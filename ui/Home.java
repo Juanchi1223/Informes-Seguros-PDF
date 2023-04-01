@@ -8,10 +8,13 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import objetos.*;
+
 
 public class Home extends JFrame {
 
 	private JPanel contentPane;
+	private Contrato contrato;
 
 	/**
 	 * Launch the application.
@@ -48,6 +51,9 @@ public class Home extends JFrame {
 				inforBasica ventana = new inforBasica();
 				ventana.setVisible(true);
 				ventana.setModal(true);
+				
+				contrato.setSiniestro(ventana.getSinientro());
+				
 			}
 		});
 		btnInfBasc.setBounds(32, 67, 193, 53);
