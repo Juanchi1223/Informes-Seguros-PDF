@@ -13,6 +13,8 @@ import javax.swing.border.EmptyBorder;
 
 import com.toedter.calendar.JCalendar;
 
+import objetos.Contrato;
+
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
@@ -35,20 +37,20 @@ public class inforBasica extends JDialog {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		try {
-			inforBasica dialog = new inforBasica();
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+//	public static void main(String[] args) {
+//		try {
+//			inforBasica dialog = new inforBasica();
+//			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+//			dialog.setVisible(true);
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//	}
 
 	/**
 	 * Create the dialog.
 	 */
-	public inforBasica() {
+	public inforBasica(Contrato contrato) {
 		setResizable(false);
 		setTitle("Informacion Basica");
 		setBounds(100, 100, 775, 539);
@@ -66,48 +68,58 @@ public class inforBasica extends JDialog {
 		contentPanel.add(lblFechaOc);
 		
 		JLabel lblFechaDerivacion = new JLabel("Fecha de Derivacion:");
-		lblFechaDerivacion.setBounds(11, 215, 125, 14);
+		lblFechaDerivacion.setBounds(11, 232, 125, 14);
 		contentPanel.add(lblFechaDerivacion);
 		
 		JLabel lblAjustadorMer = new JLabel("Ajustador Meridional:");
-		lblAjustadorMer.setBounds(16, 380, 125, 14);
+		lblAjustadorMer.setBounds(23, 397, 125, 14);
 		contentPanel.add(lblAjustadorMer);
 		
 		JLabel lblLiquidadorExt = new JLabel("Liquidador Externo:");
-		lblLiquidadorExt.setBounds(24, 405, 125, 14);
+		lblLiquidadorExt.setBounds(31, 422, 125, 14);
 		contentPanel.add(lblLiquidadorExt);
 		
 		JLabel lblResponsable = new JLabel("Responsable:");
-		lblResponsable.setBounds(59, 430, 125, 14);
+		lblResponsable.setBounds(66, 447, 125, 14);
 		contentPanel.add(lblResponsable);
 		
 		JLabel lblEmail = new JLabel("Emal:");
-		lblEmail.setBounds(446, 383, 125, 14);
+		lblEmail.setBounds(446, 400, 125, 14);
 		contentPanel.add(lblEmail);
 		
 		textFieldSiniestro = new JTextField();
+		if(contrato.getSiniestro() != 0)				// SE SUPONE QUE EL NUMERO DE SINIESTRO NUNCA VA A SER 0
+			textFieldSiniestro.setText(Integer.toString(contrato.getSiniestro()));
 		textFieldSiniestro.setBounds(146, 36, 120, 20);
 		contentPanel.add(textFieldSiniestro);
 		textFieldSiniestro.setColumns(10);
 		
 		textFieldAjustadorMer = new JTextField();
+		if(contrato.getAjustadorMer() != null)
+			textFieldAjustadorMer.setText(contrato.getAjustadorMer());
 		textFieldAjustadorMer.setColumns(10);
-		textFieldAjustadorMer.setBounds(139, 377, 120, 20);
+		textFieldAjustadorMer.setBounds(146, 394, 120, 20);
 		contentPanel.add(textFieldAjustadorMer);
 		
 		textFieldLiquidadorExt = new JTextField();
+		if(contrato.getLiquidExt()  != null)
+			textFieldLiquidadorExt.setText(contrato.getLiquidExt());
 		textFieldLiquidadorExt.setColumns(10);
-		textFieldLiquidadorExt.setBounds(139, 402, 120, 20);
+		textFieldLiquidadorExt.setBounds(146, 419, 120, 20);
 		contentPanel.add(textFieldLiquidadorExt);
 		
 		textFieldResponsable = new JTextField();
+		if(contrato.getResponsable() != null)
+			textFieldResponsable.setText(contrato.getLiquidExt());
 		textFieldResponsable.setColumns(10);
-		textFieldResponsable.setBounds(139, 427, 120, 20);
+		textFieldResponsable.setBounds(146, 444, 120, 20);
 		contentPanel.add(textFieldResponsable);
 		
 		textFieldEmail = new JTextField();
+		if(contrato.getEmail() != null)
+			textFieldEmail.setText(contrato.getEmail()); 
 		textFieldEmail.setColumns(10);
-		textFieldEmail.setBounds(491, 377, 202, 20);
+		textFieldEmail.setBounds(491, 394, 202, 20);
 		contentPanel.add(textFieldEmail);
 		
 		JLabel lblPoliza = new JLabel("Poliza:");
@@ -119,46 +131,60 @@ public class inforBasica extends JDialog {
 		contentPanel.add(lblVigenciaDesde);
 		
 		calendarioDel = new JCalendar();
-		calendarioDel.setBounds(493, 67, 200, 135);
+		if(contrato.getVigenciaIni() != null)
+			calendarioDel.setDate(contrato.getVigenciaIni());
+		calendarioDel.setBounds(493, 67, 200, 153);
 		contentPanel.add(calendarioDel);
 		
 		JLabel lblTelefono = new JLabel("Tel/Fax");
-		lblTelefono.setBounds(435, 405, 46, 14);
+		lblTelefono.setBounds(435, 422, 46, 14);
 		contentPanel.add(lblTelefono);
 		
 		textPoliza = new JTextField();
+		if(contrato.getPoliza() != 0)				// SE SUPONE QUE EL NUMERO DE SINIESTRO NUNCA VA A SER 0
+			textPoliza.setText(Integer.toString(contrato.getPoliza()));
 		textPoliza.setBounds(493, 36, 86, 20);
 		contentPanel.add(textPoliza);
 		textPoliza.setColumns(10);
 		
 		JLabel lblAL = new JLabel("al:");
-		lblAL.setBounds(468, 216, 23, 14);
+		lblAL.setBounds(469, 232, 23, 14);
 		contentPanel.add(lblAL);
 		
 		textNroTel = new JTextField();
-		textNroTel.setBounds(491, 402, 86, 20);
+		if(contrato.getTelefono() != 0)				// SE SUPONE QUE EL NUMERO DE SINIESTRO NUNCA VA A SER 0
+			textNroTel.setText(Integer.toString(contrato.getTelefono()));
+		textNroTel.setBounds(491, 419, 86, 20);
 		contentPanel.add(textNroTel);
 		textNroTel.setColumns(10);
 		
 		JLabel lblInt = new JLabel("Int:");
-		lblInt.setBounds(582, 405, 46, 14);
+		lblInt.setBounds(582, 422, 46, 14);
 		contentPanel.add(lblInt);
 		
 		textInt = new JTextField();
-		textInt.setBounds(604, 402, 89, 20);
+		if(contrato.getInterno() != 0)				// SE SUPONE QUE EL NUMERO DE SINIESTRO NUNCA VA A SER 0
+			textInt.setText(Integer.toString(contrato.getInterno()));
+		textInt.setBounds(604, 419, 89, 20);
 		contentPanel.add(textInt);
 		textInt.setColumns(10);
 		
 		calendarioHasta = new JCalendar();
-		calendarioHasta.setBounds(493, 215, 200, 135);
+		if(contrato.getVigenciaFin() != null)
+			calendarioHasta.setDate(contrato.getVigenciaFin());
+		calendarioHasta.setBounds(493, 232, 200, 153);
 		contentPanel.add(calendarioHasta);
 		
 		calendarioOcurecia = new JCalendar();
-		calendarioOcurecia.setBounds(146, 65, 200, 135);
+		if(contrato.getFechaOcurencia() != null)
+			calendarioOcurecia.setDate(contrato.getFechaOcurencia());
+		calendarioOcurecia.setBounds(146, 65, 200, 153);
 		contentPanel.add(calendarioOcurecia);
 		
 		calendarioDerivacion= new JCalendar();
-		calendarioDerivacion.setBounds(146, 215, 200, 135);
+		if(contrato.getFechaDerivacion() != null)
+			calendarioDerivacion.setDate(contrato.getFechaDerivacion());
+		calendarioDerivacion.setBounds(146, 231, 200, 153);
 		contentPanel.add(calendarioDerivacion);
 		{
 			JPanel buttonPane = new JPanel();

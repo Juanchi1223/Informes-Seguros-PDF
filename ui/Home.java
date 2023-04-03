@@ -28,10 +28,41 @@ public class Home extends JFrame {
 				try {
 					ObjectInputStream entrada = new ObjectInputStream(new FileInputStream("contrato.ser"));
 					contrato = (Contrato) entrada.readObject();
+					entrada.close();
+					
 					Home frame = new Home();
 					frame.setVisible(true);
 					
-					entrada.close();
+					frame.addWindowListener(new java.awt.event.WindowAdapter() {
+			            @Override
+			            public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+			            	System.out.print(contrato.getSiniestro());
+							ObjectOutputStream salida = null;
+							try {
+								salida = new ObjectOutputStream(new FileOutputStream("contrato.ser"));
+							} catch (IOException e2) {
+								// TODO Auto-generated catch block
+								e2.printStackTrace();
+							}
+							try {
+								salida.writeObject(contrato);
+							} catch (IOException e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+							}
+							try {
+								salida.close();
+							} catch (IOException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+			                System.exit(0);
+			            }
+			        });
+					
+					
+					
+					System.out.println("El archivo se sobreescribio");
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -115,12 +146,24 @@ public class Home extends JFrame {
 	}
 
 	protected void abrirVentanaInfor() {
-		inforBasica ventana = new inforBasica();
+		inforBasica ventana = new inforBasica(contrato);
 		
 		ventana.setModal(true);
 		ventana.setVisible(true);
 		
 		// GUARDAR TODOS LOS DATOS 
+		contrato.setSiniestro(ventana.getSinientro());
+		contrato.setAjustadorMer(ventana.getAjustador());
+		contrato.setEmail(ventana.getEmail());
+		contrato.setPoliza(ventana.getPoliza());
+		contrato.setResponsable(ventana.getResponsable());
+		contrato.setLiquidExt(ventana.getLiquidExt());
+		contrato.setFechaDerivacion(ventana.getFechaDev());
+		contrato.setFechaOcurencia(ventana.getFechaOcc());
+		contrato.setVigenciaFin(ventana.getHasta());
+		contrato.setVigenciaIni(ventana.getDesde());
+		contrato.setInterno(ventana.getInter());
+		contrato.setTelefono(ventana.getNum());
 		
 	}
 }
