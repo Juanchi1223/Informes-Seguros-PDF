@@ -1,8 +1,9 @@
 package objetos;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Contrato {
+public class Contrato implements Serializable{
 		private int siniestro;
 		private int poliza;
 		private Date fechaOcurencia;

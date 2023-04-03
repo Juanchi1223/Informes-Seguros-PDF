@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Date;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -26,6 +27,10 @@ public class inforBasica extends JDialog {
 	private JTextField textPoliza;
 	private JTextField textNroTel;
 	private JTextField textInt;
+	private JCalendar calendarioOcurecia;
+	private JCalendar calendarioHasta;
+	private JCalendar calendarioDerivacion;
+	private JCalendar calendarioDel;
 	
 	/**
 	 * Launch the application.
@@ -113,7 +118,7 @@ public class inforBasica extends JDialog {
 		lblVigenciaDesde.setBounds(391, 67, 98, 14);
 		contentPanel.add(lblVigenciaDesde);
 		
-		JCalendar calendarioDel = new JCalendar();
+		calendarioDel = new JCalendar();
 		calendarioDel.setBounds(493, 67, 200, 135);
 		contentPanel.add(calendarioDel);
 		
@@ -144,15 +149,15 @@ public class inforBasica extends JDialog {
 		contentPanel.add(textInt);
 		textInt.setColumns(10);
 		
-		JCalendar calendarioHasta = new JCalendar();
+		calendarioHasta = new JCalendar();
 		calendarioHasta.setBounds(493, 215, 200, 135);
 		contentPanel.add(calendarioHasta);
 		
-		JCalendar calendarioOcurecia = new JCalendar();
+		calendarioOcurecia = new JCalendar();
 		calendarioOcurecia.setBounds(146, 65, 200, 135);
 		contentPanel.add(calendarioOcurecia);
 		
-		JCalendar calendarioDerivacion= new JCalendar();
+		calendarioDerivacion= new JCalendar();
 		calendarioDerivacion.setBounds(146, 215, 200, 135);
 		contentPanel.add(calendarioDerivacion);
 		{
@@ -185,4 +190,38 @@ public class inforBasica extends JDialog {
 	public int getSinientro(){
 		return Integer.parseInt(textFieldSiniestro.getText());
 	}
+	public int getPoliza() {
+		return Integer.parseInt(textPoliza.getText());
+	}
+	public Date getFechaOcc() {
+		return calendarioOcurecia.getDate();
+	}
+	public Date getFechaDev() {
+		return calendarioDerivacion.getDate();
+	}
+	public Date getDesde() {
+		return calendarioDel.getDate();
+	}
+	public Date getHasta() {
+		return calendarioHasta.getDate();
+	}
+	public String getAjustador() {
+		return textFieldAjustadorMer.getText();
+	}
+	public String getLiquidExt() {
+		return textFieldLiquidadorExt.getText();
+	}
+	public String getResponsable() {
+		return textFieldResponsable.getText();
+	}
+	public String getEmail() {
+		return textFieldEmail.getText();
+	}
+	public int getNum() {
+		return Integer.parseInt(textNroTel.getText());
+	}
+	public int getInter() {
+		return Integer.parseInt(textInt.getText());
+	}
+	
 }

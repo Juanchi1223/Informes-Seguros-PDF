@@ -7,6 +7,10 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.awt.event.ActionEvent;
 import objetos.*;
 
@@ -14,12 +18,9 @@ import objetos.*;
 public class Home extends JFrame {
 
 	private JPanel contentPane;
-	private Contrato contrato;
+	private static Contrato contrato;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
+	public static void main(String[] args) {	
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -48,12 +49,7 @@ public class Home extends JFrame {
 		JButton btnInfBasc = new JButton("Información Basica");
 		btnInfBasc.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				inforBasica ventana = new inforBasica();
-				ventana.setVisible(true);
-				ventana.setModal(true);
-				
-				contrato.setSiniestro(ventana.getSinientro());
-				
+				abrirVentanaInfor();
 			}
 		});
 		btnInfBasc.setBounds(32, 67, 193, 53);
@@ -110,5 +106,15 @@ public class Home extends JFrame {
 		JButton btnGuardar = new JButton("Guarda como");
 		btnGuardar.setBounds(625, 473, 109, 23);
 		contentPane.add(btnGuardar);
+	}
+
+	protected void abrirVentanaInfor() {
+		inforBasica ventana = new inforBasica();
+		
+		ventana.setModal(true);
+		ventana.setVisible(true);
+		
+		// GUARDAR TODOS LOS DATOS 
+		
 	}
 }
