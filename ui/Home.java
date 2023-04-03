@@ -7,9 +7,11 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.awt.event.ActionEvent;
 import objetos.*;
@@ -24,8 +26,12 @@ public class Home extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
+					ObjectInputStream entrada = new ObjectInputStream(new FileInputStream("contrato.ser"));
+					contrato = (Contrato) entrada.readObject();
 					Home frame = new Home();
 					frame.setVisible(true);
+					
+					entrada.close();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
