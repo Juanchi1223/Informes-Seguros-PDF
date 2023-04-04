@@ -5,8 +5,15 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import org.apache.pdfbox.Loader;
+import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.pdmodel.interactive.form.PDAcroForm;
+import org.apache.pdfbox.pdmodel.interactive.form.PDField;
+
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -36,7 +43,6 @@ public class Home extends JFrame {
 					frame.addWindowListener(new java.awt.event.WindowAdapter() {
 			            @Override
 			            public void windowClosing(java.awt.event.WindowEvent windowEvent) {
-			            	System.out.print(contrato.getSiniestro());
 							ObjectOutputStream salida = null;
 							try {
 								salida = new ObjectOutputStream(new FileOutputStream("contrato.ser"));
@@ -62,7 +68,6 @@ public class Home extends JFrame {
 					
 					
 					
-					System.out.println("El archivo se sobreescribio");
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -117,6 +122,11 @@ public class Home extends JFrame {
 		contentPane.add(btnOtros);
 		
 		JButton btnVerInf = new JButton("Ver");
+		btnVerInf.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				CrearPDF();
+			}
+		});
 		btnVerInf.setBounds(32, 451, 66, 66);
 		contentPane.add(btnVerInf);
 		
@@ -164,6 +174,30 @@ public class Home extends JFrame {
 		contrato.setVigenciaIni(ventana.getDesde());
 		contrato.setInterno(ventana.getInter());
 		contrato.setTelefono(ventana.getNum());
+		
+	}
+	protected void CrearPDF() {
+		// ACA SE VA A CREAR EL ARCHIVO DE PDF
+		File template = new File("src\\contrato_template\\Contrato1.0_Rellenable.pdf");
+		try {
+			PDDocument documento = Loader.loadPDF(template);
+			PDAcroForm acroForm = documento.getDocumentCatalog().getAcroForm();
+			PDField field = acroForm.getField("Campo1"); 
+			field.setValue("John Doe");
+			
+			documento.save("Contrato Juan Canestrari.pdf");
+			documento.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+
+
+
+
+		
+		
 		
 	}
 }
