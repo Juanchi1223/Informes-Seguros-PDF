@@ -1,8 +1,11 @@
 package ui;
 
+import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
@@ -10,6 +13,8 @@ import org.apache.pdfbox.Loader;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.interactive.form.PDAcroForm;
 import org.apache.pdfbox.pdmodel.interactive.form.PDField;
+import org.apache.pdfbox.rendering.PDFRenderer;
+import org.apache.pdfbox.tools.imageio.ImageIOUtil;
 
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -20,6 +25,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.awt.event.ActionEvent;
 import objetos.*;
 
@@ -27,6 +34,7 @@ import objetos.*;
 public class Home extends JFrame {
 
 	private JPanel contentPane;
+	private static Home frame;
 	private static Contrato contrato;
 
 	public static void main(String[] args) {	
@@ -37,7 +45,7 @@ public class Home extends JFrame {
 					contrato = (Contrato) entrada.readObject();
 					entrada.close();
 					
-					Home frame = new Home();
+					frame = new Home();
 					frame.setVisible(true);
 					
 					frame.addWindowListener(new java.awt.event.WindowAdapter() {
@@ -124,7 +132,12 @@ public class Home extends JFrame {
 		JButton btnVerInf = new JButton("Ver");
 		btnVerInf.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				CrearPDF();
+				try {
+					CrearPDF();
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		btnVerInf.setBounds(32, 451, 66, 66);
@@ -176,28 +189,62 @@ public class Home extends JFrame {
 		contrato.setTelefono(ventana.getNum());
 		
 	}
-	protected void CrearPDF() {
+	protected void CrearPDF() throws Exception {
 		// ACA SE VA A CREAR EL ARCHIVO DE PDF
-		File template = new File("src\\contrato_template\\Contrato1.0_Rellenable.pdf");
+		DateFormat df = new SimpleDateFormat("dd/MM/yyy");	// formato de fecha para rellenar
+		File template = new File("src\\contrato_template\\Contrato2.0_Rellenable.pdf");
 		try {
 			PDDocument documento = Loader.loadPDF(template);
 			PDAcroForm acroForm = documento.getDocumentCatalog().getAcroForm();
-			PDField field = acroForm.getField("Campo1"); 
-			field.setValue("John Doe");
 			
-			documento.save("Contrato Juan Canestrari.pdf");
+			PDField fieldSiniestro = acroForm.getField("Siniestro"); 
+			fieldSiniestro.setValue(Integer.toString(contrato.getSiniestro()));
+			
+			PDField fieldPoliza = acroForm.getField("Poliza");
+			fieldPoliza.setValue(Integer.toString(contrato.getPoliza()));
+			
+			PDField fieldVigenciaIni = acroForm.getField("VigenciaIni");
+			fieldVigenciaIni.setValue(df.format(contrato.getVigenciaIni()));
+			
+			PDField fieldVigenciaFin = acroForm.getField("VigenciaFin");
+			fieldVigenciaFin.setValue(df.format(contrato.getVigenciaFin()));
+
+			PDField fieldFechaOcurrencia = acroForm.getField("FechaOcurrencia");
+			fieldFechaOcurrencia.setValue(df.format(contrato.getFechaOcurencia()));
+			
+			PDField fieldFechaDerivacion = acroForm.getField("FechaDerivacion");
+			fieldFechaDerivacion.setValue(df.format(contrato.getFechaDerivacion()));
+			
+			PDField fieldAjustadorMeridional = acroForm.getField("AjustadorMeridional");
+			fieldAjustadorMeridional.setValue(contrato.getAjustadorMer());
+			
+			PDField fieldLiquidadorExterno = acroForm.getField("LiquidadorExterno");
+			fieldLiquidadorExterno.setValue(contrato.getLiquidExt());
+			
+			PDField fieldResponsable = acroForm.getField("Responsable");
+			fieldResponsable.setValue(contrato.getResponsable());
+			
+			PDField fieldTelFax = acroForm.getField("Tel/Fax");
+			fieldTelFax.setValue(Integer.toString(contrato.getTelefono()));
+			
+			PDField fieldInt = acroForm.getField("Int");
+			fieldInt.setValue(Integer.toString(contrato.getInterno()));
+			
+			PDField fieldemail = acroForm.getField("e-mail");
+			fieldemail.setValue(contrato.getEmail());	
+			
+			
+			String nombre = "Contrato Nro " + contrato.getSiniestro() + ".pdf" ;
+						
+			JOptionPane.showMessageDialog(null, "¡El PDF se creo!", "Confirmacion", JOptionPane.INFORMATION_MESSAGE);
+
+			documento.save(nombre);
+	        
 			documento.close();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
+			JOptionPane.showMessageDialog(null, "Error: El PDF no se pudo crear", "ERROR", JOptionPane.WARNING_MESSAGE);
 			e.printStackTrace();
 		}
-
-
-
-
-
-		
-		
-		
 	}
 }

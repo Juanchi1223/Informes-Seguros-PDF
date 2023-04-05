@@ -110,7 +110,7 @@ public class inforBasica extends JDialog {
 		
 		textFieldResponsable = new JTextField();
 		if(contrato.getResponsable() != null)
-			textFieldResponsable.setText(contrato.getLiquidExt());
+			textFieldResponsable.setText(contrato.getResponsable());
 		textFieldResponsable.setColumns(10);
 		textFieldResponsable.setBounds(146, 444, 120, 20);
 		contentPanel.add(textFieldResponsable);
