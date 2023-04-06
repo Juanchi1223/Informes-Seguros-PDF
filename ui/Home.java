@@ -238,7 +238,7 @@ public class Home extends JFrame {
 						
 			JOptionPane.showMessageDialog(null, "¡El PDF se creo!", "Confirmacion", JOptionPane.INFORMATION_MESSAGE);
 
-			documento.save(nombre);
+			documento.save("src\\contratos\\" + nombre);
 	        
 			documento.close();
 		} catch (IOException e) {
