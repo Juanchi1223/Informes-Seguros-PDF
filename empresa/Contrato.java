@@ -3,7 +3,7 @@ package empresa;
 import java.io.Serializable;
 
 public class Contrato implements Serializable{
-	private InformacionBasica infoaBas;
+	private InformacionBasica infoBas;
 	private InformacionSiniestro infoSin;
 	private OtrosDaños otrosDaños;
 	private Peatones peatones;
@@ -11,8 +11,17 @@ public class Contrato implements Serializable{
 	private VehiculoTerceroLesionado vehiculosTerceros;
 	
 	
+	public Contrato() {			// CARGAR TODO EN NULL
+		this.infoBas = new InformacionBasica();
+		this.infoSin = new InformacionSiniestro();
+		this.otrosDaños = new OtrosDaños();
+		this.peatones = new Peatones();
+		this.vehiculosAsegurados = new VehiculoAseguradoLesionados();
+		this.vehiculosTerceros = new VehiculoTerceroLesionado();
+	}
+	
 	public InformacionBasica getInfoaBas() {					// GET
-		return infoaBas;
+		return infoBas;
 	}
 	public InformacionSiniestro getInfoSin() {
 		return infoSin;
@@ -31,8 +40,8 @@ public class Contrato implements Serializable{
 	}
 	
 	
-	public void setInfoaBas(InformacionBasica infoaBas) {		// SET
-		this.infoaBas = infoaBas;	
+	public void setInfoaBas(InformacionBasica infoBas) {		// SET
+		this.infoBas = infoBas;	
 	}
 	public void setInfoSin(InformacionSiniestro infoSin) {
 		this.infoSin = infoSin;

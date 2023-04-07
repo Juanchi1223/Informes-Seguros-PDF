@@ -1,6 +1,8 @@
 package empresa;
 
-public class Peaton {
+import java.io.Serializable;
+
+public class Peaton implements Serializable{
 	private String apellido;
 	private String nombre;
 	private String edad;

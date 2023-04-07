@@ -1,9 +1,10 @@
 package empresa;
 
+import java.io.Serializable;
 import java.lang.reflect.Array;
 import java.util.Date;
 
-public class InformacionSiniestro {
+public class InformacionSiniestro implements Serializable{
 	private Date fechaHoraMin;
 	private String tiempo;
 	private String estado;

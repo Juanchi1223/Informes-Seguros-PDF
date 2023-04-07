@@ -1,8 +1,9 @@
 package empresa;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Tripulantes extends Peaton {
+public class Tripulantes extends Peaton implements Serializable{
 	private String vehicPertenece;
 	private String persona;
 	private String licencia;

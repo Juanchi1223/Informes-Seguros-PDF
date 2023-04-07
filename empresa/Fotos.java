@@ -1,5 +1,7 @@
 package empresa;
 
-public class Fotos {
+import java.io.Serializable;
+
+public class Fotos implements Serializable {
 
 }

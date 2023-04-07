@@ -1,20 +1,21 @@
 package ui;
 
 import java.awt.BorderLayout;
-import java.awt.Dimension;
 import java.awt.FlowLayout;
 
-import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JDialog;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.JTextArea;
+import javax.swing.BoxLayout;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+import java.awt.CardLayout;
 
-public class inforSiniestro extends JDialog {
+public class InforSini extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
 
@@ -23,7 +24,7 @@ public class inforSiniestro extends JDialog {
 	 */
 	public static void main(String[] args) {
 		try {
-			inforSiniestro dialog = new inforSiniestro();
+			InforSini dialog = new InforSini();
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
 		} catch (Exception e) {
@@ -34,28 +35,22 @@ public class inforSiniestro extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
-	public inforSiniestro() {
-		setBounds(100, 100, 721, 519);
-		getContentPane().setLayout(null);
-		contentPanel.setLayout(new BoxLayout(contentPanel, BoxLayout.Y_AXIS));
-		contentPanel.setPreferredSize(new Dimension(400, 300));
-		contentPanel.setBounds(0, 0, 705, 447);
+	public InforSini() {
+		setResizable(false);
+		setBounds(100, 100, 775, 539);
+		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
-		for (int i = 1; i <= 50; i++) {
-			contentPanel.add(new JLabel("Etiqueta " + i));
+		getContentPane().add(contentPanel, BorderLayout.CENTER);
+		contentPanel.setLayout(null);
+		{
+			JScrollPane scrollPane = new JScrollPane();
+			scrollPane.setBounds(5, 5, 749, 457);
+			contentPanel.add(scrollPane);
 		}
-		JScrollPane scrollPane = new JScrollPane(contentPanel);
-		scrollPane.setViewportView(contentPanel);
-
-
-		
-		getContentPane().add(contentPanel);
-		
 		{
 			JPanel buttonPane = new JPanel();
-			buttonPane.setBounds(0, 447, 705, 33);
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
-			getContentPane().add(buttonPane);
+			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
 				JButton okButton = new JButton("OK");
 				okButton.setActionCommand("OK");

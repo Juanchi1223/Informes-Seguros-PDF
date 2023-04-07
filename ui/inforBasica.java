@@ -13,7 +13,7 @@ import javax.swing.border.EmptyBorder;
 
 import com.toedter.calendar.JCalendar;
 
-import objetos.Contrato;
+import empresa.*;
 
 import javax.swing.JLabel;
 import javax.swing.JTextField;
@@ -34,24 +34,14 @@ public class inforBasica extends JDialog {
 	private JCalendar calendarioDerivacion;
 	private JCalendar calendarioDel;
 	
-	/**
-	 * Launch the application.
-	 */
-//	public static void main(String[] args) {
-//		try {
-//			inforBasica dialog = new inforBasica();
-//			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-//			dialog.setVisible(true);
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//	}
-
+	
 	/**
 	 * Create the dialog.
 	 */
 	public inforBasica(Contrato contrato) {
 		setResizable(false);
+		
+		InformacionBasica objeto = contrato.getInfoaBas();
 		setTitle("Informacion Basica");
 		setBounds(100, 100, 775, 539);
 		getContentPane().setLayout(new BorderLayout());
@@ -88,36 +78,38 @@ public class inforBasica extends JDialog {
 		contentPanel.add(lblEmail);
 		
 		textFieldSiniestro = new JTextField();
-		if(contrato.getSiniestro() != 0)				// SE SUPONE QUE EL NUMERO DE SINIESTRO NUNCA VA A SER 0
-			textFieldSiniestro.setText(Integer.toString(contrato.getSiniestro()));
+		
+		if(objeto.getSiniestro() != 0)				// SE SUPONE QUE EL NUMERO DE SINIESTRO NUNCA VA A SER 0
+			textFieldSiniestro.setText(Integer.toString(objeto.getSiniestro()));
+		
 		textFieldSiniestro.setBounds(146, 36, 120, 20);
 		contentPanel.add(textFieldSiniestro);
 		textFieldSiniestro.setColumns(10);
 		
 		textFieldAjustadorMer = new JTextField();
-		if(contrato.getAjustadorMer() != null)
-			textFieldAjustadorMer.setText(contrato.getAjustadorMer());
+		if(objeto.getAjustadorMer() != null)
+			textFieldAjustadorMer.setText(objeto.getAjustadorMer());
 		textFieldAjustadorMer.setColumns(10);
 		textFieldAjustadorMer.setBounds(146, 394, 120, 20);
 		contentPanel.add(textFieldAjustadorMer);
 		
 		textFieldLiquidadorExt = new JTextField();
-		if(contrato.getLiquidExt()  != null)
-			textFieldLiquidadorExt.setText(contrato.getLiquidExt());
+		if(objeto.getLiquidExt()  != null)
+			textFieldLiquidadorExt.setText(objeto.getLiquidExt());
 		textFieldLiquidadorExt.setColumns(10);
 		textFieldLiquidadorExt.setBounds(146, 419, 120, 20);
 		contentPanel.add(textFieldLiquidadorExt);
 		
 		textFieldResponsable = new JTextField();
-		if(contrato.getResponsable() != null)
-			textFieldResponsable.setText(contrato.getResponsable());
+		if(objeto.getResponsable() != null)
+			textFieldResponsable.setText(objeto.getResponsable());
 		textFieldResponsable.setColumns(10);
 		textFieldResponsable.setBounds(146, 444, 120, 20);
 		contentPanel.add(textFieldResponsable);
 		
 		textFieldEmail = new JTextField();
-		if(contrato.getEmail() != null)
-			textFieldEmail.setText(contrato.getEmail()); 
+		if(objeto.getEmail() != null)
+			textFieldEmail.setText(objeto.getEmail()); 
 		textFieldEmail.setColumns(10);
 		textFieldEmail.setBounds(491, 394, 202, 20);
 		contentPanel.add(textFieldEmail);
@@ -131,8 +123,8 @@ public class inforBasica extends JDialog {
 		contentPanel.add(lblVigenciaDesde);
 		
 		calendarioDel = new JCalendar();
-		if(contrato.getVigenciaIni() != null)
-			calendarioDel.setDate(contrato.getVigenciaIni());
+		if(objeto.getVigenciaIni() != null)
+			calendarioDel.setDate(objeto.getVigenciaIni());
 		calendarioDel.setBounds(493, 67, 200, 153);
 		contentPanel.add(calendarioDel);
 		
@@ -141,8 +133,8 @@ public class inforBasica extends JDialog {
 		contentPanel.add(lblTelefono);
 		
 		textPoliza = new JTextField();
-		if(contrato.getPoliza() != 0)				// SE SUPONE QUE EL NUMERO DE SINIESTRO NUNCA VA A SER 0
-			textPoliza.setText(Integer.toString(contrato.getPoliza()));
+		if(objeto.getPoliza() != 0)				// SE SUPONE QUE EL NUMERO DE SINIESTRO NUNCA VA A SER 0
+			textPoliza.setText(Integer.toString(objeto.getPoliza()));
 		textPoliza.setBounds(493, 36, 86, 20);
 		contentPanel.add(textPoliza);
 		textPoliza.setColumns(10);
@@ -152,8 +144,8 @@ public class inforBasica extends JDialog {
 		contentPanel.add(lblAL);
 		
 		textNroTel = new JTextField();
-		if(contrato.getTelefono() != 0)				// SE SUPONE QUE EL NUMERO DE SINIESTRO NUNCA VA A SER 0
-			textNroTel.setText(Integer.toString(contrato.getTelefono()));
+		if(objeto.getTelefono() != 0)				// SE SUPONE QUE EL NUMERO DE SINIESTRO NUNCA VA A SER 0
+			textNroTel.setText(Integer.toString(objeto.getTelefono()));
 		textNroTel.setBounds(491, 419, 86, 20);
 		contentPanel.add(textNroTel);
 		textNroTel.setColumns(10);
@@ -163,27 +155,27 @@ public class inforBasica extends JDialog {
 		contentPanel.add(lblInt);
 		
 		textInt = new JTextField();
-		if(contrato.getInterno() != 0)				// SE SUPONE QUE EL NUMERO DE SINIESTRO NUNCA VA A SER 0
-			textInt.setText(Integer.toString(contrato.getInterno()));
+		if(objeto.getInterno() != 0)				// SE SUPONE QUE EL NUMERO DE SINIESTRO NUNCA VA A SER 0
+			textInt.setText(Integer.toString(objeto.getInterno()));
 		textInt.setBounds(604, 419, 89, 20);
 		contentPanel.add(textInt);
 		textInt.setColumns(10);
 		
 		calendarioHasta = new JCalendar();
-		if(contrato.getVigenciaFin() != null)
-			calendarioHasta.setDate(contrato.getVigenciaFin());
+		if(objeto.getVigenciaFin() != null)
+			calendarioHasta.setDate(objeto.getVigenciaFin());
 		calendarioHasta.setBounds(493, 232, 200, 153);
 		contentPanel.add(calendarioHasta);
 		
 		calendarioOcurecia = new JCalendar();
-		if(contrato.getFechaOcurencia() != null)
-			calendarioOcurecia.setDate(contrato.getFechaOcurencia());
+		if(objeto.getFechaOcurencia() != null)
+			calendarioOcurecia.setDate(objeto.getFechaOcurencia());
 		calendarioOcurecia.setBounds(146, 65, 200, 153);
 		contentPanel.add(calendarioOcurecia);
 		
 		calendarioDerivacion= new JCalendar();
-		if(contrato.getFechaDerivacion() != null)
-			calendarioDerivacion.setDate(contrato.getFechaDerivacion());
+		if(objeto.getFechaDerivacion() != null)
+			calendarioDerivacion.setDate(objeto.getFechaDerivacion());
 		calendarioDerivacion.setBounds(146, 231, 200, 153);
 		contentPanel.add(calendarioDerivacion);
 		{
@@ -214,7 +206,7 @@ public class inforBasica extends JDialog {
 		}
 	}
 	public int getSinientro(){
-		return Integer.parseInt(textFieldSiniestro.getText());
+		return Integer.parseInt(textFieldSiniestro.getText());	
 	}
 	public int getPoliza() {
 		return Integer.parseInt(textPoliza.getText());

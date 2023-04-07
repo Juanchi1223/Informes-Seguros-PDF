@@ -1,8 +1,9 @@
 package empresa;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class InformacionBasica {
+public class InformacionBasica implements Serializable{
 	private int siniestro;
 	private int poliza;
 	private Date fechaOcurencia;
@@ -15,7 +16,7 @@ public class InformacionBasica {
 	private String email;
 	private int telefono;
 	private int interno;
-		
+	
 	public int getSiniestro() {						//	GET
 		return siniestro;
 	}

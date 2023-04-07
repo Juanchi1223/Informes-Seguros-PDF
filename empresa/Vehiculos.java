@@ -1,8 +1,9 @@
 package empresa;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Vehiculos {
+public class Vehiculos implements Serializable{
 	private String daños;
 	private String codigo;
 	private String tipo;

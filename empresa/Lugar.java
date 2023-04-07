@@ -1,6 +1,8 @@
 package empresa;
 
-public class Lugar {
+import java.io.Serializable;
+
+public class Lugar implements Serializable{
 	/*
 	 * Contiene la informacion del lugar del hecho en el siniestro
 	 * 

@@ -1,8 +1,9 @@
 package empresa;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class VehiculoAseguradoLesionados {
+public class VehiculoAseguradoLesionados implements Serializable{
 	private ArrayList<Vehiculos> listaVehiculos;
 
 	public ArrayList<Vehiculos> getListaVehiculos() {

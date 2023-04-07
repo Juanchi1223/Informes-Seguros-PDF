@@ -28,7 +28,7 @@ import java.io.ObjectOutputStream;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.awt.event.ActionEvent;
-import objetos.*;
+import empresa.*;
 
 
 public class Home extends JFrame {
@@ -175,66 +175,68 @@ public class Home extends JFrame {
 		ventana.setVisible(true);
 		
 		// GUARDAR TODOS LOS DATOS 
-		contrato.setSiniestro(ventana.getSinientro());
-		contrato.setAjustadorMer(ventana.getAjustador());
-		contrato.setEmail(ventana.getEmail());
-		contrato.setPoliza(ventana.getPoliza());
-		contrato.setResponsable(ventana.getResponsable());
-		contrato.setLiquidExt(ventana.getLiquidExt());
-		contrato.setFechaDerivacion(ventana.getFechaDev());
-		contrato.setFechaOcurencia(ventana.getFechaOcc());
-		contrato.setVigenciaFin(ventana.getHasta());
-		contrato.setVigenciaIni(ventana.getDesde());
-		contrato.setInterno(ventana.getInter());
-		contrato.setTelefono(ventana.getNum());
+		InformacionBasica objeto = contrato.getInfoaBas();
 		
+		objeto.setSiniestro(ventana.getSinientro());
+		objeto.setPoliza(ventana.getPoliza());	
+		objeto.setAjustadorMer(ventana.getAjustador());
+		objeto.setEmail(ventana.getEmail());
+		objeto.setResponsable(ventana.getResponsable());
+		objeto.setLiquidExt(ventana.getLiquidExt());
+		objeto.setFechaDerivacion(ventana.getFechaDev());
+		objeto.setFechaOcurencia(ventana.getFechaOcc());
+		objeto.setVigenciaFin(ventana.getHasta());
+		objeto.setVigenciaIni(ventana.getDesde());
+		objeto.setInterno(ventana.getInter());
+		objeto.setTelefono(ventana.getNum());
 	}
 	protected void CrearPDF() throws Exception {
 		// ACA SE VA A CREAR EL ARCHIVO DE PDF
 		DateFormat df = new SimpleDateFormat("dd/MM/yyy");	// formato de fecha para rellenar
 		File template = new File("src\\contrato_template\\Contrato2.0_Rellenable.pdf");
+		InformacionBasica objeto = contrato.getInfoaBas();
 		try {
 			PDDocument documento = Loader.loadPDF(template);
 			PDAcroForm acroForm = documento.getDocumentCatalog().getAcroForm();
 			
 			PDField fieldSiniestro = acroForm.getField("Siniestro"); 
-			fieldSiniestro.setValue(Integer.toString(contrato.getSiniestro()));
+			fieldSiniestro.setValue(Integer.toString(objeto.getSiniestro()));
 			
 			PDField fieldPoliza = acroForm.getField("Poliza");
-			fieldPoliza.setValue(Integer.toString(contrato.getPoliza()));
+			fieldPoliza.setValue(Integer.toString(objeto.getPoliza()));
 			
 			PDField fieldVigenciaIni = acroForm.getField("VigenciaIni");
-			fieldVigenciaIni.setValue(df.format(contrato.getVigenciaIni()));
+			fieldVigenciaIni.setValue(df.format(objeto.getVigenciaIni()));
 			
 			PDField fieldVigenciaFin = acroForm.getField("VigenciaFin");
-			fieldVigenciaFin.setValue(df.format(contrato.getVigenciaFin()));
+			fieldVigenciaFin.setValue(df.format(objeto.getVigenciaFin()));
 
 			PDField fieldFechaOcurrencia = acroForm.getField("FechaOcurrencia");
-			fieldFechaOcurrencia.setValue(df.format(contrato.getFechaOcurencia()));
+			fieldFechaOcurrencia.setValue(df.format(objeto.getFechaOcurencia()));
 			
 			PDField fieldFechaDerivacion = acroForm.getField("FechaDerivacion");
-			fieldFechaDerivacion.setValue(df.format(contrato.getFechaDerivacion()));
+			fieldFechaDerivacion.setValue(df.format(objeto.getFechaDerivacion()));
 			
 			PDField fieldAjustadorMeridional = acroForm.getField("AjustadorMeridional");
-			fieldAjustadorMeridional.setValue(contrato.getAjustadorMer());
+			fieldAjustadorMeridional.setValue(objeto.getAjustadorMer());
 			
 			PDField fieldLiquidadorExterno = acroForm.getField("LiquidadorExterno");
-			fieldLiquidadorExterno.setValue(contrato.getLiquidExt());
+			fieldLiquidadorExterno.setValue(objeto.getLiquidExt());
 			
 			PDField fieldResponsable = acroForm.getField("Responsable");
-			fieldResponsable.setValue(contrato.getResponsable());
+			fieldResponsable.setValue(objeto.getResponsable());
 			
 			PDField fieldTelFax = acroForm.getField("Tel/Fax");
-			fieldTelFax.setValue(Integer.toString(contrato.getTelefono()));
+			fieldTelFax.setValue(Integer.toString(objeto.getTelefono()));
 			
 			PDField fieldInt = acroForm.getField("Int");
-			fieldInt.setValue(Integer.toString(contrato.getInterno()));
+			fieldInt.setValue(Integer.toString(objeto.getInterno()));
 			
 			PDField fieldemail = acroForm.getField("e-mail");
-			fieldemail.setValue(contrato.getEmail());	
+			fieldemail.setValue(objeto.getEmail());	
 			
 			
-			String nombre = "Contrato Nro " + contrato.getSiniestro() + ".pdf" ;
+			String nombre = "Contrato Nro " + objeto.getSiniestro() + ".pdf" ;
 						
 			JOptionPane.showMessageDialog(null, "¡El PDF se creo!", "Confirmacion", JOptionPane.INFORMATION_MESSAGE);
 

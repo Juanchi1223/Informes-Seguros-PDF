@@ -1,6 +1,8 @@
 package empresa;
 
-public class Daño {
+import java.io.Serializable;
+
+public class Daño implements Serializable{
 	private String nombreProp;
 	private String seguro;
 	private String nombreSeguro;
