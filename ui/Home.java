@@ -126,6 +126,11 @@ public class Home extends JFrame {
 		contentPane.add(btnPeaton);
 		
 		JButton btnOtros = new JButton("Otros Daños");
+		btnOtros.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				abrirVentanaOtros();
+			}
+		});
 		btnOtros.setBounds(32, 387, 193, 53);
 		contentPane.add(btnOtros);
 		
@@ -167,7 +172,13 @@ public class Home extends JFrame {
 		btnGuardar.setBounds(625, 473, 109, 23);
 		contentPane.add(btnGuardar);
 	}
-
+	protected void abrirVentanaOtros() {
+		ManejoDeDaños ventana = new ManejoDeDaños();
+		
+		ventana.setModal(true);
+		ventana.setVisible(true);
+		
+	}
 	protected void abrirVentanaInfor() {
 		inforBasica ventana = new inforBasica(contrato);
 		
