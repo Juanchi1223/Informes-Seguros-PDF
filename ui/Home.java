@@ -173,7 +173,8 @@ public class Home extends JFrame {
 		contentPane.add(btnGuardar);
 	}
 	protected void abrirVentanaOtros() {
-		ManejoDeDaños ventana = new ManejoDeDaños();
+		OtrosDaños objeto = contrato.getOtrosDaños();
+		ManejoDeDaños ventana = new ManejoDeDaños(objeto);
 		
 		ventana.setModal(true);
 		ventana.setVisible(true);

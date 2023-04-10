@@ -1,6 +1,7 @@
 package empresa;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class Daño implements Serializable{
 	private String nombreProp;
@@ -8,9 +9,9 @@ public class Daño implements Serializable{
 	private String nombreSeguro;
 	private String denuncia;
 	private String documentacion;
-	private Fotos FotosDoc;
+	private ArrayList<String> RutaFotosDoc = new ArrayList<String>();
 	private String justficarDoc;
-	private Fotos FotosDaño;
+	private ArrayList<String> RutaFotosDaño = new ArrayList<String>();
 	private String justificaFoto;
 	
 	public String getNombreProp() {
@@ -28,14 +29,14 @@ public class Daño implements Serializable{
 	public String getDocumentacion() {
 		return documentacion;
 	}
-	public Fotos getFotosDoc() {
-		return FotosDoc;
+	public ArrayList<String> getFotosDoc() {
+		return RutaFotosDoc;
 	}
 	public String getJustficarDoc() {
 		return justficarDoc;
 	}
-	public Fotos getFotosDaño() {
-		return FotosDaño;
+	public ArrayList<String> getFotosDaño() {
+		return RutaFotosDaño;
 	}
 	public String getJustificaFoto() {
 		return justificaFoto;
@@ -56,17 +57,24 @@ public class Daño implements Serializable{
 	public void setDocumentacion(String documentacion) {
 		this.documentacion = documentacion;
 	}
-	public void setFotosDoc(Fotos fotosDoc) {
-		FotosDoc = fotosDoc;
-	}
+	
 	public void setJustficarDoc(String justficarDoc) {
 		this.justficarDoc = justficarDoc;
 	}
-	public void setFotosDaño(Fotos fotosDaño) {
-		FotosDaño = fotosDaño;
-	}
+	
 	public void setJustificaFoto(String justificaFoto) {
 		this.justificaFoto = justificaFoto;
 	}
-
+	public void setRutaFotosDoc(ArrayList<String> rutaFotosDoc) {
+		RutaFotosDoc = rutaFotosDoc;
+	}
+	public void setRutaFotosDaño(ArrayList<String> rutaFotosDaño) {
+		RutaFotosDaño = rutaFotosDaño;
+	}
+	
+	public String toString() {
+		return nombreProp;
+	}
+	
+	
 }

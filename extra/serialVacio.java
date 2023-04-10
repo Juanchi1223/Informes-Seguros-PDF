@@ -20,6 +20,7 @@ public class serialVacio {
 		
 		salida.writeObject(x);
 		salida.close();
+		System.out.print("Serial Vacio Creado");
 	}
 
 }

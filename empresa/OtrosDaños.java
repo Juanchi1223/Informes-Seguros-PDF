@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 public class OtrosDaños implements Serializable {
-	private ArrayList<Daño> listaDeDaños;
+	private ArrayList<Daño> listaDeDaños = new ArrayList<Daño>();
 
 	public ArrayList<Daño> getListaDeDaños() {
 		return listaDeDaños;
@@ -13,6 +13,8 @@ public class OtrosDaños implements Serializable {
 		this.listaDeDaños = listaDeDaños;
 	}
 	
-	public void agregarDaño() {}
+	public void agregarDaño(Daño nuevoDaño) {
+		listaDeDaños.add(nuevoDaño);
+	}
 	public void borrarDaño() {}
 }
