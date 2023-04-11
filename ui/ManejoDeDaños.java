@@ -71,12 +71,14 @@ public class ManejoDeDaños extends JDialog {
 		JButton btnModificar = new JButton("Modificar Daño");
 		btnModificar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				list.getSelectedValue();
-//				ModificarDaño ventana = new ModificarDaño();
-//				
-//				ventana.setModal(true);
-//				ventana.setVisible(true);
-//				
+				int a = list.getSelectedIndex();
+				Daño aux = daños.getListaDeDaños().get(a);
+				
+				ModificarDaño ventana = new ModificarDaño(aux);
+				ventana.setModal(true);
+				ventana.setVisible(true);				
+				
+				
 			}
 		});
 		btnModificar.setBounds(49, 100, 106, 23);
@@ -85,8 +87,9 @@ public class ManejoDeDaños extends JDialog {
 		JButton btnEliminar = new JButton("Eliminar Daño");
 		btnEliminar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				list.getSelectedValue();
 				
-//				
+				eliminar();
 			}
 		});
 		btnEliminar.setBounds(49, 156, 106, 23);
@@ -117,5 +120,9 @@ public class ManejoDeDaños extends JDialog {
 				buttonPane.add(cancelButton);
 			}
 		}
+	}
+	private void eliminar() {
+		
+		
 	}
 }
