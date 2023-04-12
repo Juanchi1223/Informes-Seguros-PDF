@@ -156,7 +156,7 @@ public class AgregarDaño extends JDialog {
 		JButton btnAdjDoc1 = new JButton("btnAdjDoc1");
 		btnAdjDoc1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				adjuntarArchivo(btnAdjDoc1, lblDoc1,1 ,true);
+				adjuntarArchivo(btnAdjDoc1, lblDoc1,0 ,true);
 			}
 		});
 		btnAdjDoc1.setBounds(159, 151, 36, 23);
@@ -165,7 +165,7 @@ public class AgregarDaño extends JDialog {
 		JButton btnAdjDoc2 = new JButton("btnAdjDoc2");
 		btnAdjDoc2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				adjuntarArchivo(btnAdjDoc2, lblDoc2, 2, true);
+				adjuntarArchivo(btnAdjDoc2, lblDoc2, 1, true);
 			}
 		});
 		btnAdjDoc2.setBounds(370, 146, 36, 23);
@@ -174,7 +174,7 @@ public class AgregarDaño extends JDialog {
 		JButton btnAdjFt1 = new JButton("btnAdjFt1");
 		btnAdjFt1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				adjuntarArchivo(btnAdjFt1, lblFoto1, 1,false);
+				adjuntarArchivo(btnAdjFt1, lblFoto1, 0,false);
 			}
 		});
 		btnAdjFt1.setBounds(159, 306, 36, 23);
@@ -183,25 +183,25 @@ public class AgregarDaño extends JDialog {
 		JButton btnAdjFt2 = new JButton("btnAdjFt2");
 		btnAdjFt2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				adjuntarArchivo(btnAdjFt2, lblFoto3, 2,false);
+				adjuntarArchivo(btnAdjFt2, lblFoto2, 1,false);
 			}
 		});
-		btnAdjFt2.setBounds(159, 439, 36, 23);
+		btnAdjFt2.setBounds(370, 306, 36, 23);
 		contentPanel.add(btnAdjFt2);
 		
 		JButton btnAdjFt3 = new JButton("btnAdjFt3");
 		btnAdjFt3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				adjuntarArchivo(btnAdjFt3, lblFoto2, 3,false);
+				adjuntarArchivo(btnAdjFt3, lblFoto3, 2,false);
 			}
 		});
-		btnAdjFt3.setBounds(370, 306, 36, 23);
+		btnAdjFt3.setBounds(159, 439, 36, 23);
 		contentPanel.add(btnAdjFt3);
-		
+
 		JButton btnAdjFt4 = new JButton("btnAdjFt4");
 		btnAdjFt4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				adjuntarArchivo(btnAdjFt4, lblFoto4, 4,false);
+				adjuntarArchivo(btnAdjFt4, lblFoto4, 3,false);
 			}
 		});
 		btnAdjFt4.setBounds(370, 439, 36, 23);

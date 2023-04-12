@@ -16,5 +16,7 @@ public class OtrosDaños implements Serializable {
 	public void agregarDaño(Daño nuevoDaño) {
 		listaDeDaños.add(nuevoDaño);
 	}
-	public void borrarDaño() {}
+	public void borrarDaño(int indiceDaño) {
+		listaDeDaños.remove(indiceDaño);
+	}
 }
