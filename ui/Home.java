@@ -1,7 +1,5 @@
 package ui;
 
-import java.awt.BorderLayout;
-import java.awt.Dimension;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -13,14 +11,11 @@ import org.apache.pdfbox.Loader;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.interactive.form.PDAcroForm;
 import org.apache.pdfbox.pdmodel.interactive.form.PDField;
-import org.apache.pdfbox.rendering.PDFRenderer;
-import org.apache.pdfbox.tools.imageio.ImageIOUtil;
 
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -108,7 +103,10 @@ public class Home extends JFrame {
 		JButton btnSinistro = new JButton("Información del Siniestro");
 		btnSinistro.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				abrirInforSini();
 			}
+
+			
 		});
 		btnSinistro.setBounds(32, 131, 193, 53);
 		contentPane.add(btnSinistro);
@@ -171,6 +169,14 @@ public class Home extends JFrame {
 		JButton btnGuardar = new JButton("Guarda como");
 		btnGuardar.setBounds(625, 473, 109, 23);
 		contentPane.add(btnGuardar);
+	}
+	protected void abrirInforSini() {
+		InformacionSiniestro infSin = contrato.getInfoSin();
+		InforSini ventana = new InforSini(infSin);
+		
+		ventana.setModal(true);
+		ventana.setVisible(true);
+		
 	}
 	protected void abrirVentanaOtros() {
 		OtrosDaños objeto = contrato.getOtrosDaños();
