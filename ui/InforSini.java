@@ -23,6 +23,7 @@ import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import java.awt.Color;
 import java.awt.event.ActionListener;
+import java.util.Date;
 import java.awt.event.ActionEvent;
 import java.awt.SystemColor;
 import javax.swing.border.TitledBorder;
@@ -45,6 +46,7 @@ public class InforSini extends JDialog {
 	private JTextField textTestigo2;
 	private JTextField textTestigo3;
 	private JLabel lblCalle;
+	private String[] SiNo = {"","Si","No"};
 
 	/**
 	 * Launch the application.
@@ -341,7 +343,7 @@ public class InforSini extends JDialog {
 		}
 		{
 			JComboBox comboBoxAmSiNo = new JComboBox();
-			comboBoxAmSiNo.setModel(new DefaultComboBoxModel(new String[] {"", "Si", "No"}));
+			comboBoxAmSiNo.setModel(new DefaultComboBoxModel(SiNo));
 			comboBoxAmSiNo.setBounds(390, 384, 46, 22);
 			contentPanel.add(comboBoxAmSiNo);
 		}
@@ -363,7 +365,7 @@ public class InforSini extends JDialog {
 		}
 		{
 			JComboBox comboBoxPolSiNo = new JComboBox();
-			comboBoxPolSiNo.setModel(new DefaultComboBoxModel(new String[] {"", "Si", "No"}));
+			comboBoxPolSiNo.setModel(new DefaultComboBoxModel(SiNo));
 			comboBoxPolSiNo.setBounds(330, 410, 46, 22);
 			contentPanel.add(comboBoxPolSiNo);
 		}
@@ -385,7 +387,7 @@ public class InforSini extends JDialog {
 		}
 		{
 			JComboBox comboBoxPenalSiNo = new JComboBox();
-			comboBoxPenalSiNo.setModel(new DefaultComboBoxModel(new String[] {"", "Si", "No"}));
+			comboBoxPenalSiNo.setModel(new DefaultComboBoxModel(SiNo));
 			comboBoxPenalSiNo.setBounds(291, 435, 46, 22);
 			contentPanel.add(comboBoxPenalSiNo);
 		}
@@ -396,7 +398,7 @@ public class InforSini extends JDialog {
 		}
 		{
 			JComboBox comboBox_1 = new JComboBox();
-			comboBox_1.setModel(new DefaultComboBoxModel(new String[] {"", "Si", "No"}));
+			comboBox_1.setModel(new DefaultComboBoxModel(SiNo));
 			comboBox_1.setBounds(540, 435, 46, 22);
 			contentPanel.add(comboBox_1);
 		}
@@ -463,7 +465,12 @@ public class InforSini extends JDialog {
 	}
 
 	private void ok() {
-		//crear la otra parte 
+
+		ObservacionesSini subventana = new ObservacionesSini();
+		
+		subventana.setModal(true);
+		subventana.setVisible(true);
+		
 		setVisible(false);
 	}
 
@@ -475,5 +482,49 @@ public class InforSini extends JDialog {
 			retorno[i+1] = Integer.toString(i);
 		}
 		return retorno;
+	}
+
+	public Date getCalendarioFecha() {
+		return calendarioFecha.getDate();
+	}
+
+	public JTextField getTextCalle() {
+		return textCalle;
+	}
+
+	public JTextField getTextNumero() {
+		return textNumero;
+	}
+
+	public JTextField getTextField() {
+		return textField;
+	}
+
+	public JTextField getTextCarriles() {
+		return textCarriles;
+	}
+
+	public JTextField getTextVelocidad() {
+		return textVelocidad;
+	}
+
+	public JTextField getTextAmCual() {
+		return textAmCual;
+	}
+
+	public JTextField getTextSumario() {
+		return textSumario;
+	}
+
+	public JTextField getTextTestigo1() {
+		return textTestigo1;
+	}
+
+	public JTextField getTextTestigo2() {
+		return textTestigo2;
+	}
+
+	public JTextField getTextTestigo3() {
+		return textTestigo3;
 	}
 }
