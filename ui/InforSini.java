@@ -23,6 +23,8 @@ import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import java.awt.Color;
 import java.awt.event.ActionListener;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.awt.event.ActionEvent;
 import java.awt.SystemColor;
@@ -35,18 +37,13 @@ public class InforSini extends JDialog {
 	private final JPanel contentPanel = new JPanel();
 	
 	private JCalendar calendarioFecha;
-	private JTextField textCalle;
-	private JTextField textNumero;
-	private JTextField textField;
-	private JTextField textCarriles;
-	private JTextField textVelocidad;
-	private JTextField textAmCual;
-	private JTextField textSumario;
-	private JTextField textTestigo1;
-	private JTextField textTestigo2;
-	private JTextField textTestigo3;
+	private JTextField textCalle, textNumero, textLocalidad, textCarriles, textVelocidad, textAmCual, textSumario, textTestigo1, textTestigo2, textTestigo3;
+	private JComboBox comboBoxHora, comboBoxAmSiNo, comboBoxMinuto, comboBoxTiempo, comboBoxEstado, comboBoxProv, comboBoxVisibilidad, comboBoxAmbiente, comboBoxiluminacion, comboBoxPenalSiNo, comboBoxTestigos;
+	
 	private JLabel lblCalle;
 	private String[] SiNo = {"","Si","No"};
+	private Date dateCompleto;
+	
 
 	/**
 	 * Launch the application.
@@ -89,7 +86,7 @@ public class InforSini extends JDialog {
 			contentPanel.add(lblHora);
 		}
 		
-		JComboBox comboBoxHora = new JComboBox();
+		comboBoxHora = new JComboBox();
 		comboBoxHora.setModel(new DefaultComboBoxModel(crearArrayHora()));
 		comboBoxHora.setBounds(309, 21, 40, 22);
 		contentPanel.add(comboBoxHora);
@@ -99,7 +96,7 @@ public class InforSini extends JDialog {
 			contentPanel.add(lblMinuto);
 		}
 		{
-			JComboBox comboBoxMinuto = new JComboBox();
+			comboBoxMinuto = new JComboBox();
 			comboBoxMinuto.setModel(new DefaultComboBoxModel(new String[] {"", "00", "15", "30", "45"}));
 			comboBoxMinuto.setBounds(359, 21, 40, 22);
 			contentPanel.add(comboBoxMinuto);
@@ -110,7 +107,7 @@ public class InforSini extends JDialog {
 			contentPanel.add(lblTiempo);
 		}
 		{
-			JComboBox comboBoxTiempo = new JComboBox();
+			comboBoxTiempo = new JComboBox();
 			comboBoxTiempo.setModel(new DefaultComboBoxModel(new String[] {"", "Diurno", "Nocturno"}));
 			comboBoxTiempo.setBounds(463, 21, 78, 22);
 			contentPanel.add(comboBoxTiempo);
@@ -121,7 +118,7 @@ public class InforSini extends JDialog {
 			contentPanel.add(lblEstado);
 		}
 		{
-			JComboBox comboBoxEstado = new JComboBox();
+			comboBoxEstado = new JComboBox();
 			comboBoxEstado.setModel(new DefaultComboBoxModel(new String[] {"", "Seco", "Lluvia", "Granizo ", "Niebla", "Nieve"}));
 			comboBoxEstado.setBounds(590, 21, 61, 22);
 			contentPanel.add(comboBoxEstado);
@@ -154,25 +151,25 @@ public class InforSini extends JDialog {
 			contentPanel.add(lblLocalidad);
 		}
 		
-		textField = new JTextField();
-		textField.setBounds(335, 81, 108, 20);
-		contentPanel.add(textField);
-		textField.setColumns(10);
+		textLocalidad = new JTextField();
+		textLocalidad.setBounds(335, 81, 108, 20);
+		contentPanel.add(textLocalidad);
+		textLocalidad.setColumns(10);
 		
 		JLabel lblProvincia = new JLabel("Provincia:");
 		lblProvincia.setBounds(453, 83, 78, 14);
 		contentPanel.add(lblProvincia);
 		
-		JComboBox comboBox = new JComboBox();
-		comboBox.setModel(new DefaultComboBoxModel(new String[] {"", "Buenos Aires", "Catamarca", "Chaco", "Chubut", "Córdova", "Corrientes", "Entre Rios ", "Formaso", "Jujuy", "La pampa", "La rioja", "Mendoza", "Misiones ", "Neuquen", "Rio Negro", "Salta", "San Juan", "San Luis", "Santa Cruz ", "Santa Fe", "Santiago del Estero", "Tierra del Fuego", "Tucuman"}));
-		comboBox.setBounds(513, 79, 138, 22);
-		contentPanel.add(comboBox);
+		comboBoxProv = new JComboBox();
+		comboBoxProv.setModel(new DefaultComboBoxModel(new String[] {"", "Buenos Aires", "Catamarca", "Chaco", "Chubut", "Córdova", "Corrientes", "Entre Rios ", "Formaso", "Jujuy", "La pampa", "La rioja", "Mendoza", "Misiones ", "Neuquen", "Rio Negro", "Salta", "San Juan", "San Luis", "Santa Cruz ", "Santa Fe", "Santiago del Estero", "Tierra del Fuego", "Tucuman"}));
+		comboBoxProv.setBounds(513, 79, 138, 22);
+		contentPanel.add(comboBoxProv);
 		
 		JLabel lblVisibilidad = new JLabel("Visibilidad:");
 		lblVisibilidad.setBounds(268, 114, 81, 14);
 		contentPanel.add(lblVisibilidad);
 		
-		JComboBox comboBoxVisibilidad = new JComboBox();
+		comboBoxVisibilidad = new JComboBox<String>();
 		comboBoxVisibilidad.setModel(new DefaultComboBoxModel(new String[] {"", "Buena", "Regular", "Mala"}));
 		comboBoxVisibilidad.setBounds(335, 110, 78, 22);
 		contentPanel.add(comboBoxVisibilidad);
@@ -181,7 +178,7 @@ public class InforSini extends JDialog {
 		lblAmbiente.setBounds(457, 114, 69, 14);
 		contentPanel.add(lblAmbiente);
 		
-		JComboBox comboBoxAmbiente = new JComboBox();
+		comboBoxAmbiente = new JComboBox();
 		comboBoxAmbiente.setModel(new DefaultComboBoxModel(new String[] {"", "Rural", "Urbano"}));
 		comboBoxAmbiente.setBounds(520, 110, 69, 22);
 		contentPanel.add(comboBoxAmbiente);
@@ -191,7 +188,7 @@ public class InforSini extends JDialog {
 			contentPanel.add(lbliluminacion);
 		}
 		{
-			JComboBox comboBoxiluminacion = new JComboBox();
+			comboBoxiluminacion = new JComboBox();
 			comboBoxiluminacion.setModel(new DefaultComboBoxModel(new String[] {"", "Buena", "Regular", "Mala"}));
 			comboBoxiluminacion.setBounds(431, 139, 90, 22);
 			contentPanel.add(comboBoxiluminacion);
@@ -342,7 +339,7 @@ public class InforSini extends JDialog {
 			contentPanel.add(lblAmbulancia);
 		}
 		{
-			JComboBox comboBoxAmSiNo = new JComboBox();
+			comboBoxAmSiNo = new JComboBox();
 			comboBoxAmSiNo.setModel(new DefaultComboBoxModel(SiNo));
 			comboBoxAmSiNo.setBounds(390, 384, 46, 22);
 			contentPanel.add(comboBoxAmSiNo);
@@ -386,7 +383,7 @@ public class InforSini extends JDialog {
 			contentPanel.add(lblCuasaPenal);
 		}
 		{
-			JComboBox comboBoxPenalSiNo = new JComboBox();
+			comboBoxPenalSiNo = new JComboBox();
 			comboBoxPenalSiNo.setModel(new DefaultComboBoxModel(SiNo));
 			comboBoxPenalSiNo.setBounds(291, 435, 46, 22);
 			contentPanel.add(comboBoxPenalSiNo);
@@ -397,10 +394,10 @@ public class InforSini extends JDialog {
 			contentPanel.add(lblTestigos);
 		}
 		{
-			JComboBox comboBox_1 = new JComboBox();
-			comboBox_1.setModel(new DefaultComboBoxModel(SiNo));
-			comboBox_1.setBounds(540, 435, 46, 22);
-			contentPanel.add(comboBox_1);
+			comboBoxTestigos = new JComboBox();
+			comboBoxTestigos.setModel(new DefaultComboBoxModel(SiNo));
+			comboBoxTestigos.setBounds(540, 435, 46, 22);
+			contentPanel.add(comboBoxTestigos);
 		}
 		{
 			JLabel lblTestigo1 = new JLabel("Testigos 1");
@@ -484,47 +481,96 @@ public class InforSini extends JDialog {
 		return retorno;
 	}
 
-	public Date getCalendarioFecha() {
-		return calendarioFecha.getDate();
+	public Date getFecha() {
+		Date dia = calendarioFecha.getDate();
+		int hora = Integer.parseInt(comboBoxHora.getSelectedItem().toString());
+		int min = Integer.parseInt(comboBoxMinuto.getSelectedItem().toString());
+		SimpleDateFormat fechaHora = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
+		
+		try {
+			dateCompleto = fechaHora.parse(dia+" "+hora+":"+min);
+		} catch (ParseException e) {
+			System.out.print("No se cargo la data");
+			e.printStackTrace();
+		}
+		
+		return dateCompleto;
+	}
+	
+	public String getTextCalle() {
+		return textCalle.getText();
 	}
 
-	public JTextField getTextCalle() {
-		return textCalle;
+	public int getTextNumero() {
+		return Integer.parseInt(textNumero.getText());
 	}
 
-	public JTextField getTextNumero() {
-		return textNumero;
+	public String getTextLocalidad() {
+		return textLocalidad.getText();
 	}
 
-	public JTextField getTextField() {
-		return textField;
+	public int getTextCarriles() {
+		return Integer.parseInt(textCarriles.getText());
 	}
 
-	public JTextField getTextCarriles() {
-		return textCarriles;
+	public int getTextVelocidad() {
+		return Integer.parseInt(textVelocidad.getText());
 	}
 
-	public JTextField getTextVelocidad() {
-		return textVelocidad;
+	public String getTextAmCual() {
+		return textAmCual.getText();
 	}
 
-	public JTextField getTextAmCual() {
-		return textAmCual;
+	public String getTextSumario() {
+		return textSumario.getText();
 	}
 
-	public JTextField getTextSumario() {
-		return textSumario;
+	public String getTextTestigo1() {
+		return textTestigo1.getText();
 	}
 
-	public JTextField getTextTestigo1() {
-		return textTestigo1;
+	public String getTextTestigo2() {
+		return textTestigo2.getText();
 	}
 
-	public JTextField getTextTestigo2() {
-		return textTestigo2;
+	public String getTextTestigo3() {
+		return textTestigo3.getText();
 	}
 
-	public JTextField getTextTestigo3() {
-		return textTestigo3;
+	public String getComboBoxAmSiNo() {
+		return comboBoxAmSiNo.getSelectedItem().toString();
 	}
+
+	public String getComboBoxTiempo() {
+		return comboBoxTiempo.getSelectedItem().toString();
+	}
+
+	public String getComboBoxEstado() {
+		return comboBoxEstado.getSelectedItem().toString();
+	}
+
+	public String getComboBoxProv() {
+		return comboBoxProv.getSelectedItem().toString();
+	}
+
+	public String getComboBoxVisibilidad() {
+		return comboBoxVisibilidad.getSelectedItem().toString();
+	}
+
+	public String getComboBoxAmbiente() {
+		return comboBoxAmbiente.getSelectedItem().toString();
+	}
+
+	public String getComboBoxiluminacion() {
+		return comboBoxiluminacion.getSelectedItem().toString();
+	}
+
+	public String getComboBoxPenalSiNo() {
+		return comboBoxPenalSiNo.getSelectedItem().toString();
+	}
+
+	public String getComboBoxTestigos() {
+		return comboBoxTestigos.getSelectedItem().toString();
+	}
+
 }

@@ -177,6 +177,16 @@ public class Home extends JFrame {
 		ventana.setModal(true);
 		ventana.setVisible(true);
 		
+		// CAMBIAR EL CODIGO PARA QUE SE GUARDE EN EL CONTROLADOR
+		InformacionSiniestro objeto = contrato.getInfoSin();
+	
+		objeto.setFechaHoraMin(ventana.getFecha());
+		objeto.setTiempo(ventana.getComboBoxTiempo());
+		objeto.setEstado(ventana.getComboBoxEstado());
+		objeto.setLugar();
+		objeto.setFotosLugar();
+		
+		
 	}
 	protected void abrirVentanaOtros() {
 		OtrosDaños objeto = contrato.getOtrosDaños();
@@ -185,6 +195,8 @@ public class Home extends JFrame {
 		ventana.setModal(true);
 		ventana.setVisible(true);
 		
+		// CAMBIAR EL CODIGO PARA QUE SE GUARDE EN EL CONTROLADOR
+		
 	}
 	protected void abrirVentanaInfor() {
 		inforBasica ventana = new inforBasica(contrato);
@@ -192,7 +204,7 @@ public class Home extends JFrame {
 		ventana.setModal(true);
 		ventana.setVisible(true);
 		
-		// GUARDAR TODOS LOS DATOS 
+		// GUARDAR TODOS LOS DATOS -> se se salio con OK
 		InformacionBasica objeto = contrato.getInfoaBas();
 		
 		objeto.setSiniestro(ventana.getSinientro());

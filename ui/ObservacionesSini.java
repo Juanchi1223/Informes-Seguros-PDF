@@ -2,6 +2,8 @@ package ui;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -17,8 +19,21 @@ import javax.swing.JTextField;
 public class ObservacionesSini extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
-	private JTextField textField;
-	private JTextField textField_1;
+	private JTextField textIndmn;
+	private JTextField textHonorarios;
+	private JTextArea textAreaAsegurado;
+	private JTextArea textAreaTercero;
+	private JTextArea textAreaMecanica;
+	private JTextArea textAreaObservaciones;
+	private JComboBox comboBoxCobertura;
+	private JComboBox comboBoxFraude;
+	private JTextArea textAreaCob;
+	private JComboBox comboBoxResp;
+	private JComboBox comboBoxPorcentaje;
+	private JTextArea textAreaResp;
+	private JTextArea textAreaConclu;
+	private JComboBox comboBoxTransable;
+	private JComboBox comboBoxMoneda;
 
 	/**
 	 * Launch the application.
@@ -52,7 +67,7 @@ public class ObservacionesSini extends JDialog {
 		scrollPaneAs.setBounds(20, 36, 289, 73);
 		contentPanel.add(scrollPaneAs);
 		
-		JTextArea textAreaAsegurado = new JTextArea();
+		textAreaAsegurado = new JTextArea();
 		textAreaAsegurado.setLineWrap(true);
 		scrollPaneAs.setViewportView(textAreaAsegurado);
 		
@@ -68,14 +83,14 @@ public class ObservacionesSini extends JDialog {
 		scrollPaneTercero.setBounds(336, 36, 293, 73);
 		contentPanel.add(scrollPaneTercero);
 		
-		JTextArea textAreaTercero = new JTextArea();
+		textAreaTercero = new JTextArea();
 		scrollPaneTercero.setViewportView(textAreaTercero);
 		
 		JScrollPane scrollPaneMec = new JScrollPane();
 		scrollPaneMec.setBounds(20, 137, 289, 73);
 		contentPanel.add(scrollPaneMec);
 		
-		JTextArea textAreaMecanica = new JTextArea();
+		textAreaMecanica = new JTextArea();
 		scrollPaneMec.setViewportView(textAreaMecanica);
 		
 		JLabel lblObservaciones = new JLabel("Observaciones:");
@@ -86,14 +101,14 @@ public class ObservacionesSini extends JDialog {
 		scrollPaneObservaciones.setBounds(336, 137, 289, 73);
 		contentPanel.add(scrollPaneObservaciones);
 		
-		JTextArea textAreaObservaciones = new JTextArea();
+		textAreaObservaciones = new JTextArea();
 		scrollPaneObservaciones.setViewportView(textAreaObservaciones);
 		
 		JLabel lblCobertura = new JLabel("Cobertura:");
 		lblCobertura.setBounds(20, 221, 72, 14);
 		contentPanel.add(lblCobertura);
 		
-		JComboBox comboBoxCobertura = new JComboBox();
+		comboBoxCobertura = new JComboBox();
 		comboBoxCobertura.setModel(new DefaultComboBoxModel(new String[] {"", "Cubierto", "Sin Cobertura", "Dudosa"}));
 		comboBoxCobertura.setBounds(83, 217, 93, 22);
 		contentPanel.add(comboBoxCobertura);
@@ -102,7 +117,7 @@ public class ObservacionesSini extends JDialog {
 		lblIndicosFraude.setBounds(186, 221, 108, 14);
 		contentPanel.add(lblIndicosFraude);
 		
-		JComboBox comboBoxFraude = new JComboBox();
+		comboBoxFraude = new JComboBox();
 		comboBoxFraude.setModel(new DefaultComboBoxModel(new String[] {"", "Si", "No"}));
 		comboBoxFraude.setBounds(298, 218, 48, 22);
 		contentPanel.add(comboBoxFraude);
@@ -115,19 +130,19 @@ public class ObservacionesSini extends JDialog {
 		scrollPaneAnaCob.setBounds(20, 266, 289, 73);
 		contentPanel.add(scrollPaneAnaCob);
 		
-		JTextArea textAreaCob = new JTextArea();
+		textAreaCob = new JTextArea();
 		scrollPaneAnaCob.setViewportView(textAreaCob);
 		
 		JLabel lblResponsabilidad = new JLabel("Responsabilidad");
 		lblResponsabilidad.setBounds(357, 221, 110, 14);
 		contentPanel.add(lblResponsabilidad);
 		
-		JComboBox comboBoxResp = new JComboBox();
+		comboBoxResp = new JComboBox();
 		comboBoxResp.setModel(new DefaultComboBoxModel(new String[] {"", "Plena", "Concurrencia  reclamante", "Concurrencia codemandado", "Nula"}));
 		comboBoxResp.setBounds(458, 217, 196, 22);
 		contentPanel.add(comboBoxResp);
 		
-		JComboBox comboBoxPorcentaje = new JComboBox();
+		comboBoxPorcentaje = new JComboBox();
 		comboBoxPorcentaje.setModel(new DefaultComboBoxModel(new String[] {"", "25", "50", "75"}));
 		comboBoxPorcentaje.setBounds(568, 242, 47, 22);
 		contentPanel.add(comboBoxPorcentaje);
@@ -140,7 +155,7 @@ public class ObservacionesSini extends JDialog {
 		scrollPaneResp.setBounds(340, 266, 289, 73);
 		contentPanel.add(scrollPaneResp);
 		
-		JTextArea textAreaResp = new JTextArea();
+		textAreaResp = new JTextArea();
 		scrollPaneResp.setViewportView(textAreaResp);
 		
 		JLabel lblAnalizicDeResponsabilidad = new JLabel("Analizic de responsabilidad:");
@@ -155,36 +170,36 @@ public class ObservacionesSini extends JDialog {
 		scrollPaneConclu.setBounds(20, 366, 609, 73);
 		contentPanel.add(scrollPaneConclu);
 		
-		JTextArea textAreaConclu = new JTextArea();
+		textAreaConclu = new JTextArea();
 		scrollPaneConclu.setViewportView(textAreaConclu);
 		
 		JLabel lblTransable = new JLabel("¿El caso es transable?");
 		lblTransable.setBounds(20, 450, 144, 14);
 		contentPanel.add(lblTransable);
 		
-		JComboBox comboBox = new JComboBox();
-		comboBox.setModel(new DefaultComboBoxModel(new String[] {"", "Si", "En negociacion", "No por Abg no negocia", "No por cobertura", "No por fraude", "No por pred. desmedida", "No por responsabilidad", "Transado", "Otro"}));
-		comboBox.setBounds(157, 446, 160, 22);
-		contentPanel.add(comboBox);
+		comboBoxTransable = new JComboBox();
+		comboBoxTransable.setModel(new DefaultComboBoxModel(new String[] {"", "Si", "En negociacion", "No por Abg no negocia", "No por cobertura", "No por fraude", "No por pred. desmedida", "No por responsabilidad", "Transado", "Otro"}));
+		comboBoxTransable.setBounds(157, 446, 160, 22);
+		contentPanel.add(comboBoxTransable);
 		
 		JLabel lblIdnSug = new JLabel("Res. Indemnicacion Sugerida");
 		lblIdnSug.setBounds(323, 450, 181, 14);
 		contentPanel.add(lblIdnSug);
 		
-		JComboBox comboBoxPorcentaje_1 = new JComboBox();
-		comboBoxPorcentaje_1.setModel(new DefaultComboBoxModel(new String[] {"", "$ARG", "U$S"}));
-		comboBoxPorcentaje_1.setBounds(493, 446, 68, 22);
-		contentPanel.add(comboBoxPorcentaje_1);
+		comboBoxMoneda = new JComboBox();
+		comboBoxMoneda.setModel(new DefaultComboBoxModel(new String[] {"", "$ARG", "U$S"}));
+		comboBoxMoneda.setBounds(493, 446, 68, 22);
+		contentPanel.add(comboBoxMoneda);
 		
-		textField = new JTextField();
-		textField.setBounds(568, 446, 86, 20);
-		contentPanel.add(textField);
-		textField.setColumns(10);
+		textIndmn = new JTextField();
+		textIndmn.setBounds(568, 446, 86, 20);
+		contentPanel.add(textIndmn);
+		textIndmn.setColumns(10);
 		
-		textField_1 = new JTextField();
-		textField_1.setColumns(10);
-		textField_1.setBounds(568, 475, 86, 20);
-		contentPanel.add(textField_1);
+		textHonorarios = new JTextField();
+		textHonorarios.setColumns(10);
+		textHonorarios.setBounds(568, 475, 86, 20);
+		contentPanel.add(textHonorarios);
 		
 		JLabel lblHonoGast = new JLabel("Honorarios + gastos");
 		lblHonoGast.setBounds(435, 478, 126, 14);
@@ -197,13 +212,92 @@ public class ObservacionesSini extends JDialog {
 				JButton okButton = new JButton("OK");
 				okButton.setActionCommand("OK");
 				buttonPane.add(okButton);
+				okButton.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						ok();
+					}
+				});
 				getRootPane().setDefaultButton(okButton);
 			}
 			{
 				JButton cancelButton = new JButton("Cancel");
 				cancelButton.setActionCommand("Cancel");
+				cancelButton.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						cancel();
+					}
+				});
 				buttonPane.add(cancelButton);
 			}
 		}
+	}
+
+	private void ok() {
+		setVisible(false);
+	}
+	
+	protected void cancel() {
+		setVisible(false);
+	}
+
+
+	public int getTextIndmn() {
+		return Integer.parseInt(textIndmn.getText());
+	}
+
+	public int getTextHonorarios() {
+		return Integer.parseInt(textHonorarios.getText());
+	}
+
+	public String getTextAreaAsegurado() {
+		return textAreaAsegurado.getText();
+	}
+
+	public String getTextAreaTercero() {
+		return textAreaTercero.getText();
+	}
+
+	public String getTextAreaMecanica() {
+		return textAreaMecanica.getText();
+	}
+
+	public String getTextAreaObservaciones() {
+		return textAreaObservaciones.getText();
+	}
+
+	public String getComboBoxCobertura() {
+		return comboBoxCobertura.getSelectedItem().toString();
+	}
+
+	public String getComboBoxFraude() {
+		return comboBoxFraude.getSelectedItem().toString();
+	}
+
+	public String getTextAreaCob() {
+		return textAreaCob.getText();
+	}
+
+	public String getComboBoxResp() {
+		return comboBoxResp.getSelectedItem().toString();
+	}
+
+	public String getComboBoxPorcentaje() {
+		return comboBoxPorcentaje.getSelectedItem().toString();
+	}
+
+	public String getTextAreaResp() {
+		return textAreaResp.getText();
+	}
+
+	public String getTextAreaConclu() {
+		return textAreaConclu.getText();
+	}
+
+	public String getComboBoxTransable() {
+		return comboBoxTransable.getSelectedItem().toString();
+	}
+
+	public String getComboBoxMoneda() {
+		return comboBoxMoneda.getSelectedItem().toString();
 	}
 }
