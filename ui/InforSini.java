@@ -11,6 +11,7 @@ import javax.swing.border.EmptyBorder;
 import com.toedter.calendar.JCalendar;
 
 import empresa.InformacionSiniestro;
+import empresa.Lugar;
 
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
@@ -38,12 +39,16 @@ public class InforSini extends JDialog {
 	
 	private JCalendar calendarioFecha;
 	private JTextField textCalle, textNumero, textLocalidad, textCarriles, textVelocidad, textAmCual, textSumario, textTestigo1, textTestigo2, textTestigo3;
-	private JComboBox comboBoxHora, comboBoxAmSiNo, comboBoxMinuto, comboBoxTiempo, comboBoxEstado, comboBoxProv, comboBoxVisibilidad, comboBoxAmbiente, comboBoxiluminacion, comboBoxPenalSiNo, comboBoxTestigos;
+	private JComboBox comboBoxHora, comboBoxAmSiNo, comboBoxMinuto, comboBoxTiempo, comboBoxEstado, comboBoxProv, comboBoxVisibilidad, comboBoxAmbiente, comboBoxiluminacion, comboBoxPenalSiNo, comboBoxTestigos, comboBoxJuridicc, comboBoxPais, comboBoxPolSiNo;
 	
 	private JLabel lblCalle;
 	private String[] SiNo = {"","Si","No"};
 	private Date dateCompleto;
+	private String[] testigos;
+	private Lugar lugar;
 	
+	private int indm, honorarios;	// VARIABLES DE SUBVETANA
+	private String verAs, verTer, mecanica, observaciones, cobertura, fraude, anCobertura, respns, porcentajeResp, anResp, conclu, transable, moneda; 
 
 	/**
 	 * Launch the application.
@@ -65,7 +70,7 @@ public class InforSini extends JDialog {
 		setBackground(SystemColor.menu);
 		setResizable(false);
 		setTitle("Informacion Siniestro");
-		setBounds(100, 100, 690, 572);
+		setBounds(100, 100, 728, 572);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
@@ -130,18 +135,18 @@ public class InforSini extends JDialog {
 		}
 		{
 			textCalle = new JTextField();
-			textCalle.setBounds(309, 50, 150, 20);
+			textCalle.setBounds(309, 50, 181, 20);
 			contentPanel.add(textCalle);
 			textCalle.setColumns(10);
 		}
 		{
 			JLabel lblNumero = new JLabel("Numero:");
-			lblNumero.setBounds(470, 53, 61, 14);
+			lblNumero.setBounds(500, 53, 61, 14);
 			contentPanel.add(lblNumero);
 		}
 		{
 			textNumero = new JTextField();
-			textNumero.setBounds(526, 50, 86, 20);
+			textNumero.setBounds(556, 50, 86, 20);
 			contentPanel.add(textNumero);
 			textNumero.setColumns(10);
 		}
@@ -162,35 +167,35 @@ public class InforSini extends JDialog {
 		
 		comboBoxProv = new JComboBox();
 		comboBoxProv.setModel(new DefaultComboBoxModel(new String[] {"", "Buenos Aires", "Catamarca", "Chaco", "Chubut", "Córdova", "Corrientes", "Entre Rios ", "Formaso", "Jujuy", "La pampa", "La rioja", "Mendoza", "Misiones ", "Neuquen", "Rio Negro", "Salta", "San Juan", "San Luis", "Santa Cruz ", "Santa Fe", "Santiago del Estero", "Tierra del Fuego", "Tucuman"}));
-		comboBoxProv.setBounds(513, 79, 138, 22);
+		comboBoxProv.setBounds(513, 79, 165, 22);
 		contentPanel.add(comboBoxProv);
 		
 		JLabel lblVisibilidad = new JLabel("Visibilidad:");
-		lblVisibilidad.setBounds(268, 114, 81, 14);
+		lblVisibilidad.setBounds(394, 146, 81, 14);
 		contentPanel.add(lblVisibilidad);
 		
 		comboBoxVisibilidad = new JComboBox<String>();
 		comboBoxVisibilidad.setModel(new DefaultComboBoxModel(new String[] {"", "Buena", "Regular", "Mala"}));
-		comboBoxVisibilidad.setBounds(335, 110, 78, 22);
+		comboBoxVisibilidad.setBounds(460, 142, 78, 22);
 		contentPanel.add(comboBoxVisibilidad);
 		
 		JLabel lblAmbiente = new JLabel("Ambiente:");
-		lblAmbiente.setBounds(457, 114, 69, 14);
+		lblAmbiente.setBounds(262, 147, 69, 14);
 		contentPanel.add(lblAmbiente);
 		
 		comboBoxAmbiente = new JComboBox();
 		comboBoxAmbiente.setModel(new DefaultComboBoxModel(new String[] {"", "Rural", "Urbano"}));
-		comboBoxAmbiente.setBounds(520, 110, 69, 22);
+		comboBoxAmbiente.setBounds(323, 142, 69, 22);
 		contentPanel.add(comboBoxAmbiente);
 		{
 			JLabel lbliluminacion = new JLabel("Iluminacion:");
-			lbliluminacion.setBounds(345, 143, 82, 14);
+			lbliluminacion.setBounds(540, 146, 82, 14);
 			contentPanel.add(lbliluminacion);
 		}
 		{
 			comboBoxiluminacion = new JComboBox();
 			comboBoxiluminacion.setModel(new DefaultComboBoxModel(new String[] {"", "Buena", "Regular", "Mala"}));
-			comboBoxiluminacion.setBounds(431, 139, 90, 22);
+			comboBoxiluminacion.setBounds(616, 141, 90, 22);
 			contentPanel.add(comboBoxiluminacion);
 		}
 		{
@@ -361,7 +366,7 @@ public class InforSini extends JDialog {
 			contentPanel.add(lblPolicial);
 		}
 		{
-			JComboBox comboBoxPolSiNo = new JComboBox();
+			comboBoxPolSiNo = new JComboBox();
 			comboBoxPolSiNo.setModel(new DefaultComboBoxModel(SiNo));
 			comboBoxPolSiNo.setBounds(330, 410, 46, 22);
 			contentPanel.add(comboBoxPolSiNo);
@@ -401,36 +406,56 @@ public class InforSini extends JDialog {
 		}
 		{
 			JLabel lblTestigo1 = new JLabel("Testigos 1");
-			lblTestigo1.setBounds(21, 466, 67, 14);
+			lblTestigo1.setBounds(24, 468, 67, 14);
 			contentPanel.add(lblTestigo1);
 		}
 		{
 			textTestigo1 = new JTextField();
-			textTestigo1.setBounds(88, 463, 128, 20);
+			textTestigo1.setBounds(91, 465, 128, 20);
 			contentPanel.add(textTestigo1);
 			textTestigo1.setColumns(10);
 		}
 		{
 			JLabel lblTestigo2 = new JLabel("Testigos 2");
-			lblTestigo2.setBounds(223, 467, 67, 14);
+			lblTestigo2.setBounds(242, 467, 67, 14);
 			contentPanel.add(lblTestigo2);
 		}
 		{
 			textTestigo2 = new JTextField();
 			textTestigo2.setColumns(10);
-			textTestigo2.setBounds(290, 464, 128, 20);
+			textTestigo2.setBounds(309, 464, 128, 20);
 			contentPanel.add(textTestigo2);
 		}
 		{
 			JLabel lblTestigo3 = new JLabel("Testigos 3");
-			lblTestigo3.setBounds(427, 467, 67, 14);
+			lblTestigo3.setBounds(469, 467, 67, 14);
 			contentPanel.add(lblTestigo3);
 		}
 		{
 			textTestigo3 = new JTextField();
 			textTestigo3.setColumns(10);
-			textTestigo3.setBounds(494, 464, 128, 20);
+			textTestigo3.setBounds(536, 464, 128, 20);
 			contentPanel.add(textTestigo3);
+		}
+		
+		JLabel lblPais = new JLabel("Pais:");
+		lblPais.setBounds(268, 112, 46, 14);
+		contentPanel.add(lblPais);
+		
+		comboBoxPais = new JComboBox();
+		comboBoxPais.setModel(new DefaultComboBoxModel(new String[] {"", "Argentina", "Brasil", "Chile", "Paraguay", "Uruguay"}));
+		comboBoxPais.setBounds(309, 108, 83, 22);
+		contentPanel.add(comboBoxPais);
+		{
+			JLabel lblJurridicion = new JLabel("Jurridiccion:");
+			lblJurridicion.setBounds(432, 113, 87, 14);
+			contentPanel.add(lblJurridicion);
+		}
+		{
+			comboBoxJuridicc = new JComboBox();
+			comboBoxJuridicc.setModel(new DefaultComboBoxModel(new String[] {"", "Cdad autonoma Bs As", "Cordoba", "Lomas de Zamora", "Mendoza ", "Moron ", "Quilmes", "San Isidro", "Santa Fe", "Resto de Bs As", "Resto del interior"}));
+			comboBoxJuridicc.setBounds(513, 108, 189, 22);
+			contentPanel.add(comboBoxJuridicc);
 		}
 		
 		{
@@ -469,6 +494,27 @@ public class InforSini extends JDialog {
 		subventana.setVisible(true);
 		
 		setVisible(false);
+		
+		obsVariables(subventana);
+	}
+
+	private void obsVariables(ObservacionesSini subventana) {
+		indm = subventana.getTextIndmn();
+		honorarios = subventana.getTextHonorarios();
+		
+		verAs = subventana.getTextAreaAsegurado();
+		verTer = subventana.getTextAreaTercero();
+		mecanica = subventana.getTextAreaMecanica();
+		observaciones = subventana.getTextAreaObservaciones();
+		cobertura = subventana.getComboBoxCobertura();
+		fraude = subventana.getComboBoxFraude();
+		anCobertura = subventana.getTextAreaCob();
+		respns = subventana.getComboBoxResp();
+		porcentajeResp = subventana.getComboBoxPorcentaje();
+		anResp = subventana.getTextAreaResp();
+		conclu = subventana.getTextAreaConclu();
+		transable = subventana.getComboBoxTransable();
+		moneda = subventana.getComboBoxMoneda();
 	}
 
 	private String[] crearArrayHora() {
@@ -483,45 +529,42 @@ public class InforSini extends JDialog {
 
 	public Date getFecha() {
 		Date dia = calendarioFecha.getDate();
+	
 		int hora = Integer.parseInt(comboBoxHora.getSelectedItem().toString());
 		int min = Integer.parseInt(comboBoxMinuto.getSelectedItem().toString());
-		SimpleDateFormat fechaHora = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
 		
-		try {
-			dateCompleto = fechaHora.parse(dia+" "+hora+":"+min);
-		} catch (ParseException e) {
-			System.out.print("No se cargo la data");
-			e.printStackTrace();
-		}
+		dia.setHours(hora);
+		dia.setMinutes(min);
+		dia.setSeconds(00);
 		
 		return dateCompleto;
 	}
 	
-	public String getTextCalle() {
+	private String getTextCalle() {
 		return textCalle.getText();
 	}
 
-	public int getTextNumero() {
+	private int getTextNumero() {
 		return Integer.parseInt(textNumero.getText());
 	}
 
-	public String getTextLocalidad() {
+	private String getTextLocalidad() {
 		return textLocalidad.getText();
 	}
 
-	public int getTextCarriles() {
+	private int getTextCarriles() {
 		return Integer.parseInt(textCarriles.getText());
 	}
 
-	public int getTextVelocidad() {
+	private int getTextVelocidad() {
 		return Integer.parseInt(textVelocidad.getText());
 	}
 
-	public String getTextAmCual() {
+	private String getTextAmCual() {
 		return textAmCual.getText();
 	}
 
-	public String getTextSumario() {
+	private String getTextSumario() {
 		return textSumario.getText();
 	}
 
@@ -529,15 +572,26 @@ public class InforSini extends JDialog {
 		return textTestigo1.getText();
 	}
 
-	public String getTextTestigo2() {
+	private String getTextTestigo2() {
 		return textTestigo2.getText();
 	}
 
-	public String getTextTestigo3() {
+	private String getTextTestigo3() {
 		return textTestigo3.getText();
 	}
+	
+	public String[] getTestigos() {
+		testigos = new String[3];
+		if (getTextTestigo1() != "")
+			testigos[0] = getTextTestigo1();
+		if (getTextTestigo2() != "")
+			testigos[1] = getTextTestigo2();
+		if (getTextTestigo3() != "")
+			testigos[2] = getTextTestigo3();
+		return testigos;
+	}	
 
-	public String getComboBoxAmSiNo() {
+	private String getComboBoxAmSiNo() {
 		return comboBoxAmSiNo.getSelectedItem().toString();
 	}
 
@@ -549,19 +603,19 @@ public class InforSini extends JDialog {
 		return comboBoxEstado.getSelectedItem().toString();
 	}
 
-	public String getComboBoxProv() {
+	private String getComboBoxProv() {
 		return comboBoxProv.getSelectedItem().toString();
 	}
 
-	public String getComboBoxVisibilidad() {
+	private String getComboBoxVisibilidad() {
 		return comboBoxVisibilidad.getSelectedItem().toString();
 	}
 
-	public String getComboBoxAmbiente() {
+	private String getComboBoxAmbiente() {
 		return comboBoxAmbiente.getSelectedItem().toString();
 	}
 
-	public String getComboBoxiluminacion() {
+	private String getComboBoxiluminacion() {
 		return comboBoxiluminacion.getSelectedItem().toString();
 	}
 
@@ -572,5 +626,95 @@ public class InforSini extends JDialog {
 	public String getComboBoxTestigos() {
 		return comboBoxTestigos.getSelectedItem().toString();
 	}
+	private String getPais() {
+		return comboBoxPais.getSelectedItem().toString();
+	}
+	private String getJuridicc(){
+		return comboBoxJuridicc.getSelectedItem().toString();
+	}
+	private String getPolicia() {
+		return comboBoxPolSiNo.getSelectedItem().toString();
+	}
 
+	public Lugar getLugar() {
+		lugar = new Lugar();
+		
+		lugar.setCalle(getTextCalle());
+		lugar.setNumero(getTextNumero());
+		lugar.setLocalidad(getTextLocalidad());
+		lugar.setProvincia(getComboBoxProv());
+		lugar.setPais(getPais());
+		lugar.setJurridicion(getJuridicc());
+		lugar.setVisibilidad(getComboBoxVisibilidad());
+		lugar.setAmbiente(getComboBoxAmbiente());
+		lugar.setIluminacion(getComboBoxiluminacion());
+		lugar.setCarriles(getTextCarriles());
+		lugar.setVelocidad(getTextVelocidad());
+		lugar.setAmbulancia(getComboBoxAmSiNo());
+		lugar.setDescAmbulancia(getTextAmCual());
+		lugar.setPolicia(getPolicia());
+		lugar.setSumario(getTextSumario());
+		
+		return lugar;
+	}
+	
+	public int getIndm() {
+		return indm;
+	}
+
+	public int getHonorarios() {
+		return honorarios;
+	}
+
+	public String getVerAs() {
+		return verAs;
+	}
+
+	public String getVerTer() {
+		return verTer;
+	}
+
+	public String getMecanica() {
+		return mecanica;
+	}
+
+	public String getObservaciones() {
+		return observaciones;
+	}
+
+	public String getCobertura() {
+		return cobertura;
+	}
+
+	public String getFraude() {
+		return fraude;
+	}
+
+	public String getAnCobertura() {
+		return anCobertura;
+	}
+
+	public String getRespns() {
+		return respns;
+	}
+
+	public String getPorcentajeResp() {
+		return porcentajeResp;
+	}
+
+	public String getAnResp() {
+		return anResp;
+	}
+
+	public String getConclu() {
+		return conclu;
+	}
+
+	public String getTransable() {
+		return transable;
+	}
+
+	public String getMoneda() {
+		return moneda;
+	}
 }

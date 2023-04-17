@@ -8,16 +8,17 @@ public class Lugar implements Serializable{
 	 * 
 	 * */
 	private String calle;
-	private String numero;
+	private int numero;
 	private String localidad;
 	private String provincia;
 	private String pais;
 	private String jurridicion;
 	private String visibilidad;
 	private String ambiente;
+	private String estado;
 	private String iluminacion;
-	private String carriles;
-	private String velocidad;
+	private int carriles;
+	private int velocidad;
 	private String ambulancia;
 	private String descAmbulancia;
 	private String policia;
@@ -26,7 +27,7 @@ public class Lugar implements Serializable{
 	public String getCalle() {
 		return calle;
 	}
-	public String getNumero() {
+	public int getNumero() {
 		return numero;
 	}
 	public String getLocalidad() {
@@ -50,10 +51,10 @@ public class Lugar implements Serializable{
 	public String getIluminacion() {
 		return iluminacion;
 	}
-	public String getCarriles() {
+	public int getCarriles() {
 		return carriles;
 	}
-	public String getVelocidad() {
+	public int getVelocidad() {
 		return velocidad;
 	}
 	public String getAmbulancia() {
@@ -72,8 +73,8 @@ public class Lugar implements Serializable{
 	public void setCalle(String calle) {
 		this.calle = calle;
 	}
-	public void setNumero(String numero) {
-		this.numero = numero;
+	public void setNumero(int i) {
+		this.numero = i;
 	}
 	public void setLocalidad(String localidad) {
 		this.localidad = localidad;
@@ -96,10 +97,10 @@ public class Lugar implements Serializable{
 	public void setIluminacion(String iluminacion) {
 		this.iluminacion = iluminacion;
 	}
-	public void setCarriles(String carriles) {
-		this.carriles = carriles;
+	public void setCarriles(int i) {
+		this.carriles = i;
 	}
-	public void setVelocidad(String velocidad) {
+	public void setVelocidad(int velocidad) {
 		this.velocidad = velocidad;
 	}
 	public void setAmbulancia(String ambulancia) {

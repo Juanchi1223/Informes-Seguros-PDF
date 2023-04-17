@@ -183,10 +183,25 @@ public class Home extends JFrame {
 		objeto.setFechaHoraMin(ventana.getFecha());
 		objeto.setTiempo(ventana.getComboBoxTiempo());
 		objeto.setEstado(ventana.getComboBoxEstado());
-		objeto.setLugar();
-		objeto.setFotosLugar();
-		
-		
+		objeto.setLugar(ventana.getLugar());
+//		objeto.setFotosLugar(null);
+		objeto.setTestigosBool(ventana.getComboBoxTestigos());
+		objeto.setTestigos(ventana.getTestigos());
+		objeto.setVersionAsegurado(ventana.getVerAs());
+		objeto.setVersionTercero(ventana.getVerTer());
+		objeto.setMecanicaAccidente(ventana.getMecanica());
+		objeto.setObservaciones(ventana.getObservaciones());
+		objeto.setCausa(ventana.getCobertura());
+		objeto.setIndiciosFraude(ventana.getFraude());
+		objeto.setAnalisis(ventana.getAnCobertura());
+		objeto.setResponsabilidad(ventana.getRespns());
+		objeto.setPorcentajeresponsabilidad(ventana.getPorcentajeResp());
+		objeto.setDescResponsabilidad(ventana.getAnResp());
+		objeto.setConcluciones(ventana.getConclu());
+		objeto.setTransable(ventana.getTransable());
+		objeto.setMoneda(ventana.getMoneda());
+		objeto.setIndemnizacion(ventana.getIndm());
+		objeto.setHonorariosGastos(ventana.getHonorarios());
 	}
 	protected void abrirVentanaOtros() {
 		OtrosDaños objeto = contrato.getOtrosDaños();

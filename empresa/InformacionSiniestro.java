@@ -10,9 +10,9 @@ public class InformacionSiniestro implements Serializable{
 	private String estado;
 	private Lugar lugar;		// !
 	private Fotos fotosLugar;	// !
-	private String causa;
+	private String causa; // que es causa
 	private String testigosBool;
-	private Array[] testigos;
+	private String[] testigos;
 	private String versionAsegurado;
 	private String versionTercero;
 	private String mecanicaAccidente;
@@ -21,12 +21,13 @@ public class InformacionSiniestro implements Serializable{
 	private String indiciosFraude;
 	private String analisis;
 	private String responsabilidad;
-	private int porcentajeresponsabilidad;
+	private String porcentajeresponsabilidad;
 	private String descResponsabilidad;
 	private String concluciones;
 	private String transable;
 	private String moneda;
-	private String honorariosGastos;
+	private int indemnizacion;
+	private int honorariosGastos;
 	
 	public Date getFechaHoraMin() {
 		return fechaHoraMin;
@@ -49,7 +50,7 @@ public class InformacionSiniestro implements Serializable{
 	public String getTestigosBool() {
 		return testigosBool;
 	}
-	public Array[] getTestigos() {
+	public String[] getTestigos() {
 		return testigos;
 	}
 	public String getVersionAsegurado() {
@@ -76,7 +77,7 @@ public class InformacionSiniestro implements Serializable{
 	public String getResponsabilidad() {
 		return responsabilidad;
 	}
-	public int getPorcentajeresponsabilidad() {
+	public String getPorcentajeresponsabilidad() {
 		return porcentajeresponsabilidad;
 	}
 	public String getDescResponsabilidad() {
@@ -91,7 +92,7 @@ public class InformacionSiniestro implements Serializable{
 	public String getMoneda() {
 		return moneda;
 	}
-	public String getHonorariosGastos() {
+	public int getHonorariosGastos() {
 		return honorariosGastos;
 	}
 	
@@ -116,7 +117,7 @@ public class InformacionSiniestro implements Serializable{
 	public void setTestigosBool(String testigosBool) {
 		this.testigosBool = testigosBool;
 	}
-	public void setTestigos(Array[] testigos) {
+	public void setTestigos(String[] testigos) {
 		this.testigos = testigos;
 	}
 	public void setVersionAsegurado(String versionAsegurado) {
@@ -143,7 +144,7 @@ public class InformacionSiniestro implements Serializable{
 	public void setResponsabilidad(String responsabilidad) {
 		this.responsabilidad = responsabilidad;
 	}
-	public void setPorcentajeresponsabilidad(int porcentajeresponsabilidad) {
+	public void setPorcentajeresponsabilidad(String porcentajeresponsabilidad) {
 		this.porcentajeresponsabilidad = porcentajeresponsabilidad;
 	}
 	public void setDescResponsabilidad(String descResponsabilidad) {
@@ -158,7 +159,13 @@ public class InformacionSiniestro implements Serializable{
 	public void setMoneda(String moneda) {
 		this.moneda = moneda;
 	}
-	public void setHonorariosGastos(String honorariosGastos) {
+	public void setHonorariosGastos(int honorariosGastos) {
 		this.honorariosGastos = honorariosGastos;
+	}
+	public int getIndemnizacion() {
+		return indemnizacion;
+	}
+	public void setIndemnizacion(int indemnizacion) {
+		this.indemnizacion = indemnizacion;
 	}
 }
