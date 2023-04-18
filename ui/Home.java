@@ -181,10 +181,12 @@ public class Home extends JFrame {
 		InformacionSiniestro objeto = contrato.getInfoSin();
 	
 		objeto.setFechaHoraMin(ventana.getFecha());
+		objeto.setHora(ventana.getHr());
+		objeto.setMin(ventana.getMin());
 		objeto.setTiempo(ventana.getComboBoxTiempo());
 		objeto.setEstado(ventana.getComboBoxEstado());
 		objeto.setLugar(ventana.getLugar());
-//		objeto.setFotosLugar(null);
+		objeto.setFotosLugar(ventana.getFotos());
 		objeto.setTestigosBool(ventana.getComboBoxTestigos());
 		objeto.setTestigos(ventana.getTestigos());
 		objeto.setVersionAsegurado(ventana.getVerAs());

@@ -2,14 +2,17 @@ package ui;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
+import java.awt.Image;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
+import javax.swing.JFileChooser;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import com.toedter.calendar.JCalendar;
 
+import empresa.Fotos;
 import empresa.InformacionSiniestro;
 import empresa.Lugar;
 
@@ -22,14 +25,18 @@ import javax.swing.JTextField;
 import java.awt.CardLayout;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.ImageIcon;
+
 import java.awt.Color;
 import java.awt.event.ActionListener;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.awt.event.ActionEvent;
 import java.awt.SystemColor;
 import javax.swing.border.TitledBorder;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.LineBorder;
 
@@ -43,9 +50,11 @@ public class InforSini extends JDialog {
 	
 	private JLabel lblCalle;
 	private String[] SiNo = {"","Si","No"};
-	private Date dateCompleto;
 	private String[] testigos;
 	private Lugar lugar;
+	private ArrayList<String> fotos;
+	private JFileChooser fcDoc1;
+	private JLabel Foto1, Foto2, Foto3, Foto4, Croquis;
 	
 	private int indm, honorarios;	// VARIABLES DE SUBVETANA
 	private String verAs, verTer, mecanica, observaciones, cobertura, fraude, anCobertura, respns, porcentajeResp, anResp, conclu, transable, moneda; 
@@ -76,13 +85,15 @@ public class InforSini extends JDialog {
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
 		
+		fotos = contrato.getFotosLugar();
+		
 		JLabel lblFecha = new JLabel("Fecha:");
 		lblFecha.setBounds(10, 25, 46, 14);
 		contentPanel.add(lblFecha);
 		
 		calendarioFecha = new JCalendar();
-//		if(objeto.getFechaOcurencia() != null)
-//			calendarioFecha.setDate(objeto.getFechaOcurencia());
+		if(contrato.getFechaHoraMin() != null)
+			calendarioFecha.setDate(contrato.getFechaHoraMin());
 		calendarioFecha.setBounds(58, 25, 200, 153);
 		contentPanel.add(calendarioFecha);
 		{
@@ -93,6 +104,9 @@ public class InforSini extends JDialog {
 		
 		comboBoxHora = new JComboBox();
 		comboBoxHora.setModel(new DefaultComboBoxModel(crearArrayHora()));
+		if (contrato.getHora() != null && contrato.getHora() != "") {
+			comboBoxHora.setSelectedIndex(Integer.parseInt(contrato.getHora())+1);
+		}
 		comboBoxHora.setBounds(309, 21, 40, 22);
 		contentPanel.add(comboBoxHora);
 		{
@@ -102,7 +116,10 @@ public class InforSini extends JDialog {
 		}
 		{
 			comboBoxMinuto = new JComboBox();
-			comboBoxMinuto.setModel(new DefaultComboBoxModel(new String[] {"", "00", "15", "30", "45"}));
+			String[] valores =  {"", "00", "15", "30", "45"};
+			comboBoxMinuto.setModel(new DefaultComboBoxModel(valores));
+			if (contrato.getMin() != null && contrato.getMin() != "")
+				comboBoxHora.setSelectedIndex(getIndex(contrato.getMin(), valores));
 			comboBoxMinuto.setBounds(359, 21, 40, 22);
 			contentPanel.add(comboBoxMinuto);
 		}
@@ -113,7 +130,10 @@ public class InforSini extends JDialog {
 		}
 		{
 			comboBoxTiempo = new JComboBox();
-			comboBoxTiempo.setModel(new DefaultComboBoxModel(new String[] {"", "Diurno", "Nocturno"}));
+			String[] valorTiempo =  {"", "Diurno", "Nocturno"};
+			comboBoxTiempo.setModel(new DefaultComboBoxModel(valorTiempo));
+			if (contrato.getTiempo() != null && contrato.getTiempo() != "")
+				comboBoxTiempo.setSelectedIndex(getIndex(contrato.getTiempo(), valorTiempo));
 			comboBoxTiempo.setBounds(463, 21, 78, 22);
 			contentPanel.add(comboBoxTiempo);
 		}
@@ -199,31 +219,31 @@ public class InforSini extends JDialog {
 			contentPanel.add(comboBoxiluminacion);
 		}
 		{
-			JLabel Foto1 = new JLabel("");
+			Foto1 = new JLabel("");
 			Foto1.setBackground(SystemColor.desktop);
 			Foto1.setBounds(10, 206, 108, 108);
 			contentPanel.add(Foto1);
 		}
 		{
-			JLabel Foto2 = new JLabel("");
+			Foto2 = new JLabel("");
 			Foto2.setBackground(Color.BLACK);
 			Foto2.setBounds(174, 206, 108, 108);
 			contentPanel.add(Foto2);
 		}
 		{
-			JLabel Foto3 = new JLabel("");
+			Foto3 = new JLabel("");
 			Foto3.setBackground(Color.BLACK);
 			Foto3.setBounds(341, 206, 108, 108);
 			contentPanel.add(Foto3);
 		}
 		{
-			JLabel Foto4 = new JLabel("");
+			Foto4 = new JLabel("");
 			Foto4.setBackground(Color.BLACK);
 			Foto4.setBounds(513, 206, 108, 108);
 			contentPanel.add(Foto4);
 		}
 		{
-			JLabel Croquis = new JLabel("");
+			Croquis = new JLabel("");
 			Croquis.setBackground(Color.BLACK);
 			Croquis.setBounds(10, 347, 108, 108);
 			contentPanel.add(Croquis);
@@ -232,27 +252,48 @@ public class InforSini extends JDialog {
 		JButton btnFt1 = new JButton("Foto1");
 		btnFt1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				adjuntarArchivo(btnFt1, Foto1 , 0);
 			}
 		});
 		btnFt1.setBounds(132, 208, 24, 23);
 		contentPanel.add(btnFt1);
 		{
 			JButton btnFt2 = new JButton("Foto2");
+			btnFt2.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					adjuntarArchivo(btnFt2, Foto2 , 1);
+				}
+			});
 			btnFt2.setBounds(291, 208, 24, 23);
 			contentPanel.add(btnFt2);
 		}
 		{
 			JButton btnFt3 = new JButton("Foto3");
+			btnFt3.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					adjuntarArchivo(btnFt3, Foto3 , 2);
+				}
+			});
 			btnFt3.setBounds(462, 208, 24, 23);
 			contentPanel.add(btnFt3);
 		}
 		{
 			JButton btnFt4 = new JButton("Foto4");
+			btnFt4.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					adjuntarArchivo(btnFt4, Foto4 , 3);
+				}
+			});
 			btnFt4.setBounds(630, 208, 24, 23);
 			contentPanel.add(btnFt4);
 		}
 		{
 			JButton btnCroquis = new JButton("Croquis");
+			btnCroquis.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					adjuntarArchivo(btnCroquis, Croquis , 4);
+				}
+			});
 			btnCroquis.setBounds(132, 349, 24, 23);
 			contentPanel.add(btnCroquis);
 		}
@@ -486,6 +527,22 @@ public class InforSini extends JDialog {
 		}
 	}
 
+	
+
+	private int getIndex(String valor, String[] x) {
+		int cont = 0;
+		
+		for(String i : x) {
+			if (i.equalsIgnoreCase(valor)) 
+				break;
+			cont++;
+		}
+		
+		return cont;
+	}
+
+
+
 	private void ok() {
 
 		ObservacionesSini subventana = new ObservacionesSini();
@@ -516,6 +573,24 @@ public class InforSini extends JDialog {
 		transable = subventana.getComboBoxTransable();
 		moneda = subventana.getComboBoxMoneda();
 	}
+	private void adjuntarArchivo(JButton botton, JLabel marco, int pos) {
+		fcDoc1 = new JFileChooser();
+		FileNameExtensionFilter filter = new FileNameExtensionFilter("Archivos de imagen", "jpg", "jpeg", "png", "gif");
+		fcDoc1.setFileFilter(filter);
+		
+		int selecionar = fcDoc1.showOpenDialog(botton);
+		
+		if (selecionar == JFileChooser.APPROVE_OPTION) {
+           String Ruta = fcDoc1.getSelectedFile().getPath();
+           fotos.add(pos, Ruta);
+            
+	       Image mImagen = new ImageIcon(Ruta).getImage();
+	       ImageIcon mIcono = new ImageIcon(mImagen.getScaledInstance(marco.getWidth(), marco.getHeight(), Image.SCALE_SMOOTH));
+	       marco.setIcon(mIcono); 
+            
+        }
+		
+	}
 
 	private String[] crearArrayHora() {
 		// TODO Auto-generated method stub
@@ -528,16 +603,13 @@ public class InforSini extends JDialog {
 	}
 
 	public Date getFecha() {
-		Date dia = calendarioFecha.getDate();
-	
-		int hora = Integer.parseInt(comboBoxHora.getSelectedItem().toString());
-		int min = Integer.parseInt(comboBoxMinuto.getSelectedItem().toString());
-		
-		dia.setHours(hora);
-		dia.setMinutes(min);
-		dia.setSeconds(00);
-		
-		return dateCompleto;
+		return calendarioFecha.getDate();
+	}
+	public String getHr() {
+		return comboBoxHora.getSelectedItem().toString();
+	} 
+	public String getMin() {
+		return comboBoxMinuto.getSelectedItem().toString();
 	}
 	
 	private String getTextCalle() {
@@ -717,4 +789,9 @@ public class InforSini extends JDialog {
 	public String getMoneda() {
 		return moneda;
 	}
+
+	public ArrayList<String> getFotos() {
+		return fotos;
+	}
+	
 }

@@ -2,14 +2,17 @@ package empresa;
 
 import java.io.Serializable;
 import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.Date;
 
 public class InformacionSiniestro implements Serializable{
-	private Date fechaHoraMin;
+	private Date fecha;
+	private String hora;
+	private String min;
 	private String tiempo;
 	private String estado;
 	private Lugar lugar;		// !
-	private Fotos fotosLugar;	// !
+	private ArrayList<String> fotosLugar = new ArrayList<String>();	// !
 	private String causa; // que es causa
 	private String testigosBool;
 	private String[] testigos;
@@ -29,8 +32,12 @@ public class InformacionSiniestro implements Serializable{
 	private int indemnizacion;
 	private int honorariosGastos;
 	
+	public InformacionSiniestro() {
+		fotosLugar.add(null);fotosLugar.add(null);fotosLugar.add(null);fotosLugar.add(null);fotosLugar.add(null);
+	}
+	
 	public Date getFechaHoraMin() {
-		return fechaHoraMin;
+		return fecha;
 	}
 	public String getTiempo() {
 		return tiempo;
@@ -41,7 +48,7 @@ public class InformacionSiniestro implements Serializable{
 	public Lugar getLugar() {
 		return lugar;
 	}
-	public Fotos getFotosLugar() {
+	public ArrayList<String> getFotosLugar() {
 		return fotosLugar;
 	}
 	public String getCausa() {
@@ -96,8 +103,8 @@ public class InformacionSiniestro implements Serializable{
 		return honorariosGastos;
 	}
 	
-	public void setFechaHoraMin(Date fechaHoraMin) {
-		this.fechaHoraMin = fechaHoraMin;
+	public void setFechaHoraMin(Date fecha) {
+		this.fecha = fecha;
 	}
 	public void setTiempo(String tiempo) {
 		this.tiempo = tiempo;
@@ -108,7 +115,7 @@ public class InformacionSiniestro implements Serializable{
 	public void setLugar(Lugar lugar) {
 		this.lugar = lugar;
 	}
-	public void setFotosLugar(Fotos fotosLugar) {
+	public void setFotosLugar(ArrayList<String> fotosLugar) {
 		this.fotosLugar = fotosLugar;
 	}
 	public void setCausa(String causa) {
@@ -167,5 +174,21 @@ public class InformacionSiniestro implements Serializable{
 	}
 	public void setIndemnizacion(int indemnizacion) {
 		this.indemnizacion = indemnizacion;
+	}
+
+	public String getHora() {
+		return hora;
+	}
+
+	public String getMin() {
+		return min;
+	}
+
+	public void setHora(String hora) {
+		this.hora = hora;
+	}
+
+	public void setMin(String min) {
+		this.min = min;
 	}
 }
