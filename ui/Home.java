@@ -187,13 +187,14 @@ public class Home extends JFrame {
 		objeto.setEstado(ventana.getComboBoxEstado());
 		objeto.setLugar(ventana.getLugar());
 		objeto.setFotosLugar(ventana.getFotos());
+		objeto.setCausa(ventana.getComboBoxPenalSiNo());
 		objeto.setTestigosBool(ventana.getComboBoxTestigos());
 		objeto.setTestigos(ventana.getTestigos());
 		objeto.setVersionAsegurado(ventana.getVerAs());
 		objeto.setVersionTercero(ventana.getVerTer());
 		objeto.setMecanicaAccidente(ventana.getMecanica());
 		objeto.setObservaciones(ventana.getObservaciones());
-		objeto.setCausa(ventana.getCobertura());
+		objeto.setCobertura(ventana.getCobertura());
 		objeto.setIndiciosFraude(ventana.getFraude());
 		objeto.setAnalisis(ventana.getAnCobertura());
 		objeto.setResponsabilidad(ventana.getRespns());

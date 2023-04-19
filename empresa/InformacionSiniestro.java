@@ -11,11 +11,11 @@ public class InformacionSiniestro implements Serializable{
 	private String min;
 	private String tiempo;
 	private String estado;
-	private Lugar lugar;		// !
+	private Lugar lugar = new Lugar();		// !
 	private ArrayList<String> fotosLugar = new ArrayList<String>();	// !
 	private String causa; // que es causa
 	private String testigosBool;
-	private String[] testigos;
+	private String[] testigos = new String[3];
 	private String versionAsegurado;
 	private String versionTercero;
 	private String mecanicaAccidente;

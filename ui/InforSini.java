@@ -119,7 +119,7 @@ public class InforSini extends JDialog {
 			String[] valores =  {"", "00", "15", "30", "45"};
 			comboBoxMinuto.setModel(new DefaultComboBoxModel(valores));
 			if (contrato.getMin() != null && contrato.getMin() != "")
-				comboBoxHora.setSelectedIndex(getIndex(contrato.getMin(), valores));
+				comboBoxMinuto.setSelectedIndex(getIndex(contrato.getMin(), valores));
 			comboBoxMinuto.setBounds(359, 21, 40, 22);
 			contentPanel.add(comboBoxMinuto);
 		}
@@ -144,7 +144,10 @@ public class InforSini extends JDialog {
 		}
 		{
 			comboBoxEstado = new JComboBox();
-			comboBoxEstado.setModel(new DefaultComboBoxModel(new String[] {"", "Seco", "Lluvia", "Granizo ", "Niebla", "Nieve"}));
+			String[] valorEstado = {"", "Seco", "Lluvia", "Granizo ", "Niebla", "Nieve"};
+			comboBoxEstado.setModel(new DefaultComboBoxModel(valorEstado));
+			if(contrato.getEstado() != null && contrato.getEstado() != "")
+				comboBoxEstado.setSelectedIndex(getIndex(contrato.getEstado(), valorEstado));
 			comboBoxEstado.setBounds(590, 21, 61, 22);
 			contentPanel.add(comboBoxEstado);
 		}
@@ -156,6 +159,8 @@ public class InforSini extends JDialog {
 		{
 			textCalle = new JTextField();
 			textCalle.setBounds(309, 50, 181, 20);
+			if (contrato.getLugar().getCalle() != null && contrato.getLugar().getCalle() != "")
+				textCalle.setText(contrato.getLugar().getCalle());
 			contentPanel.add(textCalle);
 			textCalle.setColumns(10);
 		}
@@ -167,6 +172,8 @@ public class InforSini extends JDialog {
 		{
 			textNumero = new JTextField();
 			textNumero.setBounds(556, 50, 86, 20);
+			if (contrato.getLugar().getNumero() != 0)
+				textNumero.setText(Integer.toString(contrato.getLugar().getNumero()));
 			contentPanel.add(textNumero);
 			textNumero.setColumns(10);
 		}
@@ -177,6 +184,8 @@ public class InforSini extends JDialog {
 		}
 		
 		textLocalidad = new JTextField();
+		if (contrato.getLugar().getLocalidad() != null && contrato.getLugar().getLocalidad() != "")
+			textLocalidad.setText(contrato.getLugar().getLocalidad());
 		textLocalidad.setBounds(335, 81, 108, 20);
 		contentPanel.add(textLocalidad);
 		textLocalidad.setColumns(10);
@@ -186,8 +195,11 @@ public class InforSini extends JDialog {
 		contentPanel.add(lblProvincia);
 		
 		comboBoxProv = new JComboBox();
-		comboBoxProv.setModel(new DefaultComboBoxModel(new String[] {"", "Buenos Aires", "Catamarca", "Chaco", "Chubut", "Córdova", "Corrientes", "Entre Rios ", "Formaso", "Jujuy", "La pampa", "La rioja", "Mendoza", "Misiones ", "Neuquen", "Rio Negro", "Salta", "San Juan", "San Luis", "Santa Cruz ", "Santa Fe", "Santiago del Estero", "Tierra del Fuego", "Tucuman"}));
+		String[] valoresProv = {"", "Buenos Aires", "Catamarca", "Chaco", "Chubut", "Córdova", "Corrientes", "Entre Rios ", "Formaso", "Jujuy", "La pampa", "La rioja", "Mendoza", "Misiones ", "Neuquen", "Rio Negro", "Salta", "San Juan", "San Luis", "Santa Cruz ", "Santa Fe", "Santiago del Estero", "Tierra del Fuego", "Tucuman"};
+		comboBoxProv.setModel(new DefaultComboBoxModel(valoresProv));
 		comboBoxProv.setBounds(513, 79, 165, 22);
+		if (contrato.getLugar().getProvincia() != null && contrato.getLugar().getProvincia() != "")
+			comboBoxProv.setSelectedIndex(getIndex(contrato.getLugar().getProvincia(), valoresProv));
 		contentPanel.add(comboBoxProv);
 		
 		JLabel lblVisibilidad = new JLabel("Visibilidad:");
@@ -195,7 +207,10 @@ public class InforSini extends JDialog {
 		contentPanel.add(lblVisibilidad);
 		
 		comboBoxVisibilidad = new JComboBox<String>();
-		comboBoxVisibilidad.setModel(new DefaultComboBoxModel(new String[] {"", "Buena", "Regular", "Mala"}));
+		String[] valoresVisi =  {"", "Buena", "Regular", "Mala"};
+		comboBoxVisibilidad.setModel(new DefaultComboBoxModel(valoresVisi));
+		if (contrato.getLugar().getVisibilidad() != null && contrato.getLugar().getVisibilidad() != "")
+			comboBoxVisibilidad.setSelectedIndex(getIndex(contrato.getLugar().getVisibilidad(), valoresVisi));
 		comboBoxVisibilidad.setBounds(460, 142, 78, 22);
 		contentPanel.add(comboBoxVisibilidad);
 		
@@ -204,7 +219,10 @@ public class InforSini extends JDialog {
 		contentPanel.add(lblAmbiente);
 		
 		comboBoxAmbiente = new JComboBox();
-		comboBoxAmbiente.setModel(new DefaultComboBoxModel(new String[] {"", "Rural", "Urbano"}));
+		String[] valoresAmb = {"", "Rural", "Urbano"};
+		comboBoxAmbiente.setModel(new DefaultComboBoxModel(valoresAmb));
+		if (contrato.getLugar().getAmbiente() != null && contrato.getLugar().getAmbiente() != "")
+			comboBoxAmbiente.setSelectedIndex(getIndex(contrato.getLugar().getAmbiente(), valoresAmb));
 		comboBoxAmbiente.setBounds(323, 142, 69, 22);
 		contentPanel.add(comboBoxAmbiente);
 		{
@@ -214,7 +232,10 @@ public class InforSini extends JDialog {
 		}
 		{
 			comboBoxiluminacion = new JComboBox();
-			comboBoxiluminacion.setModel(new DefaultComboBoxModel(new String[] {"", "Buena", "Regular", "Mala"}));
+			String[] valoresIl = {"", "Buena", "Regular", "Mala"};
+			comboBoxiluminacion.setModel(new DefaultComboBoxModel(valoresIl));
+			if (contrato.getLugar().getIluminacion() != null && contrato.getLugar().getIluminacion() != "")
+				comboBoxiluminacion.setSelectedIndex(getIndex(contrato.getLugar().getIluminacion(), valoresIl));
 			comboBoxiluminacion.setBounds(616, 141, 90, 22);
 			contentPanel.add(comboBoxiluminacion);
 		}
@@ -222,30 +243,35 @@ public class InforSini extends JDialog {
 			Foto1 = new JLabel("");
 			Foto1.setBackground(SystemColor.desktop);
 			Foto1.setBounds(10, 206, 108, 108);
+			setFotoAdj(fotos.get(0), Foto1);
 			contentPanel.add(Foto1);
 		}
 		{
 			Foto2 = new JLabel("");
 			Foto2.setBackground(Color.BLACK);
 			Foto2.setBounds(174, 206, 108, 108);
+			setFotoAdj(fotos.get(1), Foto2);
 			contentPanel.add(Foto2);
 		}
 		{
 			Foto3 = new JLabel("");
 			Foto3.setBackground(Color.BLACK);
 			Foto3.setBounds(341, 206, 108, 108);
+			setFotoAdj(fotos.get(2), Foto3);
 			contentPanel.add(Foto3);
 		}
 		{
 			Foto4 = new JLabel("");
 			Foto4.setBackground(Color.BLACK);
 			Foto4.setBounds(513, 206, 108, 108);
+			setFotoAdj(fotos.get(3), Foto4);
 			contentPanel.add(Foto4);
 		}
 		{
 			Croquis = new JLabel("");
 			Croquis.setBackground(Color.BLACK);
 			Croquis.setBounds(10, 347, 108, 108);
+			setFotoAdj(fotos.get(4), Croquis);
 			contentPanel.add(Croquis);
 		}
 		
@@ -359,6 +385,8 @@ public class InforSini extends JDialog {
 		}
 		{
 			textCarriles = new JTextField();
+			if (contrato.getLugar().getCarriles() != 0)
+				textCarriles.setText(Integer.toString(contrato.getLugar().getCarriles()));
 			textCarriles.setBounds(551, 329, 29, 20);
 			contentPanel.add(textCarriles);
 			textCarriles.setColumns(10);
@@ -370,6 +398,8 @@ public class InforSini extends JDialog {
 		}
 		{
 			textVelocidad = new JTextField();
+			if (contrato.getLugar().getVelocidad() != 0)
+				textVelocidad.setText(Integer.toString(contrato.getLugar().getVelocidad()));
 			textVelocidad.setBounds(421, 359, 35, 20);
 			contentPanel.add(textVelocidad);
 			textVelocidad.setColumns(10);
@@ -387,6 +417,8 @@ public class InforSini extends JDialog {
 		{
 			comboBoxAmSiNo = new JComboBox();
 			comboBoxAmSiNo.setModel(new DefaultComboBoxModel(SiNo));
+			if (contrato.getLugar().getAmbulancia() != null && contrato.getLugar().getAmbulancia() != "")
+				comboBoxAmSiNo.setSelectedIndex(getIndex(contrato.getLugar().getAmbulancia(), SiNo));
 			comboBoxAmSiNo.setBounds(390, 384, 46, 22);
 			contentPanel.add(comboBoxAmSiNo);
 		}
@@ -397,6 +429,8 @@ public class InforSini extends JDialog {
 		}
 		{
 			textAmCual = new JTextField();
+			if (contrato.getLugar().getDescAmbulancia() != null && contrato.getLugar().getDescAmbulancia() != "")
+				textAmCual.setText(contrato.getLugar().getDescAmbulancia());
 			textAmCual.setBounds(503, 386, 118, 20);
 			contentPanel.add(textAmCual);
 			textAmCual.setColumns(10);
@@ -409,6 +443,8 @@ public class InforSini extends JDialog {
 		{
 			comboBoxPolSiNo = new JComboBox();
 			comboBoxPolSiNo.setModel(new DefaultComboBoxModel(SiNo));
+			if(contrato.getLugar().getPolicia() != null && contrato.getLugar().getPolicia() != "" )
+				comboBoxPolSiNo.setSelectedIndex(getIndex(contrato.getLugar().getPolicia(), SiNo));
 			comboBoxPolSiNo.setBounds(330, 410, 46, 22);
 			contentPanel.add(comboBoxPolSiNo);
 		}
@@ -419,6 +455,8 @@ public class InforSini extends JDialog {
 		}
 		{
 			textSumario = new JTextField();
+			if (contrato.getLugar().getSumario() != null && contrato.getLugar().getSumario() != "")
+				textSumario.setText(contrato.getLugar().getSumario());
 			textSumario.setBounds(453, 411, 168, 20);
 			contentPanel.add(textSumario);
 			textSumario.setColumns(10);
@@ -431,6 +469,8 @@ public class InforSini extends JDialog {
 		{
 			comboBoxPenalSiNo = new JComboBox();
 			comboBoxPenalSiNo.setModel(new DefaultComboBoxModel(SiNo));
+			if(contrato.getCausa() != null && contrato.getCausa() != "")
+				comboBoxPenalSiNo.setSelectedIndex(getIndex(contrato.getCausa(), SiNo));
 			comboBoxPenalSiNo.setBounds(291, 435, 46, 22);
 			contentPanel.add(comboBoxPenalSiNo);
 		}
@@ -442,6 +482,8 @@ public class InforSini extends JDialog {
 		{
 			comboBoxTestigos = new JComboBox();
 			comboBoxTestigos.setModel(new DefaultComboBoxModel(SiNo));
+			if(contrato.getTestigosBool() != null && contrato.getTestigosBool() != "")
+				comboBoxTestigos.setSelectedIndex(getIndex(contrato.getTestigosBool(), SiNo));
 			comboBoxTestigos.setBounds(540, 435, 46, 22);
 			contentPanel.add(comboBoxTestigos);
 		}
@@ -453,6 +495,8 @@ public class InforSini extends JDialog {
 		{
 			textTestigo1 = new JTextField();
 			textTestigo1.setBounds(91, 465, 128, 20);
+			if(contrato.getTestigos()[0] != null && contrato.getTestigos()[0] != "")
+				textTestigo1.setText(contrato.getTestigos()[0]);
 			contentPanel.add(textTestigo1);
 			textTestigo1.setColumns(10);
 		}
@@ -465,6 +509,8 @@ public class InforSini extends JDialog {
 			textTestigo2 = new JTextField();
 			textTestigo2.setColumns(10);
 			textTestigo2.setBounds(309, 464, 128, 20);
+			if(contrato.getTestigos()[1] != null && contrato.getTestigos()[1] != "")
+				textTestigo2.setText(contrato.getTestigos()[1]);
 			contentPanel.add(textTestigo2);
 		}
 		{
@@ -476,6 +522,8 @@ public class InforSini extends JDialog {
 			textTestigo3 = new JTextField();
 			textTestigo3.setColumns(10);
 			textTestigo3.setBounds(536, 464, 128, 20);
+			if(contrato.getTestigos()[2] != null && contrato.getTestigos()[2] != "")
+				textTestigo3.setText(contrato.getTestigos()[2]);
 			contentPanel.add(textTestigo3);
 		}
 		
@@ -484,7 +532,10 @@ public class InforSini extends JDialog {
 		contentPanel.add(lblPais);
 		
 		comboBoxPais = new JComboBox();
-		comboBoxPais.setModel(new DefaultComboBoxModel(new String[] {"", "Argentina", "Brasil", "Chile", "Paraguay", "Uruguay"}));
+		String[] valorPais = {"", "Argentina", "Brasil", "Chile", "Paraguay", "Uruguay"};
+		comboBoxPais.setModel(new DefaultComboBoxModel(valorPais));
+		if (contrato.getLugar().getPais() != null && contrato.getLugar().getPais() != "")
+			comboBoxPais.setSelectedIndex(getIndex(contrato.getLugar().getPais(), valorPais));
 		comboBoxPais.setBounds(309, 108, 83, 22);
 		contentPanel.add(comboBoxPais);
 		{
@@ -494,8 +545,11 @@ public class InforSini extends JDialog {
 		}
 		{
 			comboBoxJuridicc = new JComboBox();
-			comboBoxJuridicc.setModel(new DefaultComboBoxModel(new String[] {"", "Cdad autonoma Bs As", "Cordoba", "Lomas de Zamora", "Mendoza ", "Moron ", "Quilmes", "San Isidro", "Santa Fe", "Resto de Bs As", "Resto del interior"}));
+			String[] valorJurr = {"", "Cdad autonoma Bs As", "Cordoba", "Lomas de Zamora", "Mendoza ", "Moron ", "Quilmes", "San Isidro", "Santa Fe", "Resto de Bs As", "Resto del interior"};
+			comboBoxJuridicc.setModel(new DefaultComboBoxModel(valorJurr));
 			comboBoxJuridicc.setBounds(513, 108, 189, 22);
+			if (contrato.getLugar().getJurridicion() != null && contrato.getLugar().getJurridicion() != "")
+				comboBoxJuridicc.setSelectedIndex(getIndex(contrato.getLugar().getJurridicion(), valorJurr));
 			contentPanel.add(comboBoxJuridicc);
 		}
 		
@@ -528,6 +582,16 @@ public class InforSini extends JDialog {
 	}
 
 	
+
+	private void setFotoAdj(String Ruta, JLabel marco) {
+		if(Ruta != null) {
+			Image mImagen = new ImageIcon(Ruta).getImage();
+	       	ImageIcon mIcono = new ImageIcon(mImagen.getScaledInstance(marco.getWidth(), marco.getHeight(), Image.SCALE_SMOOTH));
+	       	marco.setIcon(mIcono);
+		}	
+	}
+
+
 
 	private int getIndex(String valor, String[] x) {
 		int cont = 0;
