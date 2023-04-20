@@ -9,6 +9,9 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import empresa.InformacionSiniestro;
+
 import javax.swing.JLabel;
 import javax.swing.JTextArea;
 import javax.swing.JScrollPane;
@@ -37,7 +40,7 @@ public class ObservacionesSini extends JDialog {
 
 	/**
 	 * Launch the application.
-	 */
+	 
 	public static void main(String[] args) {
 		try {
 			ObservacionesSini dialog = new ObservacionesSini();
@@ -47,11 +50,8 @@ public class ObservacionesSini extends JDialog {
 			e.printStackTrace();
 		}
 	}
-
-	/**
-	 * Create the dialog.
 	 */
-	public ObservacionesSini() {
+	public ObservacionesSini(InformacionSiniestro contrato) {
 		setTitle("Observaciones");
 		setBounds(100, 100, 690, 572);
 		getContentPane().setLayout(new BorderLayout());
@@ -69,6 +69,8 @@ public class ObservacionesSini extends JDialog {
 		
 		textAreaAsegurado = new JTextArea();
 		textAreaAsegurado.setLineWrap(true);
+		if (contrato.getVersionAsegurado() != null && contrato.getVersionAsegurado() != "")
+			textAreaAsegurado.setText(contrato.getVersionAsegurado());
 		scrollPaneAs.setViewportView(textAreaAsegurado);
 		
 		JLabel lblVerTercero = new JLabel("Version de un tercero:");
@@ -84,6 +86,9 @@ public class ObservacionesSini extends JDialog {
 		contentPanel.add(scrollPaneTercero);
 		
 		textAreaTercero = new JTextArea();
+		textAreaTercero.setLineWrap(true);
+		if (contrato.getVersionTercero() != null && contrato.getVersionTercero() != "")
+			textAreaTercero.setText(contrato.getVersionTercero());
 		scrollPaneTercero.setViewportView(textAreaTercero);
 		
 		JScrollPane scrollPaneMec = new JScrollPane();
@@ -91,6 +96,9 @@ public class ObservacionesSini extends JDialog {
 		contentPanel.add(scrollPaneMec);
 		
 		textAreaMecanica = new JTextArea();
+		textAreaMecanica.setLineWrap(true);
+		if (contrato.getMecanicaAccidente() != null && contrato.getMecanicaAccidente() != "")
+			textAreaMecanica.setText(contrato.getMecanicaAccidente());
 		scrollPaneMec.setViewportView(textAreaMecanica);
 		
 		JLabel lblObservaciones = new JLabel("Observaciones:");
@@ -102,6 +110,9 @@ public class ObservacionesSini extends JDialog {
 		contentPanel.add(scrollPaneObservaciones);
 		
 		textAreaObservaciones = new JTextArea();
+		textAreaObservaciones.setLineWrap(true);
+		if (contrato.getObservaciones() != null && contrato.getObservaciones() != "")
+			textAreaObservaciones.setText(contrato.getObservaciones());
 		scrollPaneObservaciones.setViewportView(textAreaObservaciones);
 		
 		JLabel lblCobertura = new JLabel("Cobertura:");
@@ -109,8 +120,11 @@ public class ObservacionesSini extends JDialog {
 		contentPanel.add(lblCobertura);
 		
 		comboBoxCobertura = new JComboBox();
-		comboBoxCobertura.setModel(new DefaultComboBoxModel(new String[] {"", "Cubierto", "Sin Cobertura", "Dudosa"}));
+		String[] valorCob = {"", "Cubierto", "Sin Cobertura", "Dudosa"};
+		comboBoxCobertura.setModel(new DefaultComboBoxModel(valorCob));
 		comboBoxCobertura.setBounds(83, 217, 93, 22);
+		if (contrato.getCobertura() != null && contrato.getCobertura() != "")
+			comboBoxCobertura.setSelectedIndex(getIndex(contrato.getCobertura(), valorCob));
 		contentPanel.add(comboBoxCobertura);
 		
 		JLabel lblIndicosFraude = new JLabel("Indicios de fraude");
@@ -118,8 +132,11 @@ public class ObservacionesSini extends JDialog {
 		contentPanel.add(lblIndicosFraude);
 		
 		comboBoxFraude = new JComboBox();
-		comboBoxFraude.setModel(new DefaultComboBoxModel(new String[] {"", "Si", "No"}));
+		String[] SiNo = {"", "Si", "No"};
+		comboBoxFraude.setModel(new DefaultComboBoxModel(SiNo));
 		comboBoxFraude.setBounds(298, 218, 48, 22);
+		if (contrato.getIndiciosFraude() != null && contrato.getIndiciosFraude() != "")
+			comboBoxFraude.setSelectedIndex(getIndex(contrato.getIndiciosFraude(), SiNo));
 		contentPanel.add(comboBoxFraude);
 		
 		JLabel lblAnalicizCob = new JLabel("Analizic de cobertura:");
@@ -131,6 +148,9 @@ public class ObservacionesSini extends JDialog {
 		contentPanel.add(scrollPaneAnaCob);
 		
 		textAreaCob = new JTextArea();
+		textAreaCob.setLineWrap(true);
+		if(contrato.getAnalisis() != null && contrato.getAnalisis() != "")
+			textAreaCob.setText(contrato.getAnalisis());
 		scrollPaneAnaCob.setViewportView(textAreaCob);
 		
 		JLabel lblResponsabilidad = new JLabel("Responsabilidad");
@@ -138,13 +158,19 @@ public class ObservacionesSini extends JDialog {
 		contentPanel.add(lblResponsabilidad);
 		
 		comboBoxResp = new JComboBox();
-		comboBoxResp.setModel(new DefaultComboBoxModel(new String[] {"", "Plena", "Concurrencia  reclamante", "Concurrencia codemandado", "Nula"}));
+		String[] valorResp = {"", "Plena", "Concurrencia  reclamante", "Concurrencia codemandado", "Nula"};
+		comboBoxResp.setModel(new DefaultComboBoxModel(valorResp));
 		comboBoxResp.setBounds(458, 217, 196, 22);
+		if(contrato.getResponsabilidad() != null && contrato.getResponsabilidad() != "")
+			comboBoxResp.setSelectedIndex(getIndex(contrato.getResponsabilidad(), valorResp));
 		contentPanel.add(comboBoxResp);
 		
 		comboBoxPorcentaje = new JComboBox();
-		comboBoxPorcentaje.setModel(new DefaultComboBoxModel(new String[] {"", "25", "50", "75"}));
+		String[] valorPorc = {"", "25", "50", "75"};
+		comboBoxPorcentaje.setModel(new DefaultComboBoxModel(valorPorc));
 		comboBoxPorcentaje.setBounds(568, 242, 47, 22);
+		if (contrato.getPorcentajeresponsabilidad() != null && contrato.getPorcentajeresponsabilidad() != "")
+			comboBoxPorcentaje.setSelectedIndex(getIndex(contrato.getPorcentajeresponsabilidad(), valorPorc));
 		contentPanel.add(comboBoxPorcentaje);
 		
 		JLabel lblPorcentaje = new JLabel("%");
@@ -156,6 +182,9 @@ public class ObservacionesSini extends JDialog {
 		contentPanel.add(scrollPaneResp);
 		
 		textAreaResp = new JTextArea();
+		textAreaResp.setLineWrap(true);
+		if (contrato.getDescResponsabilidad() != null && contrato.getDescResponsabilidad() != "")
+			textAreaResp.setText(contrato.getDescResponsabilidad());
 		scrollPaneResp.setViewportView(textAreaResp);
 		
 		JLabel lblAnalizicDeResponsabilidad = new JLabel("Analizic de responsabilidad:");
@@ -171,6 +200,9 @@ public class ObservacionesSini extends JDialog {
 		contentPanel.add(scrollPaneConclu);
 		
 		textAreaConclu = new JTextArea();
+		textAreaConclu.setLineWrap(true);
+		if (contrato.getConcluciones() != null && contrato.getConcluciones() != "")
+			textAreaConclu.setText(contrato.getConcluciones());
 		scrollPaneConclu.setViewportView(textAreaConclu);
 		
 		JLabel lblTransable = new JLabel("¿El caso es transable?");
@@ -178,8 +210,11 @@ public class ObservacionesSini extends JDialog {
 		contentPanel.add(lblTransable);
 		
 		comboBoxTransable = new JComboBox();
-		comboBoxTransable.setModel(new DefaultComboBoxModel(new String[] {"", "Si", "En negociacion", "No por Abg no negocia", "No por cobertura", "No por fraude", "No por pred. desmedida", "No por responsabilidad", "Transado", "Otro"}));
+		String[] valorTransable = {"", "Si", "En negociacion", "No por Abg no negocia", "No por cobertura", "No por fraude", "No por pred. desmedida", "No por responsabilidad", "Transado", "Otro"};
+		comboBoxTransable.setModel(new DefaultComboBoxModel(valorTransable));
 		comboBoxTransable.setBounds(157, 446, 160, 22);
+		if (contrato.getTransable() != null && contrato.getTransable() != "")
+			comboBoxTransable.setSelectedIndex(getIndex(contrato.getTransable(), valorTransable));
 		contentPanel.add(comboBoxTransable);
 		
 		JLabel lblIdnSug = new JLabel("Res. Indemnicacion Sugerida");
@@ -187,18 +222,25 @@ public class ObservacionesSini extends JDialog {
 		contentPanel.add(lblIdnSug);
 		
 		comboBoxMoneda = new JComboBox();
-		comboBoxMoneda.setModel(new DefaultComboBoxModel(new String[] {"", "$ARG", "U$S"}));
+		String[] valorMoneda =  {"", "$ARG", "U$S"};
+		comboBoxMoneda.setModel(new DefaultComboBoxModel(valorMoneda));
 		comboBoxMoneda.setBounds(493, 446, 68, 22);
+		if(contrato.getMoneda() != null && contrato.getMoneda() != "")
+			comboBoxMoneda.setSelectedIndex(getIndex(contrato.getMoneda(), valorMoneda));
 		contentPanel.add(comboBoxMoneda);
 		
 		textIndmn = new JTextField();
 		textIndmn.setBounds(568, 446, 86, 20);
+		if (contrato.getIndemnizacion() != 0)
+			textIndmn.setText(Integer.toString(contrato.getIndemnizacion()));
 		contentPanel.add(textIndmn);
 		textIndmn.setColumns(10);
 		
 		textHonorarios = new JTextField();
 		textHonorarios.setColumns(10);
 		textHonorarios.setBounds(568, 475, 86, 20);
+		if (contrato.getHonorariosGastos() != 0)
+			textHonorarios.setText(Integer.toString(contrato.getHonorariosGastos()));
 		contentPanel.add(textHonorarios);
 		
 		JLabel lblHonoGast = new JLabel("Honorarios + gastos");
@@ -230,6 +272,18 @@ public class ObservacionesSini extends JDialog {
 				buttonPane.add(cancelButton);
 			}
 		}
+	}
+
+	private int getIndex(String valor, String[] x) {
+		int cont = 0;
+		
+		for(String i : x) {
+			if (i.equalsIgnoreCase(valor)) 
+				break;
+			cont++;
+		}
+		
+		return cont;
 	}
 
 	private void ok() {

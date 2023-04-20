@@ -561,7 +561,7 @@ public class InforSini extends JDialog {
 				JButton okButton = new JButton("OK");
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						ok();
+						ok(contrato);
 					}
 				});
 				okButton.setActionCommand("OK");
@@ -607,9 +607,9 @@ public class InforSini extends JDialog {
 
 
 
-	private void ok() {
+	private void ok(InformacionSiniestro contrato) {
 
-		ObservacionesSini subventana = new ObservacionesSini();
+		ObservacionesSini subventana = new ObservacionesSini(contrato);
 		
 		subventana.setModal(true);
 		subventana.setVisible(true);
