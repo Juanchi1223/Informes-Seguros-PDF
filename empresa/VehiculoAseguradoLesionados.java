@@ -14,6 +14,10 @@ public class VehiculoAseguradoLesionados implements Serializable{
 		this.listaVehiculos = listaVehiculos;
 	}
 	
-	public void agregarVehiculo() {}
-	public void borrarVehiculo() {}
+	public void agregarVehiculo(Vehiculos rodado) {
+		this.listaVehiculos.add(rodado);
+	}
+	public void borrarVehiculo(int posicion) {
+		this.listaVehiculos.remove(posicion);
+	}
 }

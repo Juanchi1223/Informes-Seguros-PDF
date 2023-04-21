@@ -112,6 +112,13 @@ public class Home extends JFrame {
 		contentPane.add(btnSinistro);
 		
 		JButton btnAsegLesio = new JButton("Vehículos Asegurados Lesionados");
+		btnSinistro.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+
+			
+		});
 		btnAsegLesio.setBounds(32, 195, 193, 53);
 		contentPane.add(btnAsegLesio);
 		
