@@ -24,6 +24,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.awt.event.ActionEvent;
 import empresa.*;
+import ui.daños.ManejoDeDaños;
 
 
 public class Home extends JFrame {
