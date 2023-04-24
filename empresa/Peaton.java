@@ -3,29 +3,30 @@ package empresa;
 import java.io.Serializable;
 
 public class Peaton implements Serializable{
-	private String apellido;
-	private String nombre;
-	private String edad;
-	private int nroDocumento;
-	private int celular;
-	private String ocupacion;
-	private int telefono;
-	private String calle;
-	private int numero;
-	private int piso;
-	private String dept;
-	private String localidad;
-	private String partido;
-	private String lesionado;
-	private String art;
-	private String nombreArt;
-	private String lugarAtencion;
-	private String abogado;
-	private String nombreDr;
-	private String apellidoDr;
-	private Fotos DNI;
-	private Fotos AcreditacionMedica;
-	private String justificaAcred;
+	protected String apellido;
+	protected String nombre;
+	protected int edad;
+	protected int nroDocumento;
+	protected int celular;
+	protected String ocupacion;
+	protected int telefono;
+	protected String calle;
+	protected int numero;
+	protected int piso;
+	protected String dept;
+	protected String localidad;
+	protected String partido;
+	protected String provincia;
+	protected String lesionado;
+	protected String art;
+	protected String nombreArt;
+	protected String lugarAtencion;
+	protected String abogado;
+	protected String nombreDr;
+	protected String apellidoDr;
+	protected Fotos DNI;
+	protected Fotos AcreditacionMedica;
+	protected String justificaAcred;
 	
 	public String getApellido() {
 		return apellido;
@@ -33,7 +34,7 @@ public class Peaton implements Serializable{
 	public String getNombre() {
 		return nombre;
 	}
-	public String getEdad() {
+	public int getEdad() {
 		return edad;
 	}
 	public int getNroDocumento() {
@@ -103,7 +104,7 @@ public class Peaton implements Serializable{
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-	public void setEdad(String edad) {
+	public void setEdad(int edad) {
 		this.edad = edad;
 	}
 	public void setNroDocumento(int nroDocumento) {
@@ -165,5 +166,11 @@ public class Peaton implements Serializable{
 	}
 	public void setJustificaAcred(String justificaAcred) {
 		this.justificaAcred = justificaAcred;
+	}
+	public String getProvincia() {
+		return provincia;
+	}
+	public void setProvincia(String provincia) {
+		this.provincia = provincia;
 	}
 }

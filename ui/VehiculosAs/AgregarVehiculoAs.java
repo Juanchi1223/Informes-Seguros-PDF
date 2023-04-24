@@ -16,6 +16,8 @@ import empresa.Tripulantes;
 
 import java.awt.Color;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import javax.swing.JList;
@@ -284,6 +286,18 @@ public class AgregarVehiculoAs extends JDialog {
 		contentPanel.add(btnAdjCot);
 		
 		JButton btnAgrPas = new JButton("Agregar ");
+		btnAgrPas.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+				AgregarPasajero ventana = new AgregarPasajero();
+				
+				ventana.setModal(true);
+				ventana.setVisible(true);
+				
+//				vehiculos.agregarVehiculo(ventana.getDaño());
+//				list.setListData(vehiculos.getListaVehiculos().toArray());
+			}
+		});
 		btnAgrPas.setBounds(361, 565, 89, 23);
 		contentPanel.add(btnAgrPas);
 		

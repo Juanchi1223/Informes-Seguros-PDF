@@ -53,12 +53,11 @@ public class ManejoDeVehiculoAs extends JDialog {
 		JButton btnAgregar = new JButton("Agregar Vehiculo");
 		btnAgregar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-
-//				AgregarDaño ventana = new AgregarDaño();
-//				
-//				ventana.setModal(true);
-//				ventana.setVisible(true);
-//				
+				AgregarVehiculoAs ventana = new AgregarVehiculoAs();
+				
+				ventana.setModal(true);
+				ventana.setVisible(true);
+				
 //				vehiculos.agregarVehiculo(ventana.getDaño());
 //				list.setListData(vehiculos.getListaVehiculos().toArray());
 			}

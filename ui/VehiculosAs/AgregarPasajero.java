@@ -2,6 +2,8 @@ package ui.VehiculosAs;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -9,6 +11,9 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import com.toedter.calendar.JCalendar;
+
+import empresa.Peaton;
+import empresa.Tripulantes;
 
 import javax.swing.JLabel;
 import javax.swing.JComboBox;
@@ -18,31 +23,15 @@ import javax.swing.JCheckBox;
 public class AgregarPasajero extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
-	private JTextField textFieldApellido;
-	private JTextField textEdad;
-	private JTextField textFieldDoc;
-	private JTextField textNombres;
-	private JTextField textCelular;
-	private JTextField textOcupacion;
-	private JTextField textTelefono;
-	private JTextField textCalle;
-	private JTextField textNumero;
-	private JTextField textPiso;
-	private JTextField textDepto;
-	private JTextField textLocalidad;
-	private JTextField textPartido;
-	private JTextField textProvincia;
-	private JTextField textLicConducir;
-	private JTextField textAutoridadEm;
-	private JTextField textNombreLes;
-	private JTextField textLugarAtt;
-	private JTextField textDesAs;
-	private JTextField textNombreDr;
-	private JTextField textAppDr;
+	private JTextField textFieldApellido, textEdad, textFieldDoc, textNombres, textCelular, textOcupacion, textTelefono, textCalle, textNumero;
+	private JTextField textPiso, textDepto, textLocalidad, textPartido, textProvincia, textLicConducir, textAutoridadEm;
+	private JTextField textNombreLes, textLugarAtt, textDesAs, textNombreDr, textAppDr;
+	private JComboBox comboBoxVehiculo, comboBoxTipoPer, comboBoxLesionado, comboBoxAlcholemia, comboBoxAbogado, comboBoxPropAs, comboBoxRelacion;
+	private JCalendar calendarioVigenciaIni, calendarioVigenciaFin;
+	private JCheckBox chckbxART;
 
-	/**
-	 * Launch the application.
-	 */
+	private Tripulantes persona;
+	
 	public static void main(String[] args) {
 		try {
 			AgregarPasajero dialog = new AgregarPasajero();
@@ -69,7 +58,7 @@ public class AgregarPasajero extends JDialog {
 		lblVehiculoPerte.setBounds(10, 26, 153, 14);
 		contentPanel.add(lblVehiculoPerte);
 		
-		JComboBox comboBoxVehiculo = new JComboBox();
+		comboBoxVehiculo = new JComboBox();
 		comboBoxVehiculo.setBounds(162, 22, 129, 22);
 		contentPanel.add(comboBoxVehiculo);
 		
@@ -77,7 +66,7 @@ public class AgregarPasajero extends JDialog {
 		lblPersona.setBounds(10, 51, 141, 14);
 		contentPanel.add(lblPersona);
 		
-		JComboBox comboBoxTipoPer = new JComboBox();
+		comboBoxTipoPer = new JComboBox();
 		comboBoxTipoPer.setBounds(144, 47, 111, 22);
 		contentPanel.add(comboBoxTipoPer);
 		
@@ -229,7 +218,7 @@ public class AgregarPasajero extends JDialog {
 		lblVigencia.setBounds(10, 232, 86, 14);
 		contentPanel.add(lblVigencia);
 		
-		JCalendar calendarioVigenciaIni = new JCalendar();
+		calendarioVigenciaIni = new JCalendar();
 		calendarioVigenciaIni.setBounds(44, 251, 200, 153);
 		contentPanel.add(calendarioVigenciaIni);
 		
@@ -237,7 +226,7 @@ public class AgregarPasajero extends JDialog {
 		lblVigenciaFin.setBounds(262, 232, 46, 14);
 		contentPanel.add(lblVigenciaFin);
 		
-		JCalendar calendarioVigenciaFin = new JCalendar();
+		calendarioVigenciaFin = new JCalendar();
 		calendarioVigenciaFin.setBounds(290, 251, 200, 153);
 		contentPanel.add(calendarioVigenciaFin);
 		
@@ -245,11 +234,11 @@ public class AgregarPasajero extends JDialog {
 		lblLesionado.setBounds(10, 415, 86, 14);
 		contentPanel.add(lblLesionado);
 		
-		JComboBox comboBoxLesionado = new JComboBox();
+		comboBoxLesionado = new JComboBox();
 		comboBoxLesionado.setBounds(84, 411, 91, 22);
 		contentPanel.add(comboBoxLesionado);
 		
-		JCheckBox chckbxART = new JCheckBox("ART");
+		chckbxART = new JCheckBox("ART");
 		chckbxART.setBounds(178, 411, 54, 23);
 		contentPanel.add(chckbxART);
 		
@@ -275,7 +264,7 @@ public class AgregarPasajero extends JDialog {
 		lblAlcoholemia.setBounds(10, 440, 86, 14);
 		contentPanel.add(lblAlcoholemia);
 		
-		JComboBox comboBoxAlcholemia = new JComboBox();
+		comboBoxAlcholemia = new JComboBox();
 		comboBoxAlcholemia.setBounds(83, 436, 117, 22);
 		contentPanel.add(comboBoxAlcholemia);
 		
@@ -283,7 +272,7 @@ public class AgregarPasajero extends JDialog {
 		lblPropAsegurado.setBounds(226, 440, 197, 14);
 		contentPanel.add(lblPropAsegurado);
 		
-		JComboBox comboBoxPropAs = new JComboBox();
+		comboBoxPropAs = new JComboBox();
 		comboBoxPropAs.setBounds(427, 436, 54, 22);
 		contentPanel.add(comboBoxPropAs);
 		
@@ -291,7 +280,7 @@ public class AgregarPasajero extends JDialog {
 		lblRelacion.setBounds(216, 465, 73, 14);
 		contentPanel.add(lblRelacion);
 		
-		JComboBox comboBoxRelacion = new JComboBox();
+		comboBoxRelacion = new JComboBox();
 		comboBoxRelacion.setBounds(274, 461, 123, 22);
 		contentPanel.add(comboBoxRelacion);
 		
@@ -308,7 +297,7 @@ public class AgregarPasajero extends JDialog {
 		lblAbodago.setBounds(12, 494, 62, 14);
 		contentPanel.add(lblAbodago);
 		
-		JComboBox comboBoxAbogado = new JComboBox();
+		comboBoxAbogado = new JComboBox();
 		comboBoxAbogado.setBounds(78, 490, 124, 22);
 		contentPanel.add(comboBoxAbogado);
 		
@@ -336,11 +325,55 @@ public class AgregarPasajero extends JDialog {
 			{
 				JButton okButton = new JButton("OK");
 				okButton.setActionCommand("OK");
+				okButton.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						// GUARDAR TODOS LOS DATOS EN LA PERSONA
+						Tripulantes aux = new Tripulantes();
+						aux.setVehicPertenece(comboBoxVehiculo.getSelectedItem().toString());
+						aux.setPersona(comboBoxTipoPer.getSelectedItem().toString());
+						aux.setApellido(textFieldApellido.getText());
+						aux.setEdad(Integer.parseInt(textEdad.getText()));
+						aux.setNroDocumento(Integer.parseInt(textFieldDoc.getText()));
+						aux.setNombre(textNombres.getText());
+						aux.setCelular(Integer.parseInt(textCelular.getText()));
+						aux.setOcupacion(textOcupacion.getText());
+						aux.setTelefono(Integer.parseInt(textTelefono.getText()));
+						aux.setCalle(textCalle.getText());
+						aux.setNumero(Integer.parseInt(textNumero.getText()));
+						aux.setPiso(Integer.parseInt(textPiso.getText()));
+						aux.setDept(textDepto.getText());
+						aux.setLocalidad(textLocalidad.getText());
+						aux.setPartido(textPartido.getText());
+						aux.setProvincia(textProvincia.getText());
+						aux.setLicencia(textLicConducir.getText());
+						aux.setAutoridadEmisora(textAutoridadEm.getText());
+						aux.setVigenciaIni(calendarioVigenciaIni.getDate());
+						aux.setVigenciaFin(calendarioVigenciaFin.getDate());
+						aux.setLesionado(comboBoxLesionado.getSelectedItem().toString());
+						aux.setArt((chckbxART.isSelected())? "Si" : "No");
+						aux.setNombreArt(textNombreLes.getText());
+						aux.setLugarAtencion(textLugarAtt.getText());
+						aux.setAlcoholemia(comboBoxAlcholemia.getSelectedItem().toString());
+						aux.setPropioAsegurado(comboBoxPropAs.getSelectedItem().toString());
+						aux.setRelacion(comboBoxRelacion.getSelectedItem().toString());
+						aux.setCual(textDesAs.getText());
+						aux.setAbogado(comboBoxAbogado.getSelectedItem().toString());
+						aux.setNombreDr(textNombreDr.getText());
+						aux.setApellidoDr(textAppDr.getText());
+						// FALTA AGREGAR LA PARTE DE LAS FOTOS
+						
+					}
+				});
 				buttonPane.add(okButton);
 				getRootPane().setDefaultButton(okButton);
 			}
 			{
 				JButton cancelButton = new JButton("Cancel");
+				cancelButton.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						System.out.print(chckbxART.isSelected());
+					}
+				});
 				cancelButton.setActionCommand("Cancel");
 				buttonPane.add(cancelButton);
 			}

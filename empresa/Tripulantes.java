@@ -16,6 +16,10 @@ public class Tripulantes extends Peaton implements Serializable{
 	private String cual;
 	private Fotos licenciaFoto;
 	
+	public Tripulantes() {
+		super();
+	}
+	
 	public String getVehicPertenece() {
 		return vehicPertenece;
 	}

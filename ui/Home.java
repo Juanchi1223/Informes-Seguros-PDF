@@ -23,7 +23,9 @@ import java.io.ObjectOutputStream;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.awt.event.ActionEvent;
+
 import empresa.*;
+import ui.VehiculosAs.ManejoDeVehiculoAs;
 import ui.daños.ManejoDeDaños;
 
 
@@ -113,12 +115,10 @@ public class Home extends JFrame {
 		contentPane.add(btnSinistro);
 		
 		JButton btnAsegLesio = new JButton("Vehículos Asegurados Lesionados");
-		btnSinistro.addActionListener(new ActionListener() {
+		btnAsegLesio.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				abrirAsegurados();
 			}
-
-			
 		});
 		btnAsegLesio.setBounds(32, 195, 193, 53);
 		contentPane.add(btnAsegLesio);
@@ -178,6 +178,15 @@ public class Home extends JFrame {
 		btnGuardar.setBounds(625, 473, 109, 23);
 		contentPane.add(btnGuardar);
 	}
+	protected void abrirAsegurados() {
+		VehiculoAseguradoLesionados vehiculosAs = contrato.getVehiculosAsegurados();
+		ManejoDeVehiculoAs ventana = new ManejoDeVehiculoAs(vehiculosAs);
+		
+		ventana.setModal(true);
+		ventana.setVisible(true);
+		
+	}
+
 	protected void abrirInforSini() {
 		InformacionSiniestro infSin = contrato.getInfoSin();
 		InforSini ventana = new InforSini(infSin);
