@@ -45,8 +45,8 @@ public class ModificarDaño extends JDialog {
 	private JComboBox AdjDocSiNo;
 	private JTextField textJstDoc;
 	private JTextField textJstFoto;
-	private ArrayList<String> FtsDoc;
-	private ArrayList<String> Fts;
+	private Fotos FtsDoc;
+	private Fotos Fts;
 	
 	/**
 	 * Launch the application.
@@ -132,45 +132,46 @@ public class ModificarDaño extends JDialog {
 		JLabel lblDoc1 = new JLabel("");
 		lblDoc1.setForeground(Color.WHITE);
 		lblDoc1.setBounds(27, 151, 122, 122);
-		setFotoAdjunta(FtsDoc.get(0), lblDoc1);
+		FtsDoc.setFotoAdj(0, lblDoc1);
 		contentPanel.add(lblDoc1);
 		
 		JLabel lblDoc2 = new JLabel("");
 		lblDoc2.setForeground(Color.WHITE);
 		lblDoc2.setBounds(225, 151, 122, 122);
-		setFotoAdjunta(FtsDoc.get(1), lblDoc2);
+		FtsDoc.setFotoAdj(1, lblDoc2);
 		contentPanel.add(lblDoc2);
 		
 		JLabel lblFoto1 = new JLabel("");
 		lblFoto1.setForeground(Color.WHITE);
 		lblFoto1.setBounds(27, 310, 122, 122);
-		setFotoAdjunta(Fts.get(0), lblFoto1);
+		Fts.setFotoAdj(0, lblFoto1);
 		contentPanel.add(lblFoto1);
 		
 		JLabel lblFoto2 = new JLabel("");
 		lblFoto2.setForeground(Color.WHITE);
 		lblFoto2.setBounds(238, 310, 122, 122);
-		setFotoAdjunta(Fts.get(1), lblFoto2);
+		Fts.setFotoAdj(1, lblFoto2);
 		contentPanel.add(lblFoto2);
 		
 		JLabel lblFoto3 = new JLabel("");
 		lblFoto3.setBackground(SystemColor.menu);
 		lblFoto3.setForeground(Color.WHITE);
 		lblFoto3.setBounds(27, 439, 122, 122);
-		setFotoAdjunta(Fts.get(2), lblFoto3);
+		Fts.setFotoAdj(2, lblFoto3);
 		contentPanel.add(lblFoto3);
 		
 		JLabel lblFoto4 = new JLabel("");
 		lblFoto4.setForeground(Color.WHITE);
 		lblFoto4.setBounds(238, 443, 122, 122);
-		setFotoAdjunta(Fts.get(3), lblFoto4);
+		Fts.setFotoAdj(3, lblFoto4);
 		contentPanel.add(lblFoto4);
 		
 		
 		JButton btnAdjDoc1 = new JButton("btnAdjDoc1");
 		btnAdjDoc1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				adjuntarArchivo(btnAdjDoc1, lblDoc1,1 ,true);
+				String ruta1 = FtsDoc.adjuntarArchivo(btnAdjDoc1, lblDoc1);
+				FtsDoc.agregarFoto(0, ruta1);;
 			}
 		});
 		btnAdjDoc1.setBounds(159, 151, 36, 23);
@@ -179,7 +180,8 @@ public class ModificarDaño extends JDialog {
 		JButton btnAdjDoc2 = new JButton("btnAdjDoc2");
 		btnAdjDoc2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				adjuntarArchivo(btnAdjDoc2, lblDoc2, 2, true);
+				String ruta2 =FtsDoc.adjuntarArchivo(btnAdjDoc2, lblDoc2);
+				FtsDoc.agregarFoto(1, ruta2);
 			}
 		});
 		btnAdjDoc2.setBounds(370, 146, 36, 23);
@@ -188,7 +190,8 @@ public class ModificarDaño extends JDialog {
 		JButton btnAdjFt1 = new JButton("btnAdjFt1");
 		btnAdjFt1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				adjuntarArchivo(btnAdjFt1, lblFoto1, 1,false);
+				String ruta1 = Fts.adjuntarArchivo(btnAdjFt1, lblFoto1);
+				Fts.agregarFoto(0, ruta1);				
 			}
 		});
 		btnAdjFt1.setBounds(159, 306, 36, 23);
@@ -197,7 +200,8 @@ public class ModificarDaño extends JDialog {
 		JButton btnAdjFt2 = new JButton("btnAdjFt2");
 		btnAdjFt2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				adjuntarArchivo(btnAdjFt2, lblFoto3, 2,false);
+				String ruta2 = Fts.adjuntarArchivo(btnAdjFt2, lblFoto3);
+				Fts.agregarFoto(1, ruta2);
 			}
 		});
 		btnAdjFt2.setBounds(159, 439, 36, 23);
@@ -206,7 +210,8 @@ public class ModificarDaño extends JDialog {
 		JButton btnAdjFt3 = new JButton("btnAdjFt3");
 		btnAdjFt3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				adjuntarArchivo(btnAdjFt3, lblFoto2, 3,false);
+				String ruta3 = Fts.adjuntarArchivo(btnAdjFt3, lblFoto2);
+				Fts.agregarFoto(2, ruta3);
 			}
 		});
 		btnAdjFt3.setBounds(370, 306, 36, 23);
@@ -215,7 +220,8 @@ public class ModificarDaño extends JDialog {
 		JButton btnAdjFt4 = new JButton("btnAdjFt4");
 		btnAdjFt4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				adjuntarArchivo(btnAdjFt4, lblFoto4, 4,false);
+				String ruta4 = Fts.adjuntarArchivo(btnAdjFt4, lblFoto4);
+				Fts.agregarFoto(3, ruta4);
 			}
 		});
 		btnAdjFt4.setBounds(370, 439, 36, 23);
@@ -278,41 +284,6 @@ public class ModificarDaño extends JDialog {
 		else
 			return 1;
 		
-	}
-
-	private void adjuntarArchivo(JButton botton, JLabel marco, int pos,boolean doc) {
-		fcDoc1 = new JFileChooser();
-		FileNameExtensionFilter filter = new FileNameExtensionFilter("Archivos de imagen", "jpg", "jpeg", "png", "gif");
-		fcDoc1.setFileFilter(filter);
-		
-		int selecionar = fcDoc1.showOpenDialog(botton);
-		
-		if (selecionar == JFileChooser.APPROVE_OPTION) {
-           String Ruta = fcDoc1.getSelectedFile().getPath();
-           agregarArrayList(Ruta, doc, pos);
-            
-	       Image mImagen = new ImageIcon(Ruta).getImage();
-	       ImageIcon mIcono = new ImageIcon(mImagen.getScaledInstance(marco.getWidth(), marco.getHeight(), Image.SCALE_SMOOTH));
-	       marco.setIcon(mIcono); 
-            
-        }
-	}
-	
-	private void agregarArrayList(String ruta, boolean doc, int pos) {
-		if (doc) {
-			FtsDoc.add(pos, ruta);
-		}
-		else{
-			Fts.add(pos, ruta);
-		}
-		
-	}
-	private void setFotoAdjunta(String Ruta, JLabel marco) {
-		if(Ruta != null) {
-			Image mImagen = new ImageIcon(Ruta).getImage();
-	       	ImageIcon mIcono = new ImageIcon(mImagen.getScaledInstance(marco.getWidth(), marco.getHeight(), Image.SCALE_SMOOTH));
-	       	marco.setIcon(mIcono);
-		}
 	}
 
 	private void ok(Daño daño) {

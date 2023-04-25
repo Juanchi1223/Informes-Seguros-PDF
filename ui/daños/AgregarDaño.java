@@ -45,8 +45,8 @@ public class AgregarDaño extends JDialog {
 	private JComboBox AdjDocSiNo;
 	private JTextField textJstDoc;
 	private JTextField textJstFoto;
-	private ArrayList<String> FtsDoc = new ArrayList<String>();
-	private ArrayList<String> Fts = new ArrayList<String>();
+	private Fotos FtsDoc = new Fotos(2);
+	private Fotos Fts = new Fotos(4);
 	
 	private Daño daño = new Daño();
 
@@ -73,8 +73,6 @@ public class AgregarDaño extends JDialog {
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
-		FtsDoc.add(null);FtsDoc.add(null);
-		Fts.add(null);Fts.add(null);Fts.add(null);Fts.add(null);
 		
 		JLabel lblPropietario = new JLabel("Propietario o Titular");
 		lblPropietario.setBounds(27, 36, 122, 14);
@@ -156,7 +154,8 @@ public class AgregarDaño extends JDialog {
 		JButton btnAdjDoc1 = new JButton("btnAdjDoc1");
 		btnAdjDoc1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				adjuntarArchivo(btnAdjDoc1, lblDoc1,0 ,true);
+				String ruta = FtsDoc.adjuntarArchivo(btnAdjDoc1, lblDoc1);
+				FtsDoc.agregarFoto(0, ruta);
 			}
 		});
 		btnAdjDoc1.setBounds(159, 151, 36, 23);
@@ -165,7 +164,8 @@ public class AgregarDaño extends JDialog {
 		JButton btnAdjDoc2 = new JButton("btnAdjDoc2");
 		btnAdjDoc2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				adjuntarArchivo(btnAdjDoc2, lblDoc2, 1, true);
+				String ruta = FtsDoc.adjuntarArchivo(btnAdjDoc2, lblDoc2);
+				FtsDoc.agregarFoto(0, ruta);
 			}
 		});
 		btnAdjDoc2.setBounds(370, 146, 36, 23);
@@ -174,7 +174,8 @@ public class AgregarDaño extends JDialog {
 		JButton btnAdjFt1 = new JButton("btnAdjFt1");
 		btnAdjFt1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				adjuntarArchivo(btnAdjFt1, lblFoto1, 0,false);
+				String ruta = Fts.adjuntarArchivo(btnAdjFt1, lblFoto1);
+				Fts.agregarFoto(0, ruta);
 			}
 		});
 		btnAdjFt1.setBounds(159, 306, 36, 23);
@@ -183,7 +184,8 @@ public class AgregarDaño extends JDialog {
 		JButton btnAdjFt2 = new JButton("btnAdjFt2");
 		btnAdjFt2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				adjuntarArchivo(btnAdjFt2, lblFoto2, 1,false);
+				String ruta = Fts.adjuntarArchivo(btnAdjFt2, lblFoto2);
+				Fts.agregarFoto(1, ruta);
 			}
 		});
 		btnAdjFt2.setBounds(370, 306, 36, 23);
@@ -192,7 +194,8 @@ public class AgregarDaño extends JDialog {
 		JButton btnAdjFt3 = new JButton("btnAdjFt3");
 		btnAdjFt3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				adjuntarArchivo(btnAdjFt3, lblFoto3, 2,false);
+				String ruta = Fts.adjuntarArchivo(btnAdjFt3, lblFoto3);
+				Fts.agregarFoto(2, ruta);
 			}
 		});
 		btnAdjFt3.setBounds(159, 439, 36, 23);
@@ -201,7 +204,8 @@ public class AgregarDaño extends JDialog {
 		JButton btnAdjFt4 = new JButton("btnAdjFt4");
 		btnAdjFt4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				adjuntarArchivo(btnAdjFt4, lblFoto4, 3,false);
+				String ruta = Fts.adjuntarArchivo(btnAdjFt4, lblFoto4);
+				Fts.agregarFoto(3, ruta);
 			}
 		});
 		btnAdjFt4.setBounds(370, 439, 36, 23);
@@ -251,33 +255,6 @@ public class AgregarDaño extends JDialog {
 				buttonPane.add(cancelButton);
 			}
 		}
-	}
-	private void adjuntarArchivo(JButton botton, JLabel marco, int pos,boolean doc) {
-		fcDoc1 = new JFileChooser();
-		FileNameExtensionFilter filter = new FileNameExtensionFilter("Archivos de imagen", "jpg", "jpeg", "png", "gif");
-		fcDoc1.setFileFilter(filter);
-		
-		int selecionar = fcDoc1.showOpenDialog(botton);
-		
-		if (selecionar == JFileChooser.APPROVE_OPTION) {
-           String Ruta = fcDoc1.getSelectedFile().getPath();
-           agregarArrayList(Ruta, doc, pos);
-            
-	       Image mImagen = new ImageIcon(Ruta).getImage();
-	       ImageIcon mIcono = new ImageIcon(mImagen.getScaledInstance(marco.getWidth(), marco.getHeight(), Image.SCALE_SMOOTH));
-	       marco.setIcon(mIcono); 
-            
-        }
-	}
-	
-	private void agregarArrayList(String ruta, boolean doc, int pos) {
-		if (doc) {
-			FtsDoc.add(pos, ruta);
-		}
-		else{
-			Fts.add(pos, ruta);
-		}
-		
 	}
 
 	private void ok() {

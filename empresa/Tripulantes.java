@@ -1,6 +1,7 @@
 package empresa;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 
 public class Tripulantes extends Peaton implements Serializable{
@@ -14,7 +15,7 @@ public class Tripulantes extends Peaton implements Serializable{
 	private String propioAsegurado;
 	private String relacion;
 	private String cual;
-	private Fotos licenciaFoto;
+	private Fotos licenciaFoto = new Fotos(2);
 	
 	public Tripulantes() {
 		super();

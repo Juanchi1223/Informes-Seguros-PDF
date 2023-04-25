@@ -12,7 +12,7 @@ public class InformacionSiniestro implements Serializable{
 	private String tiempo;
 	private String estado;
 	private Lugar lugar = new Lugar();		// !
-	private ArrayList<String> fotosLugar = new ArrayList<String>();	// !
+	private Fotos fotosLugar = new Fotos(5);	// !
 	private String causa; // que es causa
 	private String testigosBool;
 	private String[] testigos = new String[3];
@@ -32,10 +32,6 @@ public class InformacionSiniestro implements Serializable{
 	private int indemnizacion;
 	private int honorariosGastos;
 	
-	public InformacionSiniestro() {
-		fotosLugar.add(null);fotosLugar.add(null);fotosLugar.add(null);fotosLugar.add(null);fotosLugar.add(null);
-	}
-	
 	public Date getFechaHoraMin() {
 		return fecha;
 	}
@@ -48,7 +44,7 @@ public class InformacionSiniestro implements Serializable{
 	public Lugar getLugar() {
 		return lugar;
 	}
-	public ArrayList<String> getFotosLugar() {
+	public Fotos getFotosLugar() {
 		return fotosLugar;
 	}
 	public String getCausa() {
@@ -115,7 +111,7 @@ public class InformacionSiniestro implements Serializable{
 	public void setLugar(Lugar lugar) {
 		this.lugar = lugar;
 	}
-	public void setFotosLugar(ArrayList<String> fotosLugar) {
+	public void setFotosLugar(Fotos fotosLugar) {
 		this.fotosLugar = fotosLugar;
 	}
 	public void setCausa(String causa) {

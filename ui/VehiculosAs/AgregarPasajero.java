@@ -327,8 +327,13 @@ public class AgregarPasajero extends JDialog {
 				okButton.setActionCommand("OK");
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
+						PasajeroFotos subventana = new PasajeroFotos();
+						subventana.setModal(true);
+						subventana.setVisible(true);
+						
 						// GUARDAR TODOS LOS DATOS EN LA PERSONA
 						Tripulantes aux = new Tripulantes();
+						
 						aux.setVehicPertenece(comboBoxVehiculo.getSelectedItem().toString());
 						aux.setPersona(comboBoxTipoPer.getSelectedItem().toString());
 						aux.setApellido(textFieldApellido.getText());
@@ -360,7 +365,9 @@ public class AgregarPasajero extends JDialog {
 						aux.setAbogado(comboBoxAbogado.getSelectedItem().toString());
 						aux.setNombreDr(textNombreDr.getText());
 						aux.setApellidoDr(textAppDr.getText());
-						// FALTA AGREGAR LA PARTE DE LAS FOTOS
+						aux.setDNI(subventana.getDni());
+						aux.setLicenciaFoto(subventana.getLicencia());
+						aux.setAcreditacionMedica(subventana.getAcredMed());
 						
 					}
 				});

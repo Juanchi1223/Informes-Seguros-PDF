@@ -52,7 +52,7 @@ public class InforSini extends JDialog {
 	private String[] SiNo = {"","Si","No"};
 	private String[] testigos;
 	private Lugar lugar;
-	private ArrayList<String> fotos;
+	private Fotos fotos;
 	private JFileChooser fcDoc1;
 	private JLabel Foto1, Foto2, Foto3, Foto4, Croquis;
 	
@@ -243,42 +243,43 @@ public class InforSini extends JDialog {
 			Foto1 = new JLabel("");
 			Foto1.setBackground(SystemColor.desktop);
 			Foto1.setBounds(10, 206, 108, 108);
-			setFotoAdj(fotos.get(0), Foto1);
+			fotos.setFotoAdj(0, Foto1);
 			contentPanel.add(Foto1);
 		}
 		{
 			Foto2 = new JLabel("");
 			Foto2.setBackground(Color.BLACK);
 			Foto2.setBounds(174, 206, 108, 108);
-			setFotoAdj(fotos.get(1), Foto2);
+			fotos.setFotoAdj(1, Foto2);
 			contentPanel.add(Foto2);
 		}
 		{
 			Foto3 = new JLabel("");
 			Foto3.setBackground(Color.BLACK);
 			Foto3.setBounds(341, 206, 108, 108);
-			setFotoAdj(fotos.get(2), Foto3);
+			fotos.setFotoAdj(2, Foto3);
 			contentPanel.add(Foto3);
 		}
 		{
 			Foto4 = new JLabel("");
 			Foto4.setBackground(Color.BLACK);
 			Foto4.setBounds(513, 206, 108, 108);
-			setFotoAdj(fotos.get(3), Foto4);
+			fotos.setFotoAdj(3, Foto4);
 			contentPanel.add(Foto4);
 		}
 		{
 			Croquis = new JLabel("");
 			Croquis.setBackground(Color.BLACK);
 			Croquis.setBounds(10, 347, 108, 108);
-			setFotoAdj(fotos.get(4), Croquis);
+			fotos.setFotoAdj(4, Croquis);
 			contentPanel.add(Croquis);
 		}
 		
 		JButton btnFt1 = new JButton("Foto1");
 		btnFt1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				adjuntarArchivo(btnFt1, Foto1 , 0);
+				String ruta1 = fotos.adjuntarArchivo(btnFt1, Foto1);
+				fotos.agregarFoto(0, ruta1);
 			}
 		});
 		btnFt1.setBounds(132, 208, 24, 23);
@@ -287,7 +288,8 @@ public class InforSini extends JDialog {
 			JButton btnFt2 = new JButton("Foto2");
 			btnFt2.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					adjuntarArchivo(btnFt2, Foto2 , 1);
+					String ruta2 = fotos.adjuntarArchivo(btnFt2, Foto2);
+					fotos.agregarFoto(1, ruta2);
 				}
 			});
 			btnFt2.setBounds(291, 208, 24, 23);
@@ -297,7 +299,8 @@ public class InforSini extends JDialog {
 			JButton btnFt3 = new JButton("Foto3");
 			btnFt3.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					adjuntarArchivo(btnFt3, Foto3 , 2);
+					String ruta3 = fotos.adjuntarArchivo(btnFt3, Foto3);
+					fotos.agregarFoto(2, ruta3);
 				}
 			});
 			btnFt3.setBounds(462, 208, 24, 23);
@@ -307,7 +310,8 @@ public class InforSini extends JDialog {
 			JButton btnFt4 = new JButton("Foto4");
 			btnFt4.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					adjuntarArchivo(btnFt4, Foto4 , 3);
+					String ruta4 = fotos.adjuntarArchivo(btnFt4, Foto4);
+					fotos.agregarFoto(3, ruta4);
 				}
 			});
 			btnFt4.setBounds(630, 208, 24, 23);
@@ -317,7 +321,8 @@ public class InforSini extends JDialog {
 			JButton btnCroquis = new JButton("Croquis");
 			btnCroquis.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					adjuntarArchivo(btnCroquis, Croquis , 4);
+					String croquis = fotos.adjuntarArchivo(btnCroquis, Croquis);
+					fotos.agregarFoto(4, croquis);
 				}
 			});
 			btnCroquis.setBounds(132, 349, 24, 23);
@@ -580,19 +585,6 @@ public class InforSini extends JDialog {
 			}
 		}
 	}
-
-	
-
-	private void setFotoAdj(String Ruta, JLabel marco) {
-		if(Ruta != null) {
-			Image mImagen = new ImageIcon(Ruta).getImage();
-	       	ImageIcon mIcono = new ImageIcon(mImagen.getScaledInstance(marco.getWidth(), marco.getHeight(), Image.SCALE_SMOOTH));
-	       	marco.setIcon(mIcono);
-		}	
-	}
-
-
-
 	private int getIndex(String valor, String[] x) {
 		int cont = 0;
 		
@@ -637,25 +629,6 @@ public class InforSini extends JDialog {
 		transable = subventana.getComboBoxTransable();
 		moneda = subventana.getComboBoxMoneda();
 	}
-	private void adjuntarArchivo(JButton botton, JLabel marco, int pos) {
-		fcDoc1 = new JFileChooser();
-		FileNameExtensionFilter filter = new FileNameExtensionFilter("Archivos de imagen", "jpg", "jpeg", "png", "gif");
-		fcDoc1.setFileFilter(filter);
-		
-		int selecionar = fcDoc1.showOpenDialog(botton);
-		
-		if (selecionar == JFileChooser.APPROVE_OPTION) {
-           String Ruta = fcDoc1.getSelectedFile().getPath();
-           fotos.add(pos, Ruta);
-            
-	       Image mImagen = new ImageIcon(Ruta).getImage();
-	       ImageIcon mIcono = new ImageIcon(mImagen.getScaledInstance(marco.getWidth(), marco.getHeight(), Image.SCALE_SMOOTH));
-	       marco.setIcon(mIcono); 
-            
-        }
-		
-	}
-
 	private String[] crearArrayHora() {
 		// TODO Auto-generated method stub
 		String[] retorno = new String[25];
@@ -854,7 +827,7 @@ public class InforSini extends JDialog {
 		return moneda;
 	}
 
-	public ArrayList<String> getFotos() {
+	public Fotos getFotos() {
 		return fotos;
 	}
 	

@@ -9,9 +9,9 @@ public class Daño implements Serializable{
 	private String nombreSeguro;
 	private String denuncia;
 	private String documentacion;
-	private ArrayList<String> RutaFotosDoc = new ArrayList<String>();
+	private Fotos RutaFotosDoc = new Fotos(2);
 	private String justficarDoc;
-	private ArrayList<String> RutaFotosDaño = new ArrayList<String>();
+	private Fotos RutaFotosDaño = new Fotos(4);
 	private String justificaFoto;
 	
 	public String getNombreProp() {
@@ -29,13 +29,13 @@ public class Daño implements Serializable{
 	public String getDocumentacion() {
 		return documentacion;
 	}
-	public ArrayList<String> getFotosDoc() {
+	public Fotos getFotosDoc() {
 		return RutaFotosDoc;
 	}
 	public String getJustficarDoc() {
 		return justficarDoc;
 	}
-	public ArrayList<String> getFotosDaño() {
+	public Fotos getFotosDaño() {
 		return RutaFotosDaño;
 	}
 	public String getJustificaFoto() {
@@ -65,10 +65,10 @@ public class Daño implements Serializable{
 	public void setJustificaFoto(String justificaFoto) {
 		this.justificaFoto = justificaFoto;
 	}
-	public void setRutaFotosDoc(ArrayList<String> rutaFotosDoc) {
+	public void setRutaFotosDoc(Fotos rutaFotosDoc) {
 		RutaFotosDoc = rutaFotosDoc;
 	}
-	public void setRutaFotosDaño(ArrayList<String> rutaFotosDaño) {
+	public void setRutaFotosDaño(Fotos rutaFotosDaño) {
 		RutaFotosDaño = rutaFotosDaño;
 	}
 	
