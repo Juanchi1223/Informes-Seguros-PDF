@@ -12,7 +12,7 @@ import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import javax.swing.border.LineBorder;
 
-import empresa.Tripulantes;
+import empresa.*;
 
 import java.awt.Color;
 import java.awt.GridLayout;
@@ -28,9 +28,9 @@ public class AgregarVehiculoAs extends JDialog {
 	private final JPanel contentPanel = new JPanel();
 	private JTextField textCodVeh, textFieldPropietario, textMarca,  textModelo, textAño, textDominio, textNumChasis, textNumMotor, textJustificarDcs, textJustificarFts;
 	private JComboBox comboBoxDaños, comboBoxTipo, comboBoxDenuncia, comboBoxDoc;
-	private ArrayList<String> FotosDoc;
-	private ArrayList<String> Fotos;
-	private String FotoCotizacion;
+	private Fotos FotosDoc = new Fotos(2);
+	private Fotos Fotos = new Fotos(4);
+	private Fotos FotoCotizacion = new Fotos(1);
 	private ArrayList<Tripulantes> tripulantes;
 	
 
@@ -285,6 +285,14 @@ public class AgregarVehiculoAs extends JDialog {
 		btnAdjCot.setBounds(300, 536, 40, 23);
 		contentPanel.add(btnAdjCot);
 		
+		JList listPasajeros = new JList();
+		listPasajeros.setBounds(459, 536, 161, 196);
+		contentPanel.add(listPasajeros);
+		
+		JLabel lblPasajeros = new JLabel("Pasajeros:");
+		lblPasajeros.setBounds(361, 511, 89, 14);
+		contentPanel.add(lblPasajeros);
+		
 		JButton btnAgrPas = new JButton("Agregar ");
 		btnAgrPas.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -294,8 +302,10 @@ public class AgregarVehiculoAs extends JDialog {
 				ventana.setModal(true);
 				ventana.setVisible(true);
 				
-//				vehiculos.agregarVehiculo(ventana.getDaño());
-//				list.setListData(vehiculos.getListaVehiculos().toArray());
+				if (ventana.getPersona().getApellido() != null)
+					tripulantes.add(ventana.getPersona());
+				listPasajeros.setListData(tripulantes.toArray());
+				
 			}
 		});
 		btnAgrPas.setBounds(361, 565, 89, 23);
@@ -309,13 +319,7 @@ public class AgregarVehiculoAs extends JDialog {
 		btnElimPas.setBounds(361, 660, 89, 23);
 		contentPanel.add(btnElimPas);
 		
-		JList listPasajeros = new JList();
-		listPasajeros.setBounds(459, 536, 161, 196);
-		contentPanel.add(listPasajeros);
 		
-		JLabel lblPasajeros = new JLabel("Pasajeros:");
-		lblPasajeros.setBounds(361, 511, 89, 14);
-		contentPanel.add(lblPasajeros);
 		{
 			JPanel buttonPane = new JPanel();
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
@@ -390,15 +394,15 @@ public class AgregarVehiculoAs extends JDialog {
 		return comboBoxDoc;
 	}
 
-	public ArrayList<String> getFotosDoc() {
+	public Fotos getFotosDoc() {
 		return FotosDoc;
 	}
 
-	public ArrayList<String> getFotos() {
+	public Fotos getFotos() {
 		return Fotos;
 	}
 
-	public String getFotoCotizacion() {
+	public Fotos getFotoCotizacion() {
 		return FotoCotizacion;
 	}
 
