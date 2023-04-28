@@ -346,7 +346,7 @@ public class AgregarPasajero extends JDialog {
 						subventana.setVisible(true);
 						setVisible(false);
 						
-						persona.setVehicPertenece(comboBoxVehiculo.getSelectedItem().toString());
+						//persona.setVehicPertenece(comboBoxVehiculo.getSelectedItem().toString());
 						persona.setPersona(comboBoxTipoPer.getSelectedItem().toString());
 						persona.setApellido(textFieldApellido.getText());
 						persona.setEdad(Integer.parseInt(textEdad.getText()));

@@ -22,7 +22,7 @@ public class Vehiculos implements Serializable{
 	private String justificarDocs;
 	private Fotos rodadoFotos;
 	private Fotos cotizacion;
-	private ArrayList<Tripulantes> listaTripulantes;
+	private ArrayList<Tripulantes> listaTripulantes = new ArrayList<Tripulantes>();
 	
 	public String getDaños() {
 		return daños;

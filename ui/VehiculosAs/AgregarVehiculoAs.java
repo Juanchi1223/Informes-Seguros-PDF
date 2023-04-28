@@ -31,7 +31,7 @@ public class AgregarVehiculoAs extends JDialog {
 	private Fotos FotosDoc = new Fotos(2);
 	private Fotos Fotos = new Fotos(4);
 	private Fotos FotoCotizacion = new Fotos(1);
-	private ArrayList<Tripulantes> tripulantes;
+	private ArrayList<Tripulantes> tripulantes = new ArrayList<Tripulantes>();
 	
 
 	/**
@@ -304,6 +304,7 @@ public class AgregarVehiculoAs extends JDialog {
 				
 				if (ventana.getPersona().getApellido() != null)
 					tripulantes.add(ventana.getPersona());
+				
 				listPasajeros.setListData(tripulantes.toArray());
 				
 			}
@@ -338,60 +339,60 @@ public class AgregarVehiculoAs extends JDialog {
 		}
 	}
 
-	public JTextField getTextCodVeh() {
-		return textCodVeh;
+	public String getTextCodVeh() {
+		return textCodVeh.getText();
 	}
 
-	public JTextField getTextFieldPropietario() {
-		return textFieldPropietario;
+//	public S getTextFieldPropietario() {
+//		return textFieldPropietario;
+//	}
+
+	public String getTextMarca() {
+		return textMarca.getText();
 	}
 
-	public JTextField getTextMarca() {
-		return textMarca;
+	public String getTextModelo() {
+		return textModelo.getText();
 	}
 
-	public JTextField getTextModelo() {
-		return textModelo;
+	public int getTextAño() {
+		return Integer.parseInt(textAño.getText());
 	}
 
-	public JTextField getTextAño() {
-		return textAño;
+	public String getTextDominio() {
+		return textDominio.getText();
 	}
 
-	public JTextField getTextDominio() {
-		return textDominio;
+	public int getTextNumChasis() {
+		return Integer.parseInt(textNumChasis.getText());
 	}
 
-	public JTextField getTextNumChasis() {
-		return textNumChasis;
+	public int getTextNumMotor() {
+		return Integer.parseInt(textNumMotor.getText());
 	}
 
-	public JTextField getTextNumMotor() {
-		return textNumMotor;
+	public String getTextJustificarDcs() {
+		return textJustificarDcs.getText();
 	}
 
-	public JTextField getTextJustificarDcs() {
-		return textJustificarDcs;
+	public String getTextJustificarFts() {
+		return textJustificarFts.getText();
 	}
 
-	public JTextField getTextJustificarFts() {
-		return textJustificarFts;
+	public String getComboBoxDaños() {
+		return comboBoxDaños.getSelectedItem().toString();
 	}
 
-	public JComboBox getComboBoxDaños() {
-		return comboBoxDaños;
+	public String getComboBoxTipo() {
+		return comboBoxTipo.getSelectedItem().toString();
 	}
 
-	public JComboBox getComboBoxTipo() {
-		return comboBoxTipo;
+	public String getComboBoxDenuncia() {
+		return comboBoxDenuncia.getSelectedItem().toString();
 	}
 
-	public JComboBox getComboBoxDenuncia() {
-		return comboBoxDenuncia;
-	}
-
-	public JComboBox getComboBoxDoc() {
-		return comboBoxDoc;
+	public String getComboBoxDoc() {
+		return comboBoxDoc.getSelectedItem().toString();
 	}
 
 	public Fotos getFotosDoc() {

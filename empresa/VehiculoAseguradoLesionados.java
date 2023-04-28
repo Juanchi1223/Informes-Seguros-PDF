@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 public class VehiculoAseguradoLesionados implements Serializable{
 	private ArrayList<Vehiculos> listaVehiculos;
+	private int codigo = 0;
 
 	public ArrayList<Vehiculos> getListaVehiculos() {
 		return listaVehiculos;
@@ -15,6 +16,8 @@ public class VehiculoAseguradoLesionados implements Serializable{
 	}
 	
 	public void agregarVehiculo(Vehiculos rodado) {
+		this.codigo++;
+		rodado.setCodigo(Integer.toString(codigo));
 		this.listaVehiculos.add(rodado);
 	}
 	public void borrarVehiculo(int posicion) {

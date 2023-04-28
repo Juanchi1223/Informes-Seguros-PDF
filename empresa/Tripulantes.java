@@ -88,4 +88,8 @@ public class Tripulantes extends Peaton implements Serializable{
 	public void setLicenciaFoto(Fotos licenciaFoto) {
 		this.licenciaFoto = licenciaFoto;
 	}
+	
+	public String toString() {
+		return this.nombre + this.apellido;
+	}
 }
