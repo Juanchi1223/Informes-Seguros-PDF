@@ -7,8 +7,7 @@ public class Contrato implements Serializable{
 	private InformacionSiniestro infoSin;
 	private OtrosDaños otrosDaños;
 	private Peatones peatones;
-	private VehiculoAseguradoLesionados vehiculosAsegurados;
-	private VehiculoTerceroLesionado vehiculosTerceros;
+	private VehiculosLesionados vehiculos;
 	
 	
 	public Contrato() {			// CARGAR TODO EN NULL
@@ -16,8 +15,7 @@ public class Contrato implements Serializable{
 		this.infoSin = new InformacionSiniestro();
 		this.otrosDaños = new OtrosDaños();
 		this.peatones = new Peatones();
-		this.vehiculosAsegurados = new VehiculoAseguradoLesionados();
-		this.vehiculosTerceros = new VehiculoTerceroLesionado();
+		this.vehiculos = new VehiculosLesionados();
 	}
 	
 	public InformacionBasica getInfoaBas() {					// GET
@@ -32,11 +30,8 @@ public class Contrato implements Serializable{
 	public Peatones getPeatones() {
 		return peatones;
 	}
-	public VehiculoAseguradoLesionados getVehiculosAsegurados() {
-		return vehiculosAsegurados;
-	}
-	public VehiculoTerceroLesionado getVehiculosTerceros() {
-		return vehiculosTerceros;
+	public VehiculosLesionados getVehiculos() {
+		return vehiculos;
 	}
 	
 	
@@ -52,11 +47,8 @@ public class Contrato implements Serializable{
 	public void setPeatones(Peatones peatones) {
 		this.peatones = peatones;
 	}
-	public void setVehiculosAsegurados(VehiculoAseguradoLesionados vehiculosAsegurados) {
-		this.vehiculosAsegurados = vehiculosAsegurados;
-	}
-	public void setVehiculosTerceros(VehiculoTerceroLesionado vehiculosTerceros) {
-		this.vehiculosTerceros = vehiculosTerceros;
+	public void setVehiculosAsegurados(VehiculosLesionados vehiculos) {
+		this.vehiculos = vehiculos;
 	}
 	
 }

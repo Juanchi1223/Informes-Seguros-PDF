@@ -33,6 +33,8 @@ public class AgregarVehiculoAs extends JDialog {
 	private Fotos FotoCotizacion = new Fotos(1);
 	private ArrayList<Tripulantes> tripulantes = new ArrayList<Tripulantes>();
 	
+	private VehiculoAsegurado vehiculoNuevo = new VehiculoAsegurado();
+	
 
 	/**
 	 * Launch the application.
@@ -313,10 +315,23 @@ public class AgregarVehiculoAs extends JDialog {
 		contentPanel.add(btnAgrPas);
 		
 		JButton btnModPas = new JButton("Modificar");
+		btnModPas.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int a = listPasajeros.getSelectedIndex();
+				Tripulantes tripMod = tripulantes.get(a) ;
+			
+				
+			}
+		});
 		btnModPas.setBounds(361, 612, 89, 23);
 		contentPanel.add(btnModPas);
 		
 		JButton btnElimPas = new JButton("Eliminar");
+		btnElimPas.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		});
 		btnElimPas.setBounds(361, 660, 89, 23);
 		contentPanel.add(btnElimPas);
 		
@@ -327,25 +342,56 @@ public class AgregarVehiculoAs extends JDialog {
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
 				JButton okButton = new JButton("OK");
+				okButton.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						guardarVehiculo();
+						setVisible(false);
+					}
+				});
 				okButton.setActionCommand("OK");
 				buttonPane.add(okButton);
 				getRootPane().setDefaultButton(okButton);
 			}
 			{
 				JButton cancelButton = new JButton("Cancel");
+				cancelButton.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						setVisible(false);
+					}
+				});
 				cancelButton.setActionCommand("Cancel");
 				buttonPane.add(cancelButton);
 			}
 		}
 	}
 
+	protected void guardarVehiculo() {
+		vehiculoNuevo.setDaños(getComboBoxDaños());
+		vehiculoNuevo.setTipo(getComboBoxTipo());
+		vehiculoNuevo.setPropietario(getTextFieldPropietario());
+		vehiculoNuevo.setMarca(getTextMarca());
+		vehiculoNuevo.setModelo(getTextModelo());
+		vehiculoNuevo.setAño(getTextAño());
+		vehiculoNuevo.setDominio(getTextDominio());
+		vehiculoNuevo.setNroChasis(getTextNumChasis());
+		vehiculoNuevo.setNroMotor(getTextNumMotor());
+		vehiculoNuevo.setDenuncia(getComboBoxDenuncia());
+		vehiculoNuevo.setDocumentacion(getComboBoxDoc());
+		vehiculoNuevo.setDocFotos(getFotosDoc());
+		vehiculoNuevo.setJustificarDocs(getTextJustificarDcs());
+		vehiculoNuevo.setRodadoFotos(getFotos());
+		vehiculoNuevo.setJustificarFotos(getTextJustificarFts());
+		vehiculoNuevo.setCotizacion(getFotoCotizacion());
+		vehiculoNuevo.setListaTripulantes(getTripulantes());
+	}
+
 	public String getTextCodVeh() {
 		return textCodVeh.getText();
 	}
 
-//	public S getTextFieldPropietario() {
-//		return textFieldPropietario;
-//	}
+	public String getTextFieldPropietario() {
+		return textFieldPropietario.getText();
+	}
 
 	public String getTextMarca() {
 		return textMarca.getText();
@@ -409,5 +455,9 @@ public class AgregarVehiculoAs extends JDialog {
 
 	public ArrayList<Tripulantes> getTripulantes() {
 		return tripulantes;
+	}
+
+	public VehiculoAsegurado getVehiculoNuevo() {
+		return vehiculoNuevo;
 	}
 }

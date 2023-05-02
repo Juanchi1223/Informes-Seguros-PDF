@@ -12,7 +12,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import empresa.Daño;
-import empresa.VehiculoAseguradoLesionados;
+import empresa.VehiculosLesionados;
 
 public class ManejoDeVehiculoAs extends JDialog {
 
@@ -32,7 +32,7 @@ public class ManejoDeVehiculoAs extends JDialog {
 	}
 	 * Create the dialog.
 	 */
-	public ManejoDeVehiculoAs(VehiculoAseguradoLesionados vehiculos) {
+	public ManejoDeVehiculoAs(VehiculosLesionados vehiculos) {
 		setBounds(100, 100, 450, 300);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -41,7 +41,7 @@ public class ManejoDeVehiculoAs extends JDialog {
 		
 		JList list = new JList();
 		try {
-			list.setListData(vehiculos.getListaVehiculos().toArray());
+			list.setListData(vehiculos.listaVehiculosAsegurados().toArray());
 		}
 		catch (Exception e){
 			
@@ -58,7 +58,7 @@ public class ManejoDeVehiculoAs extends JDialog {
 				ventana.setModal(true);
 				ventana.setVisible(true);
 				
-				vehiculos.agregarVehiculo(ventana);
+//				vehiculos.agregarVehiculo(ventana);
 //				vehiculos.agregarVehiculo(ventana.getDaño());
 //				list.setListData(vehiculos.getListaVehiculos().toArray());
 			}

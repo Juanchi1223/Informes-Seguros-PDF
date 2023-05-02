@@ -4,34 +4,45 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 public class VehiculosLesionados implements Serializable {
-	private ArrayList<Vehiculos> listaVehiculosAsegurados;
-	private ArrayList<Vehiculos> listaVehiculosTerceros;
+	private ArrayList<VehiculoAsegurado> listaVehiculosAsegurados;
+	private ArrayList<VehiculoTercero> listaVehiculosTerceros;
 	private int codigo = 0;
 
 	
 	
-	public void agregarVehiculoAs(Vehiculos rodado) {
+	public void agregarVehiculo(VehiculoAsegurado rodado) {
 		this.codigo++;
 		rodado.setCodigo(Integer.toString(codigo));
-		this.listaVehiculos.add(rodado);
-	}
-	public void borrarVehiculo(int posicion) {
-		this.listaVehiculos.remove(posicion);
+		this.listaVehiculosAsegurados.add(rodado);
 	}
 	
-	public ArrayList<Vehiculos> listaVehiculosAsegurados() {
+	public void agregarVehiculo(VehiculoTercero rodado) {
+		this.codigo++;
+		rodado.setCodigo(Integer.toString(codigo));
+		this.listaVehiculosTerceros.add(rodado);
+		
+	}
+	public void borrarVehiculoAs(int posicion) {
+		this.listaVehiculosAsegurados.remove(posicion);
+	}
+	
+	public void borrarVehiculoTer(int posicion) {
+		this.listaVehiculosTerceros.remove(posicion);
+	}
+	
+	public ArrayList<VehiculoAsegurado> listaVehiculosAsegurados() {
 		return listaVehiculosAsegurados;
 	}
 
-	public void listaVehiculosAsegurados(ArrayList<Vehiculos> listaVehiculos) {
+	public void listaVehiculosAsegurados(ArrayList<VehiculoAsegurado> listaVehiculos) {
 		this.listaVehiculosAsegurados = listaVehiculos;
 	}
 
-	public ArrayList<Vehiculos> getListaVehiculosTerceros() {
+	public ArrayList<VehiculoTercero> getListaVehiculosTerceros() {
 		return listaVehiculosTerceros;
 	}
 
-	public void setListaVehiculosTerceros(ArrayList<Vehiculos> listaVehiculosTerceros) {
+	public void setListaVehiculosTerceros(ArrayList<VehiculoTercero> listaVehiculosTerceros) {
 		this.listaVehiculosTerceros = listaVehiculosTerceros;
 	}
 }

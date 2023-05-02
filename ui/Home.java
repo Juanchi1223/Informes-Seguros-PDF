@@ -179,8 +179,8 @@ public class Home extends JFrame {
 		contentPane.add(btnGuardar);
 	}
 	protected void abrirAsegurados() {
-		VehiculoAseguradoLesionados vehiculosAs = contrato.getVehiculosAsegurados();
-		ManejoDeVehiculoAs ventana = new ManejoDeVehiculoAs(vehiculosAs);
+		VehiculosLesionados vehiculos = contrato.getVehiculos();
+		ManejoDeVehiculoAs ventana = new ManejoDeVehiculoAs(vehiculos);
 		
 		ventana.setModal(true);
 		ventana.setVisible(true);

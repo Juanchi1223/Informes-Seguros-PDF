@@ -19,6 +19,7 @@ public class VehiculoAsegurado implements Serializable {
 		protected Fotos docFotos;
 		protected String justificarDocs;
 		protected Fotos rodadoFotos;
+		protected String justificarFotos;
 		protected Fotos cotizacion;
 		protected ArrayList<Tripulantes> listaTripulantes = new ArrayList<Tripulantes>();
 		
@@ -124,5 +125,11 @@ public class VehiculoAsegurado implements Serializable {
 		}
 		public void setListaTripulantes(ArrayList<Tripulantes> listaTripulantes) {
 			this.listaTripulantes = listaTripulantes;
+		}
+		public String getJustificarFotos() {
+			return justificarFotos;
+		}
+		public void setJustificarFotos(String justificarFotos) {
+			this.justificarFotos = justificarFotos;
 		}
 }
