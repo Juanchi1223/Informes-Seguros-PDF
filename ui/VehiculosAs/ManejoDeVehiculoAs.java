@@ -58,9 +58,10 @@ public class ManejoDeVehiculoAs extends JDialog {
 				ventana.setModal(true);
 				ventana.setVisible(true);
 				
-//				vehiculos.agregarVehiculo(ventana);
-//				vehiculos.agregarVehiculo(ventana.getDaño());
-//				list.setListData(vehiculos.getListaVehiculos().toArray());
+				if (ventana.getVehiculoNuevo() != null)
+					vehiculos.agregarVehiculo(ventana.getVehiculoNuevo());
+
+				list.setListData(vehiculos.listaVehiculosAsegurados().toArray());
 			}
 		});
 		btnAgregar.setBounds(49, 41, 132, 23);

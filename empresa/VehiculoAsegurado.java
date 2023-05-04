@@ -132,4 +132,7 @@ public class VehiculoAsegurado implements Serializable {
 		public void setJustificarFotos(String justificarFotos) {
 			this.justificarFotos = justificarFotos;
 		}
+		public String toString() {
+			return this.propietario +" (" +this.codigo+")";
+		}
 }

@@ -4,8 +4,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 public class VehiculosLesionados implements Serializable {
-	private ArrayList<VehiculoAsegurado> listaVehiculosAsegurados;
-	private ArrayList<VehiculoTercero> listaVehiculosTerceros;
+	private ArrayList<VehiculoAsegurado> listaVehiculosAsegurados = new ArrayList<VehiculoAsegurado>();
+	private ArrayList<VehiculoTercero> listaVehiculosTerceros = new ArrayList<VehiculoTercero>();
 	private int codigo = 0;
 
 	

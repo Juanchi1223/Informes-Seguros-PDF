@@ -323,6 +323,10 @@ public class AgregarVehiculoAs extends JDialog {
 				ModificarPasajero ventana = new ModificarPasajero(tripMod);
 				ventana.setModal(true);
 				ventana.setVisible(true);
+				
+				tripulantes.set(a, ventana.getPersona());
+				
+				listPasajeros.setListData(tripulantes.toArray());
 			}
 		});
 		btnModPas.setBounds(361, 612, 89, 23);
@@ -346,8 +350,8 @@ public class AgregarVehiculoAs extends JDialog {
 				JButton okButton = new JButton("OK");
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						guardarVehiculo();
 						setVisible(false);
+						guardarVehiculo();
 					}
 				});
 				okButton.setActionCommand("OK");

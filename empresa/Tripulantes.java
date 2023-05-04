@@ -90,6 +90,6 @@ public class Tripulantes extends Peaton implements Serializable{
 	}
 	
 	public String toString() {
-		return this.nombre + this.apellido;
+		return this.nombre +" "+ this.apellido;
 	}
 }
