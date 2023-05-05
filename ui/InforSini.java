@@ -630,7 +630,6 @@ public class InforSini extends JDialog {
 		moneda = subventana.getComboBoxMoneda();
 	}
 	private String[] crearArrayHora() {
-		// TODO Auto-generated method stub
 		String[] retorno = new String[25];
 		retorno[0] = "";
 		for(int i = 0; i < 24; i++) {

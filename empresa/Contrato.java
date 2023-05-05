@@ -10,7 +10,7 @@ public class Contrato implements Serializable{
 	private VehiculosLesionados vehiculos;
 	
 	
-	public Contrato() {			// CARGAR TODO EN NULL
+	public Contrato() {			
 		this.infoBas = new InformacionBasica();
 		this.infoSin = new InformacionSiniestro();
 		this.otrosDaños = new OtrosDaños();

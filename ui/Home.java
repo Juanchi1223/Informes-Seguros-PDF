@@ -53,19 +53,16 @@ public class Home extends JFrame {
 							try {
 								salida = new ObjectOutputStream(new FileOutputStream("contrato.ser"));
 							} catch (IOException e2) {
-								// TODO Auto-generated catch block
 								e2.printStackTrace();
 							}
 							try {
 								salida.writeObject(contrato);
 							} catch (IOException e1) {
-								// TODO Auto-generated catch block
 								e1.printStackTrace();
 							}
 							try {
 								salida.close();
 							} catch (IOException e) {
-								// TODO Auto-generated catch block
 								e.printStackTrace();
 							}
 			                System.exit(0);
@@ -146,7 +143,6 @@ public class Home extends JFrame {
 				try {
 					CrearPDF();
 				} catch (Exception e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 			}
@@ -309,7 +305,6 @@ public class Home extends JFrame {
 	        
 			documento.close();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			JOptionPane.showMessageDialog(null, "Error: El PDF no se pudo crear", "ERROR", JOptionPane.WARNING_MESSAGE);
 			e.printStackTrace();
 		}

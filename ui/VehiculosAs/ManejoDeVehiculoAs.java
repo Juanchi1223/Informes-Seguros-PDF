@@ -58,7 +58,7 @@ public class ManejoDeVehiculoAs extends JDialog {
 				ventana.setModal(true);
 				ventana.setVisible(true);
 				
-				if (ventana.getVehiculoNuevo() != null)
+				if (ventana.getVehiculoNuevo().getPropietario() != null)
 					vehiculos.agregarVehiculo(ventana.getVehiculoNuevo());
 
 				list.setListData(vehiculos.listaVehiculosAsegurados().toArray());
@@ -86,12 +86,11 @@ public class ManejoDeVehiculoAs extends JDialog {
 		
 		JButton btnEliminar = new JButton("Eliminar Vehiculo");
 		btnEliminar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-//				int x = list.getSelectedIndex();				
-//				
-//				vehiculos.borrarDaño(x);
-//				
-//				list.setListData(vehiculos.getListaVehiculos().toArray());
+			public void actionPerformed(ActionEvent e) {		// TODO Corregir Codigos Luegos de Borrar
+				int x = list.getSelectedIndex();						
+				vehiculos.borrarVehiculoAs(x);
+
+				list.setListData(vehiculos.listaVehiculosAsegurados().toArray());
 			}
 		});
 		btnEliminar.setBounds(49, 156, 132, 23);

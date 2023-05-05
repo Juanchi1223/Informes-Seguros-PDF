@@ -1,58 +1,65 @@
 package ui.VehiculosAs;
 
 import java.awt.BorderLayout;
-import java.awt.FlowLayout;
-
-import javax.swing.JButton;
-import javax.swing.JDialog;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
-import javax.swing.JComboBox;
-import javax.swing.border.LineBorder;
-
-import empresa.*;
-
 import java.awt.Color;
+import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-import javax.swing.JList;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JDialog;
+import javax.swing.JLabel;
+import javax.swing.JList;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.border.EmptyBorder;
+import javax.swing.border.LineBorder;
 
-public class AgregarVehiculoAs extends JDialog {
+import empresa.Fotos;
+import empresa.InsertarValores;
+import empresa.Tripulantes;
+import empresa.VehiculoAsegurado;
+
+public class ModificarVehiculo extends JDialog implements InsertarValores {
 
 	private final JPanel contentPanel = new JPanel();
 	private JTextField textCodVeh, textFieldPropietario, textMarca,  textModelo, textAño, textDominio, textNumChasis, textNumMotor, textJustificarDcs, textJustificarFts;
 	private JComboBox comboBoxDaños, comboBoxTipo, comboBoxDenuncia, comboBoxDoc;
-	private Fotos FotosDoc = new Fotos(2);
-	private Fotos Fotos = new Fotos(4);
-	private Fotos FotoCotizacion = new Fotos(1);
-	private ArrayList<Tripulantes> tripulantes = new ArrayList<Tripulantes>();
+	private Fotos FotosDoc;
+	private Fotos Fotos;
+	private Fotos FotoCotizacion;
+	private ArrayList<Tripulantes> tripulantes;
 	
-	private VehiculoAsegurado vehiculoNuevo = new VehiculoAsegurado();
-	
+	private VehiculoAsegurado vehiculoMod = new VehiculoAsegurado();
+
 
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		try {
-			AgregarVehiculoAs dialog = new AgregarVehiculoAs();
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+//	public static void main(String[] args) {
+//		try {
+//			ModificarVehiculo dialog = new ModificarVehiculo();
+//			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+//			dialog.setVisible(true);
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//	}
 
 	/**
 	 * Create the dialog.
 	 */
-	public AgregarVehiculoAs() {
+	public ModificarVehiculo(VehiculoAsegurado vehiculo) {
+		FotosDoc = vehiculo.getDocFotos();
+		Fotos = vehiculo.getRodadoFotos();
+		FotoCotizacion = vehiculo.getCotizacion();
+		tripulantes = vehiculo.getListaTripulantes();
+		
+		
 		setTitle("Ingresar un nuevo Vehiculo Asegurado");
 		setBounds(100, 100, 672, 815);
 		getContentPane().setLayout(new BorderLayout());
@@ -69,6 +76,9 @@ public class AgregarVehiculoAs extends JDialog {
 		contentPanel.add(lblCodigoVehiculo);
 		
 		textCodVeh = new JTextField();
+		if (vehiculo.getCodigo() != null) {
+			textCodVeh.setText(vehiculo.getCodigo());
+		}
 		textCodVeh.setBounds(327, 16, 74, 20);
 		contentPanel.add(textCodVeh);
 		textCodVeh.setColumns(10);
@@ -76,6 +86,8 @@ public class AgregarVehiculoAs extends JDialog {
 		comboBoxDaños = new JComboBox();
 		String[] valorSiNo = {"","Si","No"};
 		comboBoxDaños.setModel(new DefaultComboBoxModel(valorSiNo));
+		if (vehiculo.getDaños() != null)
+			comboBoxDaños.setSelectedIndex(getIndex(vehiculo.getDaños() ,valorSiNo));
 		comboBoxDaños.setBounds(160, 15, 64, 22);
 		contentPanel.add(comboBoxDaños);
 		
@@ -86,6 +98,8 @@ public class AgregarVehiculoAs extends JDialog {
 		comboBoxTipo = new JComboBox();
 		String[] valorTipo = {"","Auto","Utilitario", "Camioneta","Camion"};
 		comboBoxTipo.setModel(new DefaultComboBoxModel(valorTipo));
+		if (vehiculo.getTipo() != null)
+			comboBoxTipo.setSelectedIndex(getIndex(vehiculo.getTipo(), valorTipo));		// TODO seguir ingresado datos guardados
 		comboBoxTipo.setBounds(508, 14, 112, 22);
 		contentPanel.add(comboBoxTipo);
 		
@@ -344,7 +358,7 @@ public class AgregarVehiculoAs extends JDialog {
 		JButton btnAgrPas = new JButton("Agregar ");
 		btnAgrPas.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-
+	
 				AgregarPasajero ventana = new AgregarPasajero();
 				
 				ventana.setModal(true);
@@ -423,98 +437,99 @@ public class AgregarVehiculoAs extends JDialog {
 	}
 
 	protected void guardarVehiculo() {
-		vehiculoNuevo.setDaños(getComboBoxDaños());
-		vehiculoNuevo.setTipo(getComboBoxTipo());
-		vehiculoNuevo.setPropietario(getTextFieldPropietario());
-		vehiculoNuevo.setMarca(getTextMarca());
-		vehiculoNuevo.setModelo(getTextModelo());
-		vehiculoNuevo.setAño(getTextAño());
-		vehiculoNuevo.setDominio(getTextDominio());
-		vehiculoNuevo.setNroChasis(getTextNumChasis());
-		vehiculoNuevo.setNroMotor(getTextNumMotor());
-		vehiculoNuevo.setDenuncia(getComboBoxDenuncia());
-		vehiculoNuevo.setDocumentacion(getComboBoxDoc());
-		vehiculoNuevo.setDocFotos(getFotosDoc());
-		vehiculoNuevo.setJustificarDocs(getTextJustificarDcs());
-		vehiculoNuevo.setRodadoFotos(getFotos());
-		vehiculoNuevo.setJustificarFotos(getTextJustificarFts());
-		vehiculoNuevo.setCotizacion(getFotoCotizacion());
-		vehiculoNuevo.setListaTripulantes(getTripulantes());
+		vehiculoMod.setDaños(getComboBoxDaños());
+		vehiculoMod.setTipo(getComboBoxTipo());
+		vehiculoMod.setPropietario(getTextFieldPropietario());
+		vehiculoMod.setMarca(getTextMarca());
+		vehiculoMod.setModelo(getTextModelo());
+		vehiculoMod.setAño(getTextAño());
+		vehiculoMod.setDominio(getTextDominio());
+		vehiculoMod.setNroChasis(getTextNumChasis());
+		vehiculoMod.setNroMotor(getTextNumMotor());
+		vehiculoMod.setDenuncia(getComboBoxDenuncia());
+		vehiculoMod.setDocumentacion(getComboBoxDoc());
+		vehiculoMod.setDocFotos(getFotosDoc());
+		vehiculoMod.setJustificarDocs(getTextJustificarDcs());
+		vehiculoMod.setRodadoFotos(getFotos());
+		vehiculoMod.setJustificarFotos(getTextJustificarFts());
+		vehiculoMod.setCotizacion(getFotoCotizacion());
+		vehiculoMod.setListaTripulantes(getTripulantes());
 	}
-
+	
 	public String getTextCodVeh() {
 		return textCodVeh.getText();
 	}
-
+	
 	public String getTextFieldPropietario() {
 		return textFieldPropietario.getText();
 	}
-
+	
 	public String getTextMarca() {
 		return textMarca.getText();
 	}
-
+	
 	public String getTextModelo() {
 		return textModelo.getText();
 	}
-
+	
 	public int getTextAño() {
 		return Integer.parseInt(textAño.getText());
 	}
-
+	
 	public String getTextDominio() {
 		return textDominio.getText();
 	}
-
+	
 	public int getTextNumChasis() {
 		return Integer.parseInt(textNumChasis.getText());
 	}
-
+	
 	public int getTextNumMotor() {
 		return Integer.parseInt(textNumMotor.getText());
 	}
-
+	
 	public String getTextJustificarDcs() {
 		return textJustificarDcs.getText();
 	}
-
+	
 	public String getTextJustificarFts() {
 		return textJustificarFts.getText();
 	}
-
+	
 	public String getComboBoxDaños() {
 		return comboBoxDaños.getSelectedItem().toString();
 	}
-
+	
 	public String getComboBoxTipo() {
 		return comboBoxTipo.getSelectedItem().toString();
 	}
-
+	
 	public String getComboBoxDenuncia() {
 		return comboBoxDenuncia.getSelectedItem().toString();
 	}
-
+	
 	public String getComboBoxDoc() {
 		return comboBoxDoc.getSelectedItem().toString();
 	}
-
+	
 	public Fotos getFotosDoc() {
 		return FotosDoc;
 	}
-
+	
 	public Fotos getFotos() {
 		return Fotos;
 	}
-
+	
 	public Fotos getFotoCotizacion() {
 		return FotoCotizacion;
 	}
-
+	
 	public ArrayList<Tripulantes> getTripulantes() {
 		return tripulantes;
 	}
-
-	public VehiculoAsegurado getVehiculoNuevo() {
-		return vehiculoNuevo;
+	
+	public VehiculoAsegurado getvehiculoMod() {
+		return vehiculoMod;
 	}
 }
+

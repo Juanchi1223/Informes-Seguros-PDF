@@ -39,7 +39,6 @@ public class ModificarDaño extends JDialog {
 	private final JPanel contentPanel = new JPanel();
 	private JTextField textProp;
 	private JTextField textSeguro;
-	private JFileChooser fcDoc1;
 	private JComboBox SeguroSiNo; 
 	private JComboBox DenunciaSiNo;
 	private JComboBox AdjDocSiNo;
