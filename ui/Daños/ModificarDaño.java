@@ -1,4 +1,4 @@
-package ui.daños;
+package ui.Daños;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
@@ -34,40 +34,37 @@ import java.util.ArrayList;
 
 import javax.swing.Action;
 
-public class AgregarDaño extends JDialog {
+public class ModificarDaño extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
 	private JTextField textProp;
 	private JTextField textSeguro;
-	private JFileChooser fcDoc1;
 	private JComboBox SeguroSiNo; 
 	private JComboBox DenunciaSiNo;
 	private JComboBox AdjDocSiNo;
 	private JTextField textJstDoc;
 	private JTextField textJstFoto;
-	private Fotos FtsDoc = new Fotos(2);
-	private Fotos Fts = new Fotos(4);
+	private Fotos FtsDoc;
+	private Fotos Fts;
 	
-	private Daño daño = new Daño();
-
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		try {
-			AgregarDaño dialog = new AgregarDaño();
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+//	public static void main(String[] args) {
+//		try {
+//			ModificarDaño dialog = new ModificarDaño(Daño d = new Daño());
+//			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+//			dialog.setVisible(true);
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//	}
 
 	/**
 	 * Create the dialog.
 	 */
 	@SuppressWarnings({ "rawtypes", "unchecked" })
-	public AgregarDaño() {
+	public ModificarDaño(Daño daño) {
 		setBounds(100, 100, 533, 680);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -79,6 +76,9 @@ public class AgregarDaño extends JDialog {
 		contentPanel.add(lblPropietario);
 		
 		textProp = new JTextField();
+		if(daño.getNombreProp() != null) {
+			textProp.setText(daño.getNombreProp());
+		}
 		textProp.setBounds(148, 33, 291, 20);
 		contentPanel.add(textProp);
 		textProp.setColumns(10);
@@ -89,6 +89,7 @@ public class AgregarDaño extends JDialog {
 		
 		SeguroSiNo = new JComboBox();
 		SeguroSiNo.setModel(new DefaultComboBoxModel(new String[] {"No", "Si"}));
+		SeguroSiNo.setSelectedIndex(getSiNoIndex(daño.getSeguro()));
 		SeguroSiNo.setBounds(196, 57, 44, 22);
 		contentPanel.add(SeguroSiNo);
 		
@@ -97,6 +98,9 @@ public class AgregarDaño extends JDialog {
 		contentPanel.add(lblCual);
 		
 		textSeguro = new JTextField();
+		if (daño.getNombreSeguro() != null) {
+			textSeguro.setText(daño.getNombreSeguro());
+		}
 		textSeguro.setBounds(297, 58, 142, 20);
 		contentPanel.add(textSeguro);
 		textSeguro.setColumns(10);
@@ -107,6 +111,7 @@ public class AgregarDaño extends JDialog {
 		
 		DenunciaSiNo = new JComboBox();
 		DenunciaSiNo.setModel(new DefaultComboBoxModel(new String[] {"No", "Si"}));
+		DenunciaSiNo.setSelectedIndex(getSiNoIndex(daño.getDenuncia()));
 		DenunciaSiNo.setBounds(171, 86, 44, 22);
 		contentPanel.add(DenunciaSiNo);
 		
@@ -116,46 +121,56 @@ public class AgregarDaño extends JDialog {
 		
 		AdjDocSiNo = new JComboBox();
 		AdjDocSiNo.setModel(new DefaultComboBoxModel(new String[] {"No", "Si"}));
+		AdjDocSiNo.setSelectedIndex(getSiNoIndex(daño.getDocumentacion()));
 		AdjDocSiNo.setBounds(395, 86, 44, 22);
 		contentPanel.add(AdjDocSiNo);
+		
+		FtsDoc = daño.getFotosDoc();
+		Fts = daño.getFotosDaño();
 		
 		JLabel lblDoc1 = new JLabel("");
 		lblDoc1.setForeground(Color.WHITE);
 		lblDoc1.setBounds(27, 151, 122, 122);
+		FtsDoc.setFotoAdj(0, lblDoc1);
 		contentPanel.add(lblDoc1);
 		
 		JLabel lblDoc2 = new JLabel("");
 		lblDoc2.setForeground(Color.WHITE);
 		lblDoc2.setBounds(225, 151, 122, 122);
+		FtsDoc.setFotoAdj(1, lblDoc2);
 		contentPanel.add(lblDoc2);
 		
 		JLabel lblFoto1 = new JLabel("");
 		lblFoto1.setForeground(Color.WHITE);
 		lblFoto1.setBounds(27, 310, 122, 122);
+		Fts.setFotoAdj(0, lblFoto1);
 		contentPanel.add(lblFoto1);
 		
 		JLabel lblFoto2 = new JLabel("");
 		lblFoto2.setForeground(Color.WHITE);
 		lblFoto2.setBounds(238, 310, 122, 122);
+		Fts.setFotoAdj(1, lblFoto2);
 		contentPanel.add(lblFoto2);
 		
 		JLabel lblFoto3 = new JLabel("");
 		lblFoto3.setBackground(SystemColor.menu);
 		lblFoto3.setForeground(Color.WHITE);
 		lblFoto3.setBounds(27, 439, 122, 122);
+		Fts.setFotoAdj(2, lblFoto3);
 		contentPanel.add(lblFoto3);
 		
 		JLabel lblFoto4 = new JLabel("");
 		lblFoto4.setForeground(Color.WHITE);
 		lblFoto4.setBounds(238, 443, 122, 122);
+		Fts.setFotoAdj(3, lblFoto4);
 		contentPanel.add(lblFoto4);
 		
 		
 		JButton btnAdjDoc1 = new JButton("btnAdjDoc1");
 		btnAdjDoc1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String ruta = FtsDoc.adjuntarArchivo(btnAdjDoc1, lblDoc1);
-				FtsDoc.agregarFoto(0, ruta);
+				String ruta1 = FtsDoc.adjuntarArchivo(btnAdjDoc1, lblDoc1);
+				FtsDoc.agregarFoto(0, ruta1);;
 			}
 		});
 		btnAdjDoc1.setBounds(159, 151, 36, 23);
@@ -164,8 +179,8 @@ public class AgregarDaño extends JDialog {
 		JButton btnAdjDoc2 = new JButton("btnAdjDoc2");
 		btnAdjDoc2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String ruta = FtsDoc.adjuntarArchivo(btnAdjDoc2, lblDoc2);
-				FtsDoc.agregarFoto(0, ruta);
+				String ruta2 =FtsDoc.adjuntarArchivo(btnAdjDoc2, lblDoc2);
+				FtsDoc.agregarFoto(1, ruta2);
 			}
 		});
 		btnAdjDoc2.setBounds(370, 146, 36, 23);
@@ -174,8 +189,8 @@ public class AgregarDaño extends JDialog {
 		JButton btnAdjFt1 = new JButton("btnAdjFt1");
 		btnAdjFt1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String ruta = Fts.adjuntarArchivo(btnAdjFt1, lblFoto1);
-				Fts.agregarFoto(0, ruta);
+				String ruta1 = Fts.adjuntarArchivo(btnAdjFt1, lblFoto1);
+				Fts.agregarFoto(0, ruta1);				
 			}
 		});
 		btnAdjFt1.setBounds(159, 306, 36, 23);
@@ -184,28 +199,28 @@ public class AgregarDaño extends JDialog {
 		JButton btnAdjFt2 = new JButton("btnAdjFt2");
 		btnAdjFt2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String ruta = Fts.adjuntarArchivo(btnAdjFt2, lblFoto2);
-				Fts.agregarFoto(1, ruta);
+				String ruta2 = Fts.adjuntarArchivo(btnAdjFt2, lblFoto3);
+				Fts.agregarFoto(1, ruta2);
 			}
 		});
-		btnAdjFt2.setBounds(370, 306, 36, 23);
+		btnAdjFt2.setBounds(159, 439, 36, 23);
 		contentPanel.add(btnAdjFt2);
 		
 		JButton btnAdjFt3 = new JButton("btnAdjFt3");
 		btnAdjFt3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String ruta = Fts.adjuntarArchivo(btnAdjFt3, lblFoto3);
-				Fts.agregarFoto(2, ruta);
+				String ruta3 = Fts.adjuntarArchivo(btnAdjFt3, lblFoto2);
+				Fts.agregarFoto(2, ruta3);
 			}
 		});
-		btnAdjFt3.setBounds(159, 439, 36, 23);
+		btnAdjFt3.setBounds(370, 306, 36, 23);
 		contentPanel.add(btnAdjFt3);
-
+		
 		JButton btnAdjFt4 = new JButton("btnAdjFt4");
 		btnAdjFt4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String ruta = Fts.adjuntarArchivo(btnAdjFt4, lblFoto4);
-				Fts.agregarFoto(3, ruta);
+				String ruta4 = Fts.adjuntarArchivo(btnAdjFt4, lblFoto4);
+				Fts.agregarFoto(3, ruta4);
 			}
 		});
 		btnAdjFt4.setBounds(370, 439, 36, 23);
@@ -216,6 +231,9 @@ public class AgregarDaño extends JDialog {
 		contentPanel.add(lblJstDoc);
 		
 		textJstDoc = new JTextField();
+		if(daño.getJustficarDoc() != null){
+			textJstDoc.setText(daño.getJustficarDoc());
+		}
 		textJstDoc.setBounds(196, 282, 291, 20);
 		contentPanel.add(textJstDoc);
 		textJstDoc.setColumns(10);
@@ -225,6 +243,9 @@ public class AgregarDaño extends JDialog {
 		contentPanel.add(lblJstFoto);
 		
 		textJstFoto = new JTextField();
+		if(daño.getJustificaFoto() != null) {
+			textJstFoto.setText(daño.getJustificaFoto());
+		}
 		textJstFoto.setColumns(10);
 		textJstFoto.setBounds(196, 576, 291, 20);
 		contentPanel.add(textJstFoto);
@@ -237,7 +258,7 @@ public class AgregarDaño extends JDialog {
 				JButton okButton = new JButton("OK");
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						ok();
+						ok(daño);
 					}
 				});
 				okButton.setActionCommand("OK");
@@ -256,8 +277,15 @@ public class AgregarDaño extends JDialog {
 			}
 		}
 	}
+	private int getSiNoIndex(String s) {
+		if(s == "No")
+			return 0;
+		else
+			return 1;
+		
+	}
 
-	private void ok() {
+	private void ok(Daño daño) {
 		daño.setNombreProp(textProp.getText());
 		daño.setSeguro(SeguroSiNo.getSelectedObjects().toString());
 		daño.setNombreSeguro(textSeguro.getText());
@@ -266,12 +294,8 @@ public class AgregarDaño extends JDialog {
 		daño.setJustficarDoc(textJstDoc.getText());
 		daño.setJustificaFoto(textJstFoto.getText());
 		daño.setRutaFotosDoc(FtsDoc);
-		daño.setRutaFotosDaño(Fts);
+		daño.setRutaFotosDoc(Fts);
 		
 		setVisible(false);
-	}
-	
-	public Daño getDaño() {
-		return daño;
 	}
 }

@@ -1,4 +1,4 @@
-package ui.daños;
+package ui.Daños;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;

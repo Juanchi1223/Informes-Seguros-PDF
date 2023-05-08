@@ -24,6 +24,11 @@ public class VehiculosLesionados implements Serializable {
 	}
 	public void borrarVehiculoAs(int posicion) {
 		this.listaVehiculosAsegurados.remove(posicion);
+		for(int i = posicion; i < listaVehiculosAsegurados.size(); i++ ) {
+			VehiculoAsegurado aux = listaVehiculosAsegurados.get(i);
+			int indiceNuevo = Integer.parseInt(aux.getCodigo()) - 1; 
+			aux.setCodigo(Integer.toString(indiceNuevo));
+		}
 	}
 	
 	public void borrarVehiculoTer(int posicion) {

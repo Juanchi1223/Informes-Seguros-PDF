@@ -1,4 +1,4 @@
-package ui.VehiculosAs;
+package ui.VehiculosTer;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
@@ -11,28 +11,31 @@ import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import empresa.Daño;
 import empresa.VehiculosLesionados;
+import ui.VehiculosAs.AgregarVehiculoAs;
+import ui.VehiculosAs.ModificarVehiculo;
 
-public class ManejoDeVehiculoAs extends JDialog {
+public class ManejoDeVehiculoTer extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
 
 	/**
 	 * Launch the application.
-	 * 
-	public static void main(String[] args) {
-		try {
-			ManejoDeVehiculoAs dialog = new ManejoDeVehiculoAs();
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+	 */
+//	public static void main(String[] args) {
+//		try {
+//			ManejoDeVehiculoTer dialog = new ManejoDeVehiculoTer();
+//			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+//			dialog.setVisible(true);
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//	}
+
+	/**
 	 * Create the dialog.
 	 */
-	public ManejoDeVehiculoAs(VehiculosLesionados vehiculos) {
+	public ManejoDeVehiculoTer(VehiculosLesionados vehiculos) {
 		setBounds(100, 100, 450, 300);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -41,7 +44,7 @@ public class ManejoDeVehiculoAs extends JDialog {
 		
 		JList list = new JList();
 		try {
-			list.setListData(vehiculos.listaVehiculosAsegurados().toArray());
+			list.setListData(vehiculos.getListaVehiculosTerceros().toArray());
 		}
 		catch (Exception e){
 			
@@ -53,15 +56,15 @@ public class ManejoDeVehiculoAs extends JDialog {
 		JButton btnAgregar = new JButton("Agregar Vehiculo");
 		btnAgregar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				AgregarVehiculoAs ventana = new AgregarVehiculoAs();
+				AgregarVehiculosTer ventana = new AgregarVehiculosTer();
 				
 				ventana.setModal(true);
 				ventana.setVisible(true);
-				
-				if (ventana.getVehiculoNuevo().getPropietario() != null)
-					vehiculos.agregarVehiculo(ventana.getVehiculoNuevo());
-
-				list.setListData(vehiculos.listaVehiculosAsegurados().toArray());
+//				
+//				if (ventana.getVehiculoNuevo().getPropietario() != null)
+//					vehiculos.agregarVehiculo(ventana.getVehiculoNuevo());
+//
+//				list.setListData(vehiculos.getListaVehiculosTerceros().toArray());
 			}
 		});
 		btnAgregar.setBounds(49, 41, 132, 23);
@@ -71,12 +74,12 @@ public class ManejoDeVehiculoAs extends JDialog {
 		btnModificar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int a = list.getSelectedIndex();
-				ModificarVehiculo ventana = new ModificarVehiculo(vehiculos.listaVehiculosAsegurados().get(a));
-					
-				ventana.setModal(true);
-				ventana.setVisible(true);				
-				
-				list.setListData(vehiculos.listaVehiculosAsegurados().toArray());
+//				ModificarVehiculo ventana = new ModificarVehiculo(vehiculos.getListaVehiculosTerceros().get(a));
+//					
+//				ventana.setModal(true);
+//				ventana.setVisible(true);				
+//				
+//				list.setListData(vehiculos.getListaVehiculosTerceros().toArray());
 
 			}
 		});
@@ -86,10 +89,10 @@ public class ManejoDeVehiculoAs extends JDialog {
 		JButton btnEliminar = new JButton("Eliminar Vehiculo");
 		btnEliminar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				int x = list.getSelectedIndex();						
-				vehiculos.borrarVehiculoAs(x);
-
-				list.setListData(vehiculos.listaVehiculosAsegurados().toArray());
+//				int x = list.getSelectedIndex();						
+//				vehiculos.borrarVehiculoAs(x);
+//
+//				list.setListData(vehiculos.getListaVehiculosTerceros().toArray());
 			}
 		});
 		btnEliminar.setBounds(49, 156, 132, 23);
@@ -121,5 +124,6 @@ public class ManejoDeVehiculoAs extends JDialog {
 			}
 		}
 	}
-
 }
+
+
