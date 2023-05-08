@@ -86,8 +86,7 @@ public class ModificarVehiculo extends JDialog implements InsertarValores {
 		comboBoxDaños = new JComboBox();
 		String[] valorSiNo = {"","Si","No"};
 		comboBoxDaños.setModel(new DefaultComboBoxModel(valorSiNo));
-		if (vehiculo.getDaños() != null)
-			comboBoxDaños.setSelectedIndex(getIndex(vehiculo.getDaños() ,valorSiNo));
+		rellenarBox(vehiculo.getDaños(), valorSiNo, comboBoxDaños);
 		comboBoxDaños.setBounds(160, 15, 64, 22);
 		contentPanel.add(comboBoxDaños);
 		
@@ -98,8 +97,7 @@ public class ModificarVehiculo extends JDialog implements InsertarValores {
 		comboBoxTipo = new JComboBox();
 		String[] valorTipo = {"","Auto","Utilitario", "Camioneta","Camion"};
 		comboBoxTipo.setModel(new DefaultComboBoxModel(valorTipo));
-		if (vehiculo.getTipo() != null)
-			comboBoxTipo.setSelectedIndex(getIndex(vehiculo.getTipo(), valorTipo));		// TODO seguir ingresado datos guardados
+		rellenarBox(vehiculo.getTipo(), valorTipo, comboBoxTipo);
 		comboBoxTipo.setBounds(508, 14, 112, 22);
 		contentPanel.add(comboBoxTipo);
 		
@@ -108,6 +106,7 @@ public class ModificarVehiculo extends JDialog implements InsertarValores {
 		contentPanel.add(lblPropietario);
 		
 		textFieldPropietario = new JTextField();
+		rellenarText(vehiculo.getPropietario(), textFieldPropietario);
 		textFieldPropietario.setBounds(169, 40, 451, 20);
 		contentPanel.add(textFieldPropietario);
 		textFieldPropietario.setColumns(10);
@@ -117,6 +116,7 @@ public class ModificarVehiculo extends JDialog implements InsertarValores {
 		contentPanel.add(lblMarca);
 		
 		textMarca = new JTextField();
+		rellenarText(vehiculo.getMarca(), textMarca);
 		textMarca.setBounds(100, 65, 106, 20);
 		contentPanel.add(textMarca);
 		textMarca.setColumns(10);
@@ -126,6 +126,7 @@ public class ModificarVehiculo extends JDialog implements InsertarValores {
 		contentPanel.add(lblModelo);
 		
 		textModelo = new JTextField();
+		rellenarText(vehiculo.getModelo(), textModelo);
 		textModelo.setBounds(272, 65, 106, 20);
 		contentPanel.add(textModelo);
 		textModelo.setColumns(10);
@@ -135,6 +136,7 @@ public class ModificarVehiculo extends JDialog implements InsertarValores {
 		contentPanel.add(lblAño);
 		
 		textAño = new JTextField();
+		rellenarText(vehiculo.getAño(), textAño);
 		textAño.setBounds(422, 65, 46, 20);
 		contentPanel.add(textAño);
 		textAño.setColumns(10);
@@ -144,6 +146,7 @@ public class ModificarVehiculo extends JDialog implements InsertarValores {
 		contentPanel.add(lblDominio);
 		
 		textDominio = new JTextField();
+		rellenarText(vehiculo.getDominio(), textDominio);
 		textDominio.setBounds(534, 65, 86, 20);
 		contentPanel.add(textDominio);
 		textDominio.setColumns(10);
@@ -153,6 +156,7 @@ public class ModificarVehiculo extends JDialog implements InsertarValores {
 		contentPanel.add(lblNumChasis);
 		
 		textNumChasis = new JTextField();
+		rellenarText(vehiculo.getNroChasis(), textNumChasis);
 		textNumChasis.setBounds(120, 90, 191, 20);
 		contentPanel.add(textNumChasis);
 		textNumChasis.setColumns(10);
@@ -162,6 +166,7 @@ public class ModificarVehiculo extends JDialog implements InsertarValores {
 		contentPanel.add(lblNumMot);
 		
 		textNumMotor = new JTextField();
+		rellenarText(vehiculo.getNroMotor(), textNumMotor);			
 		textNumMotor.setBounds(392, 90, 228, 20);
 		contentPanel.add(textNumMotor);
 		textNumMotor.setColumns(10);
@@ -172,6 +177,7 @@ public class ModificarVehiculo extends JDialog implements InsertarValores {
 		
 		comboBoxDenuncia = new JComboBox();
 		comboBoxDenuncia.setModel(new DefaultComboBoxModel(valorSiNo));
+		rellenarBox(vehiculo.getDenuncia(), valorSiNo, comboBoxDenuncia);
 		comboBoxDenuncia.setBounds(327, 116, 51, 22);
 		contentPanel.add(comboBoxDenuncia);
 		
@@ -181,6 +187,7 @@ public class ModificarVehiculo extends JDialog implements InsertarValores {
 		
 		comboBoxDoc = new JComboBox();
 		comboBoxDoc.setModel(new DefaultComboBoxModel(valorSiNo));
+		rellenarBox(vehiculo.getDocumentacion(), valorSiNo, comboBoxDoc);
 		comboBoxDoc.setBounds(569, 116, 51, 22);
 		contentPanel.add(comboBoxDoc);
 		
@@ -195,6 +202,8 @@ public class ModificarVehiculo extends JDialog implements InsertarValores {
 		panelBordeFt.setLayout(new GridLayout(1, 0, 0, 0));
 		
 		JLabel FotoDoc1 = new JLabel("");
+		FotoDoc1.setBounds(45, 168, 179, 113);
+		FotosDoc.setFotoAdj(0, FotoDoc1);
 		panelBordeFt.add(FotoDoc1);
 		
 		JPanel panelBordeFt2 = new JPanel();
@@ -204,6 +213,8 @@ public class ModificarVehiculo extends JDialog implements InsertarValores {
 		panelBordeFt2.setLayout(new GridLayout(1, 0, 0, 0));
 		
 		JLabel FotoDoc2 = new JLabel("");
+		FotoDoc2.setBounds(303, 168, 179, 113);
+		FotosDoc.setFotoAdj(1, FotoDoc2);
 		panelBordeFt2.add(FotoDoc2);
 		
 		JButton btnAjuntarDoc1 = new JButton("...");
@@ -237,6 +248,8 @@ public class ModificarVehiculo extends JDialog implements InsertarValores {
 		panelBordeFoto3.setLayout(new BorderLayout(0, 0));
 		
 		JLabel Foto1 = new JLabel("");
+		Foto1.setBounds(29, 351, 112, 113);
+		Fotos.setFotoAdj(0, Foto1);
 		panelBordeFoto3.add(Foto1, BorderLayout.CENTER);
 		
 		JPanel panelBordeFoto4 = new JPanel();
@@ -246,6 +259,8 @@ public class ModificarVehiculo extends JDialog implements InsertarValores {
 		panelBordeFoto4.setLayout(new BorderLayout(0, 0));
 		
 		JLabel Foto2 = new JLabel("");
+		Foto2.setBounds(180, 351, 112, 113);
+		Fotos.setFotoAdj(1, Foto2);
 		panelBordeFoto4.add(Foto2, BorderLayout.CENTER);
 		
 		JPanel panelBordeFoto5 = new JPanel();
@@ -255,6 +270,8 @@ public class ModificarVehiculo extends JDialog implements InsertarValores {
 		panelBordeFoto5.setLayout(new BorderLayout(0, 0));
 		
 		JLabel Foto3 = new JLabel("");
+		Foto3.setBounds(338, 351, 112, 113);
+		Fotos.setFotoAdj(2, Foto3);
 		panelBordeFoto5.add(Foto3, BorderLayout.CENTER);
 		
 		JPanel panelBordeFoto6 = new JPanel();
@@ -264,6 +281,8 @@ public class ModificarVehiculo extends JDialog implements InsertarValores {
 		panelBordeFoto6.setLayout(new BorderLayout(0, 0));
 		
 		JLabel Foto4 = new JLabel("");
+		Foto4.setBounds(492, 351, 112, 113);
+		Fotos.setFotoAdj(3, Foto4);
 		panelBordeFoto6.add(Foto4, BorderLayout.CENTER);
 		
 		JLabel lblJustificarDoc = new JLabel("Justificar:");
@@ -271,6 +290,7 @@ public class ModificarVehiculo extends JDialog implements InsertarValores {
 		contentPanel.add(lblJustificarDoc);
 		
 		textJustificarDcs = new JTextField();
+		rellenarText(vehiculo.getJustificarDocs(),textJustificarDcs);
 		textJustificarDcs.setBounds(100, 298, 520, 20);
 		contentPanel.add(textJustificarDcs);
 		textJustificarDcs.setColumns(10);
@@ -320,6 +340,7 @@ public class ModificarVehiculo extends JDialog implements InsertarValores {
 		contentPanel.add(lblJustificarFotos);
 		
 		textJustificarFts = new JTextField();
+		rellenarText(vehiculo.getJustificarFotos() ,textJustificarFts);
 		textJustificarFts.setColumns(10);
 		textJustificarFts.setBounds(100, 475, 520, 20);
 		contentPanel.add(textJustificarFts);
@@ -335,6 +356,8 @@ public class ModificarVehiculo extends JDialog implements InsertarValores {
 		panelBordeFoto7.setLayout(new BorderLayout(0, 0));
 		
 		JLabel Cotizacion = new JLabel("");
+		Cotizacion.setBounds(29, 536, 260, 196);
+		FotoCotizacion.setFotoAdj(0, Cotizacion);
 		panelBordeFoto7.add(Cotizacion, BorderLayout.CENTER);
 		
 		JButton btnAdjCot = new JButton("...");
@@ -349,8 +372,9 @@ public class ModificarVehiculo extends JDialog implements InsertarValores {
 		
 		JList listPasajeros = new JList();
 		listPasajeros.setBounds(459, 536, 161, 196);
+		listPasajeros.setListData(tripulantes.toArray());
 		contentPanel.add(listPasajeros);
-		
+
 		JLabel lblPasajeros = new JLabel("Pasajeros:");
 		lblPasajeros.setBounds(361, 511, 89, 14);
 		contentPanel.add(lblPasajeros);

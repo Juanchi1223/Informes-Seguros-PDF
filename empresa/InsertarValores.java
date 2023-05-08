@@ -1,7 +1,10 @@
 package empresa;
 
+import javax.swing.JComboBox;
+import javax.swing.JTextField;
+
 public interface InsertarValores{
-	public default  int getIndex(String valor, String[] x) {
+	private int getIndex(String valor, String[] x) {
 		int cont = 0;
 		
 		for(String i : x) {
@@ -12,4 +15,17 @@ public interface InsertarValores{
 		
 		return cont;
 	}
+	public default void rellenarText(String valor, JTextField textField) {
+		if (valor != null)
+			textField.setText(valor);
+	}
+	public default void rellenarText(int valor, JTextField textField) {
+		if (valor != 0)
+			textField.setText(Integer.toString(valor));
+	}
+	public default void rellenarBox(String valor,String[] valores,JComboBox comboBox) {
+		if (valor != null)
+			comboBox.setSelectedIndex(getIndex(valor, valores));
+	}
 }
+

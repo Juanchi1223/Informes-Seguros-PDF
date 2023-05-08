@@ -70,14 +70,13 @@ public class ManejoDeVehiculoAs extends JDialog {
 		JButton btnModificar = new JButton("Modificar Vehiculo");
 		btnModificar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-//				int a = list.getSelectedIndex();
-//				Daño aux = vehiculos.getListaVehiculos().get(a);
-//				
-//				ModificarDaño ventana = new ModificarDaño(aux);
-//				ventana.setModal(true);
-//				ventana.setVisible(true);				
-//				
-//				list.setListData(vehiculos.getListaVehiculos().toArray());
+				int a = list.getSelectedIndex();
+				ModificarVehiculo ventana = new ModificarVehiculo(vehiculos.listaVehiculosAsegurados().get(a));
+					
+				ventana.setModal(true);
+				ventana.setVisible(true);				
+				
+				list.setListData(vehiculos.listaVehiculosAsegurados().toArray());
 
 			}
 		});
