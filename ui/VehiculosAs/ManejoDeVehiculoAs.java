@@ -58,7 +58,8 @@ public class ManejoDeVehiculoAs extends JDialog {
 				ventana.setModal(true);
 				ventana.setVisible(true);
 				
-				if (ventana.getVehiculoNuevo().getPropietario() != null)
+				// TODO como hacer para que no se agregen vacios parte 2
+				if (ventana.getVehiculoNuevo().getPropietario() != null && ventana.getVehiculoNuevo().getPropietario() != "")
 					vehiculos.agregarVehiculo(ventana.getVehiculoNuevo());
 
 				list.setListData(vehiculos.listaVehiculosAsegurados().toArray());

@@ -61,7 +61,7 @@ public class ManejoDeDaños extends JDialog {
 				ventana.setModal(true);
 				ventana.setVisible(true);
 				
-				daños.agregarDaño(ventana.getDaño());
+				daños.agregarDaño(ventana.getDaño()); // TODO como hacer para que no se agregen vacios
 				list.setListData(daños.getListaDeDaños().toArray());
 			}
 		});
