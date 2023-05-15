@@ -11,29 +11,26 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import javax.swing.JCheckBox;
+import javax.swing.border.LineBorder;
+
+import empresa.Fotos;
+import empresa.Peaton;
+
+import java.awt.Color;
 
 public class AgregarPeaton extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
-	private JTextField textField_4;
-	private JTextField textField_5;
-	private JTextField textField_6;
-	private JTextField textField_7;
-	private JTextField textField_8;
-	private JTextField textField_9;
-	private JTextField textField_10;
-	private JTextField textField_11;
-	private JTextField textField_12;
-	private JTextField textField_13;
-	private JTextField textField_14;
-	private JTextField textField_15;
-	private JTextField textField_16;
-	private JTextField textField_17;
-
+	private JTextField textApellido, textNombre, textEdad, textDocumento, textOcupacion, textCalle, textCelular, textTelefono, textNumeroDir, textPisoDir, textDeptDir, textLocalidad, textPartido, textProvincia;
+	private JTextField textJustificarACMED, textNombreART, textLugarAtt, textNombreDr, textApellidoDr;
+	private JComboBox<String> comboBoxLesionado, comboBoxAbogadoSN;
+	private JLabel DNI1, DNI2, MED1, MED2, MED3, MED4;
+	private JButton btnDNI1, btnDNI2, btnMED1, btnMED2, btnMED3, btnMED4;
+	
+	private Fotos DNI = new Fotos(2);
+	private Fotos ACMED = new Fotos(4);
+	
+	private Peaton persona;
 	/**
 	 * Launch the application.
 	 */
@@ -52,7 +49,7 @@ public class AgregarPeaton extends JDialog {
 	 */
 	public AgregarPeaton() {
 		setTitle("Agregar Nuevo Peaton");
-		setBounds(100, 100, 685, 702);
+		setBounds(100, 100, 685, 828);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
@@ -62,183 +59,278 @@ public class AgregarPeaton extends JDialog {
 		lblApellido.setBounds(10, 26, 46, 14);
 		contentPanel.add(lblApellido);
 		
-		textField = new JTextField();
-		textField.setBounds(62, 23, 253, 20);
-		contentPanel.add(textField);
-		textField.setColumns(10);
+		textApellido = new JTextField();
+		textApellido.setBounds(62, 23, 253, 20);
+		contentPanel.add(textApellido);
+		textApellido.setColumns(10);
 		
-		JLabel lblNewLabel = new JLabel("Nombre");
-		lblNewLabel.setBounds(10, 54, 59, 14);
-		contentPanel.add(lblNewLabel);
+		JLabel lblNombre = new JLabel("Nombre");
+		lblNombre.setBounds(10, 54, 59, 14);
+		contentPanel.add(lblNombre);
 		
-		textField_1 = new JTextField();
-		textField_1.setBounds(62, 51, 253, 20);
-		contentPanel.add(textField_1);
-		textField_1.setColumns(10);
+		textNombre = new JTextField();
+		textNombre.setBounds(62, 51, 253, 20);
+		contentPanel.add(textNombre);
+		textNombre.setColumns(10);
 		
-		JLabel lblNewLabel_1 = new JLabel("Edad");
-		lblNewLabel_1.setBounds(325, 26, 46, 14);
-		contentPanel.add(lblNewLabel_1);
+		JLabel lblEdad = new JLabel("Edad");
+		lblEdad.setBounds(325, 26, 46, 14);
+		contentPanel.add(lblEdad);
 		
-		textField_2 = new JTextField();
-		textField_2.setBounds(365, 23, 59, 20);
-		contentPanel.add(textField_2);
-		textField_2.setColumns(10);
+		textEdad = new JTextField();
+		textEdad.setBounds(365, 23, 59, 20);
+		contentPanel.add(textEdad);
+		textEdad.setColumns(10);
 		
-		JLabel lblNewLabel_2 = new JLabel("Documento");
-		lblNewLabel_2.setBounds(434, 26, 73, 14);
-		contentPanel.add(lblNewLabel_2);
+		JLabel lblDocumento = new JLabel("Documento");
+		lblDocumento.setBounds(434, 26, 73, 14);
+		contentPanel.add(lblDocumento);
 		
-		textField_3 = new JTextField();
-		textField_3.setBounds(505, 23, 138, 20);
-		contentPanel.add(textField_3);
-		textField_3.setColumns(10);
+		textDocumento = new JTextField();
+		textDocumento.setBounds(505, 23, 138, 20);
+		contentPanel.add(textDocumento);
+		textDocumento.setColumns(10);
 		
 		JLabel lblOcupacion = new JLabel("Ocupacion");
 		lblOcupacion.setBounds(10, 81, 73, 14);
 		contentPanel.add(lblOcupacion);
 		
-		textField_4 = new JTextField();
-		textField_4.setBounds(72, 78, 243, 20);
-		contentPanel.add(textField_4);
-		textField_4.setColumns(10);
+		textOcupacion = new JTextField();
+		textOcupacion.setBounds(72, 78, 243, 20);
+		contentPanel.add(textOcupacion);
+		textOcupacion.setColumns(10);
 		
 		JLabel lblCalle = new JLabel("Calle");
 		lblCalle.setBounds(23, 109, 46, 14);
 		contentPanel.add(lblCalle);
 		
-		textField_5 = new JTextField();
-		textField_5.setBounds(63, 106, 206, 20);
-		contentPanel.add(textField_5);
-		textField_5.setColumns(10);
+		textCalle = new JTextField();
+		textCalle.setBounds(63, 106, 206, 20);
+		contentPanel.add(textCalle);
+		textCalle.setColumns(10);
 		
-		JLabel lblNewLabel_3 = new JLabel("Celular");
-		lblNewLabel_3.setBounds(365, 54, 46, 14);
-		contentPanel.add(lblNewLabel_3);
+		JLabel lblCelular = new JLabel("Celular");
+		lblCelular.setBounds(365, 54, 46, 14);
+		contentPanel.add(lblCelular);
 		
-		JLabel lblNewLabel_4 = new JLabel("Tel Particular");
-		lblNewLabel_4.setBounds(325, 81, 86, 14);
-		contentPanel.add(lblNewLabel_4);
+		JLabel lblTelefonoPar = new JLabel("Tel Particular");
+		lblTelefonoPar.setBounds(325, 81, 86, 14);
+		contentPanel.add(lblTelefonoPar);
 		
-		textField_6 = new JTextField();
-		textField_6.setBounds(418, 51, 225, 20);
-		contentPanel.add(textField_6);
-		textField_6.setColumns(10);
+		textCelular = new JTextField();
+		textCelular.setBounds(418, 51, 225, 20);
+		contentPanel.add(textCelular);
+		textCelular.setColumns(10);
 		
-		textField_7 = new JTextField();
-		textField_7.setColumns(10);
-		textField_7.setBounds(418, 78, 225, 20);
-		contentPanel.add(textField_7);
+		textTelefono = new JTextField();
+		textTelefono.setColumns(10);
+		textTelefono.setBounds(418, 78, 225, 20);
+		contentPanel.add(textTelefono);
 		
-		JLabel lblNewLabel_5 = new JLabel("Numero");
-		lblNewLabel_5.setBounds(279, 109, 46, 14);
-		contentPanel.add(lblNewLabel_5);
+		JLabel lblNumeroDir = new JLabel("Numero");
+		lblNumeroDir.setBounds(279, 109, 46, 14);
+		contentPanel.add(lblNumeroDir);
 		
-		textField_8 = new JTextField();
-		textField_8.setBounds(329, 106, 86, 20);
-		contentPanel.add(textField_8);
-		textField_8.setColumns(10);
+		textNumeroDir = new JTextField();
+		textNumeroDir.setBounds(329, 106, 86, 20);
+		contentPanel.add(textNumeroDir);
+		textNumeroDir.setColumns(10);
 		
-		JLabel lblNewLabel_6 = new JLabel("Piso");
-		lblNewLabel_6.setBounds(425, 109, 46, 14);
-		contentPanel.add(lblNewLabel_6);
+		JLabel lblPiso = new JLabel("Piso");
+		lblPiso.setBounds(425, 109, 46, 14);
+		contentPanel.add(lblPiso);
 		
-		textField_9 = new JTextField();
-		textField_9.setBounds(467, 106, 46, 20);
-		contentPanel.add(textField_9);
-		textField_9.setColumns(10);
+		textPisoDir = new JTextField();
+		textPisoDir.setBounds(467, 106, 46, 20);
+		contentPanel.add(textPisoDir);
+		textPisoDir.setColumns(10);
 		
-		JLabel lblNewLabel_7 = new JLabel("Dept");
-		lblNewLabel_7.setBounds(523, 109, 46, 14);
-		contentPanel.add(lblNewLabel_7);
+		JLabel lblDeptDir = new JLabel("Dept");
+		lblDeptDir.setBounds(523, 109, 46, 14);
+		contentPanel.add(lblDeptDir);
 		
-		textField_10 = new JTextField();
-		textField_10.setBounds(569, 106, 73, 20);
-		contentPanel.add(textField_10);
-		textField_10.setColumns(10);
+		textDeptDir = new JTextField();
+		textDeptDir.setBounds(569, 106, 73, 20);
+		contentPanel.add(textDeptDir);
+		textDeptDir.setColumns(10);
 		
-		JLabel lblNewLabel_8 = new JLabel("Localidad");
-		lblNewLabel_8.setBounds(10, 134, 59, 14);
-		contentPanel.add(lblNewLabel_8);
+		JLabel lblLocalidad = new JLabel("Localidad");
+		lblLocalidad.setBounds(10, 134, 59, 14);
+		contentPanel.add(lblLocalidad);
 		
-		textField_11 = new JTextField();
-		textField_11.setBounds(73, 131, 159, 20);
-		contentPanel.add(textField_11);
-		textField_11.setColumns(10);
+		textLocalidad = new JTextField();
+		textLocalidad.setBounds(73, 131, 159, 20);
+		contentPanel.add(textLocalidad);
+		textLocalidad.setColumns(10);
 		
-		JLabel lblNewLabel_9 = new JLabel("Partido");
-		lblNewLabel_9.setBounds(242, 134, 46, 14);
-		contentPanel.add(lblNewLabel_9);
+		JLabel lblParitdo = new JLabel("Partido");
+		lblParitdo.setBounds(242, 134, 46, 14);
+		contentPanel.add(lblParitdo);
 		
-		textField_12 = new JTextField();
-		textField_12.setBounds(285, 131, 139, 20);
-		contentPanel.add(textField_12);
-		textField_12.setColumns(10);
+		textPartido = new JTextField();
+		textPartido.setBounds(285, 131, 139, 20);
+		contentPanel.add(textPartido);
+		textPartido.setColumns(10);
 		
-		JLabel lblNewLabel_10 = new JLabel("Provincia");
-		lblNewLabel_10.setBounds(434, 134, 73, 14);
-		contentPanel.add(lblNewLabel_10);
+		JLabel lblProvincia = new JLabel("Provincia");
+		lblProvincia.setBounds(434, 134, 73, 14);
+		contentPanel.add(lblProvincia);
 		
-		textField_13 = new JTextField();
-		textField_13.setBounds(505, 131, 138, 20);
-		contentPanel.add(textField_13);
-		textField_13.setColumns(10);
+		textProvincia = new JTextField();
+		textProvincia.setBounds(505, 131, 138, 20);
+		contentPanel.add(textProvincia);
+		textProvincia.setColumns(10);
 		
-		JLabel lblNewLabel_11 = new JLabel("Lesionado");
-		lblNewLabel_11.setBounds(10, 159, 59, 14);
-		contentPanel.add(lblNewLabel_11);
+		JLabel lblLesionado = new JLabel("Lesionado");
+		lblLesionado.setBounds(10, 159, 59, 14);
+		contentPanel.add(lblLesionado);
 		
-		JComboBox comboBox = new JComboBox();
-		comboBox.setBounds(72, 156, 86, 20);
-		contentPanel.add(comboBox);
+		comboBoxLesionado = new JComboBox<String>();
+		comboBoxLesionado.setBounds(72, 156, 86, 20);
+		contentPanel.add(comboBoxLesionado);
 		
-		JCheckBox chckbxNewCheckBox = new JCheckBox("ART");
-		chckbxNewCheckBox.setBounds(164, 155, 52, 23);
-		contentPanel.add(chckbxNewCheckBox);
+		JCheckBox chckbxART = new JCheckBox("ART");
+		chckbxART.setBounds(164, 155, 52, 23);
+		contentPanel.add(chckbxART);
 		
-		JLabel lblNewLabel_12 = new JLabel("Nombre");
-		lblNewLabel_12.setBounds(222, 159, 46, 14);
-		contentPanel.add(lblNewLabel_12);
+		JLabel lblNombreART = new JLabel("Nombre");
+		lblNombreART.setBounds(222, 159, 46, 14);
+		contentPanel.add(lblNombreART);
 		
-		textField_14 = new JTextField();
-		textField_14.setBounds(271, 156, 132, 20);
-		contentPanel.add(textField_14);
-		textField_14.setColumns(10);
+		textNombreART = new JTextField();
+		textNombreART.setBounds(271, 156, 132, 20);
+		contentPanel.add(textNombreART);
+		textNombreART.setColumns(10);
 		
-		JLabel lblNewLabel_13 = new JLabel("Lugar de Atencion");
-		lblNewLabel_13.setBounds(409, 159, 115, 14);
-		contentPanel.add(lblNewLabel_13);
+		JLabel lblLugarAtt = new JLabel("Lugar de Atencion");
+		lblLugarAtt.setBounds(409, 159, 115, 14);
+		contentPanel.add(lblLugarAtt);
 		
-		textField_15 = new JTextField();
-		textField_15.setBounds(515, 156, 128, 20);
-		contentPanel.add(textField_15);
-		textField_15.setColumns(10);
+		textLugarAtt = new JTextField();
+		textLugarAtt.setBounds(515, 156, 128, 20);
+		contentPanel.add(textLugarAtt);
+		textLugarAtt.setColumns(10);
 		
-		JLabel lblNewLabel_14 = new JLabel("Abogado");
-		lblNewLabel_14.setBounds(10, 184, 59, 14);
-		contentPanel.add(lblNewLabel_14);
+		JLabel lblAbogado = new JLabel("Abogado");
+		lblAbogado.setBounds(10, 184, 59, 14);
+		contentPanel.add(lblAbogado);
 		
-		JComboBox comboBox_1 = new JComboBox();
-		comboBox_1.setBounds(72, 180, 86, 22);
-		contentPanel.add(comboBox_1);
+		comboBoxAbogadoSN = new JComboBox<String>();
+		comboBoxAbogadoSN.setBounds(72, 180, 86, 22);
+		contentPanel.add(comboBoxAbogadoSN);
 		
-		JLabel lblNewLabel_15 = new JLabel("Nombre Dr:");
-		lblNewLabel_15.setBounds(164, 184, 68, 14);
-		contentPanel.add(lblNewLabel_15);
+		JLabel lblNombreDr = new JLabel("Nombre Dr:");
+		lblNombreDr.setBounds(164, 184, 68, 14);
+		contentPanel.add(lblNombreDr);
 		
-		textField_16 = new JTextField();
-		textField_16.setBounds(242, 181, 148, 20);
-		contentPanel.add(textField_16);
-		textField_16.setColumns(10);
+		textNombreDr = new JTextField();
+		textNombreDr.setBounds(242, 181, 148, 20);
+		contentPanel.add(textNombreDr);
+		textNombreDr.setColumns(10);
 		
-		JLabel lblNewLabel_16 = new JLabel("Apellido Dr:");
-		lblNewLabel_16.setBounds(403, 184, 68, 14);
-		contentPanel.add(lblNewLabel_16);
+		JLabel lblApellidoDr = new JLabel("Apellido Dr:");
+		lblApellidoDr.setBounds(403, 184, 68, 14);
+		contentPanel.add(lblApellidoDr);
 		
-		textField_17 = new JTextField();
-		textField_17.setBounds(477, 181, 166, 20);
-		contentPanel.add(textField_17);
-		textField_17.setColumns(10);
+		textApellidoDr = new JTextField();
+		textApellidoDr.setBounds(477, 181, 166, 20);
+		contentPanel.add(textApellidoDr);
+		textApellidoDr.setColumns(10);
+		
+		JLabel lblDNI = new JLabel("DNI");
+		lblDNI.setBounds(23, 225, 46, 14);
+		contentPanel.add(lblDNI);
+		
+		JPanel panelDNI1 = new JPanel();
+		panelDNI1.setBorder(new LineBorder(new Color(0, 0, 0)));
+		panelDNI1.setBounds(50, 250, 183, 106);
+		contentPanel.add(panelDNI1);
+		panelDNI1.setLayout(new BorderLayout(0, 0));
+		
+		DNI1 = new JLabel("");
+		panelDNI1.add(DNI1, BorderLayout.CENTER);
+		
+		JPanel panelDNI2 = new JPanel();
+		panelDNI2.setBorder(new LineBorder(new Color(0, 0, 0)));
+		panelDNI2.setBounds(358, 250, 183, 106);
+		contentPanel.add(panelDNI2);
+		panelDNI2.setLayout(new BorderLayout(0, 0));
+		
+		DNI2 = new JLabel("");
+		panelDNI2.add(DNI2, BorderLayout.CENTER);
+		
+		btnDNI1 = new JButton("...");
+		btnDNI1.setBounds(250, 250, 47, 23);
+		contentPanel.add(btnDNI1);
+		
+		btnDNI2 = new JButton("...");
+		btnDNI2.setBounds(558, 250, 47, 23);
+		contentPanel.add(btnDNI2);
+		
+		JLabel lblAcreditacionMed = new JLabel("Acreditacion Medica");
+		lblAcreditacionMed.setBounds(23, 367, 121, 14);
+		contentPanel.add(lblAcreditacionMed);
+		
+		btnMED1 = new JButton("...");
+		btnMED1.setBounds(258, 398, 30, 23);
+		contentPanel.add(btnMED1);
+		
+		JPanel panelMED2 = new JPanel();
+		panelMED2.setBorder(new LineBorder(new Color(0, 0, 0)));
+		panelMED2.setBounds(349, 398, 174, 148);
+		contentPanel.add(panelMED2);
+		panelMED2.setLayout(new BorderLayout(0, 0));
+		
+		MED2 = new JLabel("");
+		panelMED2.add(MED2, BorderLayout.CENTER);
+		
+		btnMED2 = new JButton("...");
+		btnMED2.setBounds(539, 398, 30, 23);
+		contentPanel.add(btnMED2);
+		
+		btnMED3 = new JButton("...");
+		btnMED3.setBounds(262, 558, 30, 23);
+		contentPanel.add(btnMED3);
+		
+		JPanel panelMED4 = new JPanel();
+		panelMED4.setBorder(new LineBorder(new Color(0, 0, 0)));
+		panelMED4.setBounds(349, 558, 174, 148);
+		contentPanel.add(panelMED4);
+		panelMED4.setLayout(new BorderLayout(0, 0));
+		
+		MED4 = new JLabel("");
+		panelMED4.add(MED4, BorderLayout.CENTER);
+		
+		btnMED4 = new JButton("...");
+		btnMED4.setBounds(539, 558, 30, 23);
+		contentPanel.add(btnMED4);
+		
+		JLabel lblJustificarAC = new JLabel("Justificar acreditaciones");
+		lblJustificarAC.setBounds(10, 731, 148, 14);
+		contentPanel.add(lblJustificarAC);
+		
+		textJustificarACMED = new JTextField();
+		textJustificarACMED.setBounds(160, 728, 471, 20);
+		contentPanel.add(textJustificarACMED);
+		textJustificarACMED.setColumns(10);
+		
+		JPanel panelMED1 = new JPanel();
+		panelMED1.setBorder(new LineBorder(new Color(0, 0, 0)));
+		panelMED1.setBounds(78, 398, 174, 148);
+		contentPanel.add(panelMED1);
+		panelMED1.setLayout(new BorderLayout(0, 0));
+		
+		MED1 = new JLabel("");
+		panelMED1.add(MED1, BorderLayout.CENTER);
+		
+		JPanel panelMED3 = new JPanel();
+		panelMED3.setBorder(new LineBorder(new Color(0, 0, 0)));
+		panelMED3.setBounds(78, 558, 174, 148);
+		contentPanel.add(panelMED3);
+		panelMED3.setLayout(new BorderLayout(0, 0));
+		
+		MED3 = new JLabel("");
+		panelMED3.add(MED3, BorderLayout.CENTER);
 		{
 			JPanel buttonPane = new JPanel();
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
@@ -255,5 +347,108 @@ public class AgregarPeaton extends JDialog {
 				buttonPane.add(cancelButton);
 			}
 		}
+	}
+
+	public void setPersona() {
+		persona = new Peaton();
+		
+		persona.setNombre(getTextNombre());
+		
+	}
+	
+	public String getTextApellido() {
+		return textApellido.getText();
+	}
+
+	public String getTextNombre() {
+		return textNombre.getText();
+	}
+
+	public int getTextEdad() {
+		return Integer.parseInt(textEdad.getText());
+	}
+
+	public int getTextDocumento() {
+		return Integer.parseInt(textDocumento.getText());
+	}
+
+	public String getTextOcupacion() {
+		return textOcupacion.getText();
+	}
+
+	public String getTextCalle() {
+		return textCalle.getText();
+	}
+
+	public int getTextCelular() {
+		return Integer.parseInt(textCelular.getText());
+	}
+
+	public int getTextTelefono() {
+		return Integer.parseInt(textTelefono.getText());
+	}
+
+	public int getTextNumeroDir() {
+		return Integer.parseInt(textNumeroDir.getText());
+	}
+
+	public int getTextPisoDir() {
+		return Integer.parseInt(textPisoDir.getText()); 
+	}
+
+	public String getTextDeptDir() {
+		return textDeptDir.getText();
+	}
+
+	public String getTextLocalidad() {
+		return textLocalidad.getText();
+	}
+
+	public String getTextPartido() {
+		return textPartido.getText();
+	}
+
+	public String getTextProvincia() {
+		return textProvincia.getText();
+	}
+
+	public String getTextJustificarACMED() {
+		return textJustificarACMED.getText();
+	}
+
+	public String getTextNombreART() {
+		return textNombreART.getText();
+	}
+
+	public String getTextLugarAtt() {
+		return textLugarAtt.getText();
+	}
+
+	public String getTextNombreDr() {
+		return textNombreDr.getText();
+	}
+
+	public String getTextApellidoDr() {
+		return textApellidoDr.getText();
+	}
+
+	public String getComboBoxLesionado() {
+		return comboBoxLesionado.getSelectedItem().toString();
+	}
+
+	public String getComboBoxAbogadoSN() {
+		return comboBoxAbogadoSN.getSelectedItem().toString();
+	}
+
+	public Fotos getDNI() {
+		return DNI;
+	}
+
+	public Fotos getACMED() {
+		return ACMED;
+	}
+
+	public Peaton getPersona() {
+		return persona;
 	}
 }

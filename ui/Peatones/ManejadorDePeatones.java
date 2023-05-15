@@ -58,11 +58,11 @@ public class ManejadorDePeatones extends JDialog {
 		JButton btnAgregar = new JButton("Agregar Peaton");
 		btnAgregar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-//				AgregarDaño ventana = new AgregarDaño();
-//				
-//				ventana.setModal(true);
-//				ventana.setVisible(true);
-//				
+				AgregarPeaton ventana = new AgregarPeaton();
+				
+				ventana.setModal(true);
+				ventana.setVisible(true);
+
 //				daños.agregarDaño(ventana.getDaño()); // TODO como hacer para que no se agregen vacios
 //				list.setListData(daños.getListaDeDaños().toArray());
 			}
