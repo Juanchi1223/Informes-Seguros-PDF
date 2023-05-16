@@ -26,6 +26,7 @@ import java.awt.event.ActionEvent;
 
 import empresa.*;
 import ui.Daños.ManejoDeDaños;
+import ui.Peatones.ManejadorDePeatones;
 import ui.VehiculosAs.ManejoDeVehiculoAs;
 import ui.VehiculosTer.ManejoDeVehiculoTer;
 
@@ -131,6 +132,11 @@ public class Home extends JFrame {
 		contentPane.add(btnTercLesn);
 		
 		JButton btnPeaton = new JButton("Peaton");
+		btnPeaton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				abrirPeaton();
+			}
+		});
 		btnPeaton.setBounds(32, 323, 193, 53);
 		contentPane.add(btnPeaton);
 		
@@ -180,6 +186,14 @@ public class Home extends JFrame {
 		btnGuardar.setBounds(625, 473, 109, 23);
 		contentPane.add(btnGuardar);
 	}
+	protected void abrirPeaton() {
+		Peatones lista = contrato.getPeatones();
+		ManejadorDePeatones ventana = new ManejadorDePeatones(lista);
+		
+		ventana.setModal(true);
+		ventana.setVisible(true);
+	}
+
 	protected void abrirTerceros() {
 		VehiculosLesionados vehiculos = contrato.getVehiculos();
 		ManejoDeVehiculoTer ventana = new ManejoDeVehiculoTer(vehiculos);

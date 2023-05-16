@@ -17,6 +17,9 @@ import empresa.Fotos;
 import empresa.Peaton;
 
 import java.awt.Color;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import javax.swing.DefaultComboBoxModel;
 
 public class AgregarPeaton extends JDialog {
 
@@ -26,6 +29,7 @@ public class AgregarPeaton extends JDialog {
 	private JComboBox<String> comboBoxLesionado, comboBoxAbogadoSN;
 	private JLabel DNI1, DNI2, MED1, MED2, MED3, MED4;
 	private JButton btnDNI1, btnDNI2, btnMED1, btnMED2, btnMED3, btnMED4;
+	private JCheckBox chckbxART;
 	
 	private Fotos DNI = new Fotos(2);
 	private Fotos ACMED = new Fotos(4);
@@ -185,11 +189,13 @@ public class AgregarPeaton extends JDialog {
 		lblLesionado.setBounds(10, 159, 59, 14);
 		contentPanel.add(lblLesionado);
 		
+		String[] valoreLes = {"", "No", "Leve", "Media", "Grave", "Muerte"};
 		comboBoxLesionado = new JComboBox<String>();
+		comboBoxLesionado.setModel(new DefaultComboBoxModel<String>(valoreLes));
 		comboBoxLesionado.setBounds(72, 156, 86, 20);
 		contentPanel.add(comboBoxLesionado);
 		
-		JCheckBox chckbxART = new JCheckBox("ART");
+		chckbxART = new JCheckBox("ART");
 		chckbxART.setBounds(164, 155, 52, 23);
 		contentPanel.add(chckbxART);
 		
@@ -215,7 +221,9 @@ public class AgregarPeaton extends JDialog {
 		lblAbogado.setBounds(10, 184, 59, 14);
 		contentPanel.add(lblAbogado);
 		
+		String[] valoresAbogado = {"", "No", "Patrocinante", "Apoderado"};
 		comboBoxAbogadoSN = new JComboBox<String>();
+		comboBoxAbogadoSN.setModel(new DefaultComboBoxModel<String>(valoresAbogado));
 		comboBoxAbogadoSN.setBounds(72, 180, 86, 22);
 		contentPanel.add(comboBoxAbogadoSN);
 		
@@ -260,10 +268,22 @@ public class AgregarPeaton extends JDialog {
 		panelDNI2.add(DNI2, BorderLayout.CENTER);
 		
 		btnDNI1 = new JButton("...");
+		btnDNI1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				DNI.adjuntarArchivo(btnDNI1, DNI1);
+				DNI.setFotoAdj(0, DNI1);
+			}
+		});
 		btnDNI1.setBounds(250, 250, 47, 23);
 		contentPanel.add(btnDNI1);
 		
 		btnDNI2 = new JButton("...");
+		btnDNI2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				DNI.adjuntarArchivo(btnDNI2, DNI2);
+				DNI.setFotoAdj(1, DNI2);
+			}
+		});
 		btnDNI2.setBounds(558, 250, 47, 23);
 		contentPanel.add(btnDNI2);
 		
@@ -271,7 +291,22 @@ public class AgregarPeaton extends JDialog {
 		lblAcreditacionMed.setBounds(23, 367, 121, 14);
 		contentPanel.add(lblAcreditacionMed);
 		
+		JPanel panelMED1 = new JPanel();
+		panelMED1.setBorder(new LineBorder(new Color(0, 0, 0)));
+		panelMED1.setBounds(78, 398, 174, 148);
+		contentPanel.add(panelMED1);
+		panelMED1.setLayout(new BorderLayout(0, 0));
+		
+		MED1 = new JLabel("");
+		panelMED1.add(MED1, BorderLayout.CENTER);
+		
 		btnMED1 = new JButton("...");
+		btnMED1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ACMED.adjuntarArchivo(btnMED1, MED1);
+				ACMED.setFotoAdj(0, MED1);
+			}
+		});
 		btnMED1.setBounds(258, 398, 30, 23);
 		contentPanel.add(btnMED1);
 		
@@ -285,10 +320,22 @@ public class AgregarPeaton extends JDialog {
 		panelMED2.add(MED2, BorderLayout.CENTER);
 		
 		btnMED2 = new JButton("...");
+		btnMED2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ACMED.adjuntarArchivo(btnMED2, MED2);
+				ACMED.setFotoAdj(1, MED2);
+			}
+		});
 		btnMED2.setBounds(539, 398, 30, 23);
 		contentPanel.add(btnMED2);
 		
 		btnMED3 = new JButton("...");
+		btnMED3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ACMED.adjuntarArchivo(btnMED3, MED3);
+				ACMED.setFotoAdj(2, MED3);
+			}
+		});
 		btnMED3.setBounds(262, 558, 30, 23);
 		contentPanel.add(btnMED3);
 		
@@ -302,6 +349,12 @@ public class AgregarPeaton extends JDialog {
 		panelMED4.add(MED4, BorderLayout.CENTER);
 		
 		btnMED4 = new JButton("...");
+		btnMED4.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ACMED.adjuntarArchivo(btnMED4, MED4);
+				ACMED.setFotoAdj(3, MED4);
+			}
+		});
 		btnMED4.setBounds(539, 558, 30, 23);
 		contentPanel.add(btnMED4);
 		
@@ -313,15 +366,6 @@ public class AgregarPeaton extends JDialog {
 		textJustificarACMED.setBounds(160, 728, 471, 20);
 		contentPanel.add(textJustificarACMED);
 		textJustificarACMED.setColumns(10);
-		
-		JPanel panelMED1 = new JPanel();
-		panelMED1.setBorder(new LineBorder(new Color(0, 0, 0)));
-		panelMED1.setBounds(78, 398, 174, 148);
-		contentPanel.add(panelMED1);
-		panelMED1.setLayout(new BorderLayout(0, 0));
-		
-		MED1 = new JLabel("");
-		panelMED1.add(MED1, BorderLayout.CENTER);
 		
 		JPanel panelMED3 = new JPanel();
 		panelMED3.setBorder(new LineBorder(new Color(0, 0, 0)));
@@ -337,12 +381,23 @@ public class AgregarPeaton extends JDialog {
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
 				JButton okButton = new JButton("OK");
+				okButton.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						setPersona();
+						setVisible(false);
+					}
+				});
 				okButton.setActionCommand("OK");
 				buttonPane.add(okButton);
 				getRootPane().setDefaultButton(okButton);
 			}
 			{
 				JButton cancelButton = new JButton("Cancel");
+				cancelButton.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						setVisible(false);
+					}
+				});
 				cancelButton.setActionCommand("Cancel");
 				buttonPane.add(cancelButton);
 			}
@@ -352,8 +407,30 @@ public class AgregarPeaton extends JDialog {
 	public void setPersona() {
 		persona = new Peaton();
 		
-		persona.setNombre(getTextNombre());
-		
+		persona.setApellido(getTextApellido());
+		persona.setNombre(getTextNombre()); 
+		persona.setEdad(getTextEdad());
+		persona.setNroDocumento(getTextDocumento());
+		persona.setCelular(getTextCelular());
+		persona.setOcupacion(getTextOcupacion());
+		persona.setTelefono(getTextTelefono());
+		persona.setCalle(getTextCalle());
+		persona.setNumero(getTextNumeroDir());
+		persona.setPiso(getTextPisoDir());
+		persona.setDept(getTextDeptDir());
+		persona.setLocalidad(getTextLocalidad());
+		persona.setPartido(getTextPartido());
+		persona.setProvincia(getTextProvincia());
+		persona.setLesionado(getComboBoxLesionado());
+		persona.setArt(getChckbxART());
+		persona.setNombreArt(getTextNombreART());
+		persona.setLugarAtencion(getTextLugarAtt());
+		persona.setAbogado(getComboBoxAbogadoSN());
+		persona.setNombreDr(getTextNombreDr());
+		persona.setApellidoDr(getTextApellidoDr());
+		persona.setDNI(DNI);
+		persona.setAcreditacionMedica(ACMED);
+		persona.setJustificaAcred(getTextJustificarACMED());
 	}
 	
 	public String getTextApellido() {
@@ -450,5 +527,12 @@ public class AgregarPeaton extends JDialog {
 
 	public Peaton getPersona() {
 		return persona;
+	}
+
+	public String getChckbxART() {
+		if (chckbxART.isSelected())
+			return "Si";
+		else
+			return "No";
 	}
 }

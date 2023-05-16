@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 public class Peatones implements Serializable {
-	private ArrayList<Peaton> listaPeatones; 
+	private ArrayList<Peaton> listaPeatones = new ArrayList<Peaton>(); 
 	
 	public ArrayList<Peaton> getListaPeatones() {
 		return listaPeatones;
@@ -14,6 +14,10 @@ public class Peatones implements Serializable {
 		this.listaPeatones = listaPeatones;
 	}
 
-	public void agregarPeaton() {};
-	public void borrarPeaton() {};
+	public void agregarPeaton(Peaton peaton) {
+		this.listaPeatones.add(peaton);
+	};
+	public void borrarPeaton(int indice) {
+		this.listaPeatones.remove(indice);
+	};
 }

@@ -49,7 +49,7 @@ public class ManejadorDePeatones extends JDialog {
 			list.setListData(listaPeatones.getListaPeatones().toArray());
 		}
 		catch (Exception e){
-			
+			;
 		}
 		
 		list.setBounds(215, 11, 194, 206);
@@ -63,8 +63,9 @@ public class ManejadorDePeatones extends JDialog {
 				ventana.setModal(true);
 				ventana.setVisible(true);
 
-//				daños.agregarDaño(ventana.getDaño()); // TODO como hacer para que no se agregen vacios
-//				list.setListData(daños.getListaDeDaños().toArray());
+				listaPeatones.agregarPeaton(ventana.getPersona()); // TODO como hacer para que no se agregen vacios
+
+				list.setListData(listaPeatones.getListaPeatones().toArray());
 			}
 		});
 		btnAgregar.setBounds(49, 41, 106, 23);
