@@ -12,6 +12,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import empresa.Daño;
+import empresa.Peaton;
 import empresa.Peatones;
 import ui.Daños.AgregarDaño;
 import ui.Daños.ModificarDaño;
@@ -38,7 +39,7 @@ public class ManejadorDePeatones extends JDialog {
 	 */
 	public ManejadorDePeatones(Peatones listaPeatones) {
 
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 440, 300);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
@@ -68,37 +69,37 @@ public class ManejadorDePeatones extends JDialog {
 				list.setListData(listaPeatones.getListaPeatones().toArray());
 			}
 		});
-		btnAgregar.setBounds(49, 41, 106, 23);
+		btnAgregar.setBounds(49, 41, 135, 23);
 		contentPanel.add(btnAgregar);
 		
 		JButton btnModificar = new JButton("Modificar Peaton");
 		btnModificar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-//				int a = list.getSelectedIndex();
-//				Daño aux = daños.getListaDeDaños().get(a);
-//				
-//				ModificarDaño ventana = new ModificarDaño(aux);
-//				ventana.setModal(true);
-//				ventana.setVisible(true);				
-//				
-//				list.setListData(daños.getListaDeDaños().toArray());
+				int a = list.getSelectedIndex();
+				Peaton aux = listaPeatones.getListaPeatones().get(a);
+		
+				AgregarPeaton ventana = new AgregarPeaton(aux);
+				
+				ventana.setModal(true);
+				ventana.setVisible(true);		
 
+				list.setListData(listaPeatones.getListaPeatones().toArray());
 			}
 		});
-		btnModificar.setBounds(49, 100, 106, 23);
+		btnModificar.setBounds(49, 100, 135, 23);
 		contentPanel.add(btnModificar);
 		
 		JButton btnEliminar = new JButton("Eliminar Peaton");
 		btnEliminar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-//				int x = list.getSelectedIndex();				
-//				
-//				daños.borrarDaño(x);
-//				
-//				list.setListData(daños.getListaDeDaños().toArray());
+				int x = list.getSelectedIndex();				
+
+				listaPeatones.borrarPeaton(x);
+
+				list.setListData(listaPeatones.getListaPeatones().toArray());
 			}
 		});
-		btnEliminar.setBounds(49, 156, 106, 23);
+		btnEliminar.setBounds(49, 156, 135, 23);
 		contentPanel.add(btnEliminar);
 		{
 			JPanel buttonPane = new JPanel();

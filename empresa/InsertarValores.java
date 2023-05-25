@@ -1,5 +1,6 @@
 package empresa;
 
+import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JTextField;
 
@@ -27,5 +28,12 @@ public interface InsertarValores{
 		if (valor != null)
 			comboBox.setSelectedIndex(getIndex(valor, valores));
 	}
-}
+	public default void rellenarCheck(String valor, JCheckBox check) {
+		boolean x;
+		if (valor != null) {
+			x = (valor == "Si")? true : false;
+			check.setSelected(x);
+		}
+	}
+} 
 

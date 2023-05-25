@@ -16,8 +16,8 @@ public class Peatones implements Serializable {
 
 	public void agregarPeaton(Peaton peaton) {
 		this.listaPeatones.add(peaton);
-	};
+	}
 	public void borrarPeaton(int indice) {
 		this.listaPeatones.remove(indice);
-	};
+	}
 }

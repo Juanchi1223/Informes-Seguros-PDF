@@ -214,7 +214,7 @@ public class ModificarPasajero extends JDialog {
 			textPartido.setText(pasajero.getPartido());
 		textPartido.setBounds(262, 179, 135, 20);
 		contentPanel.add(textPartido);
-		textPartido.setColumns(10);
+		textPartido.setColumns(10); 
 		
 		JLabel lblProvincia = new JLabel("Provincia");
 		lblProvincia.setBounds(400, 182, 59, 14);
@@ -274,7 +274,7 @@ public class ModificarPasajero extends JDialog {
 		contentPanel.add(lblLesionado);
 		
 		String[] valoresLes = {"", "No", "Leve", "Media", "Grave", "Muerte"};
-		comboBoxLesionado = new JComboBox();		// -- ACA --
+		comboBoxLesionado = new JComboBox();		
 		if (pasajero.getLesionado() != null)
 			comboBoxLesionado.setSelectedIndex(getIndex(pasajero.getLesionado(), valoresLes));
 		comboBoxLesionado.setBounds(77, 411, 91, 22);
@@ -282,7 +282,7 @@ public class ModificarPasajero extends JDialog {
 		contentPanel.add(comboBoxLesionado);
 		
 		chckbxART = new JCheckBox("ART");
-		if (pasajero.getArt() != null){
+		if (pasajero.getArt() != null){		// cambiar a la implementacion de Insertar Valores
 			boolean x = (pasajero.getArt() == "Si")? true : false;
 			chckbxART.setSelected(x);
 		}

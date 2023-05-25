@@ -204,7 +204,7 @@ public class AgregarDaño extends JDialog {
 		JButton btnAdjFt4 = new JButton("btnAdjFt4");
 		btnAdjFt4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String ruta = Fts.adjuntarArchivo(btnAdjFt4, lblFoto4);
+				String ruta = Fts.adjuntarArchivo(btnAdjFt4, lblFoto4); 
 				Fts.agregarFoto(3, ruta);
 			}
 		});

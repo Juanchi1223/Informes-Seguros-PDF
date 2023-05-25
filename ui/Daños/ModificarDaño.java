@@ -37,7 +37,7 @@ import javax.swing.Action;
 public class ModificarDaño extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
-	private JTextField textProp;
+	private JTextField textProp; 
 	private JTextField textSeguro;
 	private JComboBox SeguroSiNo; 
 	private JComboBox DenunciaSiNo;

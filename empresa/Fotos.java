@@ -20,11 +20,11 @@ public class Fotos implements Serializable {
 		}
 	}
 	
-	public void agregarFoto(int posicion, String ruta) {
+	public void agregarFoto(int posicion, String ruta) {	// agrega al array
 		this.rutas.add(posicion, ruta);
 	}
 	
-	public String adjuntarArchivo(JButton botton, JLabel marco) {
+	public String adjuntarArchivo(JButton botton, JLabel marco) {	// abre el OS para tomar la foto
 		String Ruta = null;
 		
 		JFileChooser fcDoc1 = new JFileChooser();
@@ -43,7 +43,7 @@ public class Fotos implements Serializable {
         }
 		return Ruta;
 	}
-	public void setFotoAdj(int pos, JLabel marco) {
+	public void setFotoAdj(int pos, JLabel marco) {		// par insertar las fotos cuando se modifica
 		if(rutas.get(pos) != null) {
 			Image mImagen = new ImageIcon(rutas.get(pos)).getImage();
 	       	ImageIcon mIcono = new ImageIcon(mImagen.getScaledInstance(marco.getWidth(), marco.getHeight(), Image.SCALE_SMOOTH));

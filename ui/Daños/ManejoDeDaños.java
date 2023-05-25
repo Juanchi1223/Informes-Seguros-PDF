@@ -72,9 +72,11 @@ public class ManejoDeDaños extends JDialog {
 		btnModificar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int a = list.getSelectedIndex();
+				
 				Daño aux = daños.getListaDeDaños().get(a);
 				
 				ModificarDaño ventana = new ModificarDaño(aux);
+				
 				ventana.setModal(true);
 				ventana.setVisible(true);				
 				

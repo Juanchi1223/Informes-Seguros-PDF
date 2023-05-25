@@ -29,6 +29,9 @@ import ui.Daños.ManejoDeDaños;
 import ui.Peatones.ManejadorDePeatones;
 import ui.VehiculosAs.ManejoDeVehiculoAs;
 import ui.VehiculosTer.ManejoDeVehiculoTer;
+import java.awt.Font;
+import javax.swing.UIManager;
+import java.awt.Color;
 
 
 public class Home extends JFrame {
@@ -94,15 +97,18 @@ public class Home extends JFrame {
 		contentPane.setLayout(null);
 		
 		JButton btnInfBasc = new JButton("Información Basica");
+		btnInfBasc.setBackground(Color.BLACK);
+		btnInfBasc.setFont(new Font("Verdana", Font.PLAIN, 11));
 		btnInfBasc.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				abrirVentanaInfor();
 			}
 		});
-		btnInfBasc.setBounds(32, 67, 193, 53);
+		btnInfBasc.setBounds(32, 49, 249, 53);
 		contentPane.add(btnInfBasc);
 		
 		JButton btnSinistro = new JButton("Información del Siniestro");
+		btnSinistro.setFont(new Font("Verdana", Font.PLAIN, 11));
 		btnSinistro.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				abrirInforSini();
@@ -110,43 +116,47 @@ public class Home extends JFrame {
 
 			
 		});
-		btnSinistro.setBounds(32, 131, 193, 53);
+		btnSinistro.setBounds(32, 113, 249, 53);
 		contentPane.add(btnSinistro);
 		
 		JButton btnAsegLesio = new JButton("Vehículos Asegurados Lesionados");
+		btnAsegLesio.setFont(new Font("Verdana", Font.PLAIN, 11));
 		btnAsegLesio.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				abrirAsegurados();
 			}
 		});
-		btnAsegLesio.setBounds(32, 195, 193, 53);
+		btnAsegLesio.setBounds(32, 177, 249, 53);
 		contentPane.add(btnAsegLesio);
 		
 		JButton btnTercLesn = new JButton("Vehículos Terceros Lesionados");
+		btnTercLesn.setFont(new Font("Verdana", Font.PLAIN, 11));
 		btnTercLesn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				abrirTerceros();
 			}
 		});
-		btnTercLesn.setBounds(32, 259, 193, 53);
+		btnTercLesn.setBounds(32, 241, 249, 53);
 		contentPane.add(btnTercLesn);
 		
 		JButton btnPeaton = new JButton("Peaton");
+		btnPeaton.setFont(new Font("Verdana", Font.PLAIN, 11));
 		btnPeaton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				abrirPeaton();
 			}
 		});
-		btnPeaton.setBounds(32, 323, 193, 53);
+		btnPeaton.setBounds(32, 305, 249, 53);
 		contentPane.add(btnPeaton);
 		
 		JButton btnOtros = new JButton("Otros Daños");
+		btnOtros.setFont(new Font("Verdana", Font.PLAIN, 11));
 		btnOtros.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				abrirVentanaOtros();
 			}
 		});
-		btnOtros.setBounds(32, 387, 193, 53);
+		btnOtros.setBounds(32, 369, 249, 53);
 		contentPane.add(btnOtros);
 		
 		JButton btnVerInf = new JButton("Ver");
