@@ -61,10 +61,11 @@ public class ManejoDeVehiculoTer extends JDialog {
 				ventana.setModal(true);
 				ventana.setVisible(true);
 				
-				if (ventana.getVehiculoNuevo().getPropietario() != null)
+				if ( !propietarioVacio(ventana.getPropietario())) {
 					vehiculos.agregarVehiculo(ventana.getVehiculoNuevo());
-
-				list.setListData(vehiculos.getListaVehiculosTerceros().toArray());
+					
+					list.setListData(vehiculos.getListaVehiculosTerceros().toArray());
+				}
 			}
 		});
 		btnAgregar.setBounds(49, 41, 132, 23);
@@ -123,6 +124,12 @@ public class ManejoDeVehiculoTer extends JDialog {
 				buttonPane.add(cancelButton);
 			}
 		}
+	}
+
+	protected boolean propietarioVacio(String propietario) {
+		if (propietario != null && !propietario.equals(""))
+			return false;
+		return true;
 	}
 }
 

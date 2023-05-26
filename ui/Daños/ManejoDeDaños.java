@@ -61,8 +61,10 @@ public class ManejoDeDaños extends JDialog {
 				ventana.setModal(true);
 				ventana.setVisible(true);
 				
-				daños.agregarDaño(ventana.getDaño()); // TODO como hacer para que no se agregen vacios
-				list.setListData(daños.getListaDeDaños().toArray());
+				if ( !nombreVacio(ventana.getTitularDaño())) {
+					daños.agregarDaño(ventana.getDaño()); 
+					list.setListData(daños.getListaDeDaños().toArray());
+				}
 			}
 		});
 		btnAgregar.setBounds(49, 41, 106, 23);
@@ -125,5 +127,11 @@ public class ManejoDeDaños extends JDialog {
 				buttonPane.add(cancelButton);
 			}
 		}
+	}
+
+	protected boolean nombreVacio(String titularDaño) {
+		if (titularDaño != null && !titularDaño.equals(""))
+			return false;
+		return true;
 	}
 }

@@ -517,4 +517,8 @@ public class AgregarVehiculoAs extends JDialog {
 	public VehiculoAsegurado getVehiculoNuevo() {
 		return vehiculoNuevo;
 	}
+
+	public String getPropietarioVehiculo() {
+		return vehiculoNuevo.getPropietario();
+	}
 }

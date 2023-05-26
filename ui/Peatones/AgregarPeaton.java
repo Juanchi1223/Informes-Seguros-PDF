@@ -282,8 +282,8 @@ public class AgregarPeaton extends JDialog implements InsertarValores{
 		btnDNI2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String ruta = DNI.adjuntarArchivo(btnDNI2, DNI2);
-				DNI.agregarFoto(1, ruta);		// TODO VER EL PROBLEMA DE GUARDAR 
-			}									// TODO GUARDAR DATOS ACTUALIZADOS
+				DNI.agregarFoto(1, ruta);		
+			}								
 		});
 		btnDNI2.setBounds(558, 250, 47, 23);
 		contentPanel.add(btnDNI2);
@@ -952,5 +952,9 @@ public class AgregarPeaton extends JDialog implements InsertarValores{
 			return "Si";
 		else
 			return "No";
+	}
+
+	public String getNombrePersona() {
+		return persona.getNombre();
 	}
 }

@@ -97,7 +97,6 @@ public class Home extends JFrame {
 		contentPane.setLayout(null);
 		
 		JButton btnInfBasc = new JButton("Información Basica");
-		btnInfBasc.setBackground(Color.BLACK);
 		btnInfBasc.setFont(new Font("Verdana", Font.PLAIN, 11));
 		btnInfBasc.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

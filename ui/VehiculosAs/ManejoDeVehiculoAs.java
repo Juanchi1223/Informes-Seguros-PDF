@@ -58,11 +58,11 @@ public class ManejoDeVehiculoAs extends JDialog {
 				ventana.setModal(true);
 				ventana.setVisible(true);
 				
-				// TODO como hacer para que no se agregen vacios parte 2
-				if (ventana.getVehiculoNuevo().getPropietario() != null && ventana.getVehiculoNuevo().getPropietario() != "")
+				
+				if ( !propietarioVacio(ventana.getPropietarioVehiculo())) {
 					vehiculos.agregarVehiculo(ventana.getVehiculoNuevo());
-
-				list.setListData(vehiculos.listaVehiculosAsegurados().toArray());
+					list.setListData(vehiculos.listaVehiculosAsegurados().toArray());
+				}				
 			}
 		});
 		btnAgregar.setBounds(49, 41, 132, 23);
@@ -121,6 +121,12 @@ public class ManejoDeVehiculoAs extends JDialog {
 				buttonPane.add(cancelButton);
 			}
 		}
+	}
+
+	protected boolean propietarioVacio(String propietario) {
+		if ( propietario != null && !propietario.equals(""))
+			return false;
+		return true;
 	}
 
 }

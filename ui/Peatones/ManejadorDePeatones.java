@@ -63,10 +63,13 @@ public class ManejadorDePeatones extends JDialog {
 				
 				ventana.setModal(true);
 				ventana.setVisible(true);
-
-				listaPeatones.agregarPeaton(ventana.getPersona()); // TODO como hacer para que no se agregen vacios
-
-				list.setListData(listaPeatones.getListaPeatones().toArray());
+				
+				
+				if( !nombreVacio(ventana.getNombrePersona())) {
+					listaPeatones.agregarPeaton(ventana.getPersona());
+					
+					list.setListData(listaPeatones.getListaPeatones().toArray());
+				}
 			}
 		});
 		btnAgregar.setBounds(49, 41, 135, 23);
@@ -127,5 +130,11 @@ public class ManejadorDePeatones extends JDialog {
 				buttonPane.add(cancelButton);
 			}
 		}
+	}
+
+	protected boolean nombreVacio(String nombre) {
+		if ( nombre != null && !nombre.equals(""))
+			return false;
+		return true;
 	}
 }

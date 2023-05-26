@@ -45,6 +45,7 @@ public class AgregarDaño extends JDialog {
 	private JComboBox AdjDocSiNo;
 	private JTextField textJstDoc;
 	private JTextField textJstFoto;
+	private String[] valoresSN = {"", "No", "Si"};
 	private Fotos FtsDoc = new Fotos(2);
 	private Fotos Fts = new Fotos(4);
 	
@@ -88,7 +89,7 @@ public class AgregarDaño extends JDialog {
 		contentPanel.add(lblSeguro);
 		
 		SeguroSiNo = new JComboBox();
-		SeguroSiNo.setModel(new DefaultComboBoxModel(new String[] {"No", "Si"}));
+		SeguroSiNo.setModel(new DefaultComboBoxModel(valoresSN));
 		SeguroSiNo.setBounds(196, 57, 44, 22);
 		contentPanel.add(SeguroSiNo);
 		
@@ -106,7 +107,7 @@ public class AgregarDaño extends JDialog {
 		contentPanel.add(lblDenuncia);
 		
 		DenunciaSiNo = new JComboBox();
-		DenunciaSiNo.setModel(new DefaultComboBoxModel(new String[] {"No", "Si"}));
+		DenunciaSiNo.setModel(new DefaultComboBoxModel(valoresSN));
 		DenunciaSiNo.setBounds(171, 86, 44, 22);
 		contentPanel.add(DenunciaSiNo);
 		
@@ -115,7 +116,7 @@ public class AgregarDaño extends JDialog {
 		contentPanel.add(lblAdjDoc);
 		
 		AdjDocSiNo = new JComboBox();
-		AdjDocSiNo.setModel(new DefaultComboBoxModel(new String[] {"No", "Si"}));
+		AdjDocSiNo.setModel(new DefaultComboBoxModel(valoresSN));
 		AdjDocSiNo.setBounds(395, 86, 44, 22);
 		contentPanel.add(AdjDocSiNo);
 		
@@ -273,5 +274,8 @@ public class AgregarDaño extends JDialog {
 	
 	public Daño getDaño() {
 		return daño;
+	}
+	public String getTitularDaño() {
+		return daño.getNombreProp();
 	}
 }
