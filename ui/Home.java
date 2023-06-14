@@ -293,6 +293,8 @@ public class Home extends JFrame {
 		DateFormat df = new SimpleDateFormat("dd/MM/yyy");	// formato de fecha para rellenar
 		File template = new File("src\\contrato_template\\Contrato2.0_Rellenable.pdf");
 		InformacionBasica objeto = contrato.getInfoaBas();
+		
+		
 		try {
 			PDDocument documento = Loader.loadPDF(template);
 			PDAcroForm acroForm = documento.getDocumentCatalog().getAcroForm();

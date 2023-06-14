@@ -296,10 +296,14 @@ public class ObservacionesSini extends JDialog {
 
 
 	public int getTextIndmn() {
+		if (textIndmn.getText().isEmpty())
+			return 0;
 		return Integer.parseInt(textIndmn.getText());
 	}
 
 	public int getTextHonorarios() {
+		if (textHonorarios.getText().isEmpty())
+			return 0;
 		return Integer.parseInt(textHonorarios.getText());
 	}
 

@@ -21,18 +21,11 @@ import javax.swing.JTextField;
 public class inforBasica extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
-	private JTextField textFieldSiniestro;
-	private JTextField textFieldAjustadorMer;
-	private JTextField textFieldLiquidadorExt;
-	private JTextField textFieldResponsable;
-	private JTextField textFieldEmail;
-	private JTextField textPoliza;
-	private JTextField textNroTel;
-	private JTextField textInt;
-	private JCalendar calendarioOcurecia;
-	private JCalendar calendarioHasta;
-	private JCalendar calendarioDerivacion;
-	private JCalendar calendarioDel;
+	private JTextField textFieldSiniestro, textFieldAjustadorMer, textFieldLiquidadorExt, textFieldResponsable, textFieldEmail, textPoliza, textNroTel,textInt;
+	private JCalendar calendarioOcurecia, calendarioHasta, calendarioDerivacion, calendarioDel;
+	private String ajustador, liquidExt, responsable, email;
+	private int siniestro, poliza, numero, inter;
+	private Date fechaOcc, fechaDev, fechaIni, fechaFin;
 	
 	
 	/**
@@ -205,10 +198,15 @@ public class inforBasica extends JDialog {
 			}
 		}
 	}
+	
 	public int getSinientro(){
+		if (textFieldSiniestro.getText().isEmpty())
+			return 0;
 		return Integer.parseInt(textFieldSiniestro.getText());	
 	}
 	public int getPoliza() {
+		if (textPoliza.getText().isEmpty())
+			return 0;
 		return Integer.parseInt(textPoliza.getText());
 	}
 	public Date getFechaOcc() {
@@ -236,9 +234,13 @@ public class inforBasica extends JDialog {
 		return textFieldEmail.getText();
 	}
 	public int getNum() {
+		if (textNroTel.getText().isEmpty())
+			return 0;
 		return Integer.parseInt(textNroTel.getText());
 	}
 	public int getInter() {
+		if (textInt.getText().isEmpty())
+			return 0;
 		return Integer.parseInt(textInt.getText());
 	}
 	

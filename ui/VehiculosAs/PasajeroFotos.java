@@ -41,6 +41,7 @@ public class PasajeroFotos extends JDialog {
 	 * Create the dialog.
 	 */
 	public PasajeroFotos() {
+		setResizable(false);
 		setBounds(100, 100, 580, 669);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));

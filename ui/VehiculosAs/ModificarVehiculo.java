@@ -54,6 +54,7 @@ public class ModificarVehiculo extends JDialog implements InsertarValores {
 	 * Create the dialog.
 	 */
 	public ModificarVehiculo(VehiculoAsegurado vehiculo) {
+		setResizable(false);
 		FotosDoc = vehiculo.getDocFotos();
 		Fotos = vehiculo.getRodadoFotos();
 		FotoCotizacion = vehiculo.getCotizacion();

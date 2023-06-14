@@ -53,6 +53,7 @@ public class AgregarVehiculoAs extends JDialog {
 	 * Create the dialog.
 	 */
 	public AgregarVehiculoAs() {
+		setResizable(false);
 		setTitle("Ingresar un nuevo Vehiculo Asegurado");
 		setBounds(100, 100, 672, 815);
 		getContentPane().setLayout(new BorderLayout());
@@ -459,6 +460,8 @@ public class AgregarVehiculoAs extends JDialog {
 	}
 
 	public int getTextAño() {
+		if(textAño.getText().isEmpty())
+			return 0;
 		return Integer.parseInt(textAño.getText());
 	}
 
@@ -467,10 +470,14 @@ public class AgregarVehiculoAs extends JDialog {
 	}
 
 	public int getTextNumChasis() {
+		if(textAño.getText().isEmpty())
+			return 0;
 		return Integer.parseInt(textNumChasis.getText());
 	}
 
 	public int getTextNumMotor() {
+		if(textAño.getText().isEmpty())
+			return 0;
 		return Integer.parseInt(textNumMotor.getText());
 	}
 

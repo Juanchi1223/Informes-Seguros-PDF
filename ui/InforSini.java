@@ -653,6 +653,8 @@ public class InforSini extends JDialog {
 	}
 
 	private int getTextNumero() {
+		if (textNumero.getText().isEmpty())
+			return 0;
 		return Integer.parseInt(textNumero.getText());
 	}
 
@@ -661,10 +663,14 @@ public class InforSini extends JDialog {
 	}
 
 	private int getTextCarriles() {
+		if (textCarriles.getText().isEmpty())
+			return 0;
 		return Integer.parseInt(textCarriles.getText());
 	}
 
 	private int getTextVelocidad() {
+		if (textVelocidad.getText().isEmpty())
+			return 0;
 		return Integer.parseInt(textVelocidad.getText());
 	}
 

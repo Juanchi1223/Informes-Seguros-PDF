@@ -76,11 +76,11 @@ public class ManejoDeVehiculoTer extends JDialog {
 			public void actionPerformed(ActionEvent e) {
 				int a = list.getSelectedIndex();
 				ModificarVehiculoTer ventana = new ModificarVehiculoTer(vehiculos.getListaVehiculosTerceros().get(a));
-//					
+					
 				ventana.setModal(true);
 				ventana.setVisible(true);				
-//				
-//				list.setListData(vehiculos.getListaVehiculosTerceros().toArray());
+
+				list.setListData(vehiculos.getListaVehiculosTerceros().toArray());
 
 			}
 		});
