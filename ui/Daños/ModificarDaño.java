@@ -286,16 +286,37 @@ public class ModificarDaño extends JDialog {
 	}
 
 	private void ok(Daño daño) {
-		daño.setNombreProp(textProp.getText());
-		daño.setSeguro(SeguroSiNo.getSelectedObjects().toString());
-		daño.setNombreSeguro(textSeguro.getText());
-		daño.setDenuncia(DenunciaSiNo.getSelectedItem().toString());
-		daño.setDocumentacion(AdjDocSiNo.getSelectedItem().toString());
-		daño.setJustficarDoc(textJstDoc.getText());
-		daño.setJustificaFoto(textJstFoto.getText());
+		daño.setNombreProp(getNombreProp());
+		daño.setSeguro(getSeguroSiNo());
+		daño.setNombreSeguro(getNombreSeguro());
+		daño.setDenuncia(getDenunciaSiNo());
+		daño.setDocumentacion(getDocSino());
+		daño.setJustficarDoc(getJustDoc());
+		daño.setJustificaFoto(getJustFotos());
 		daño.setRutaFotosDoc(FtsDoc);
-		daño.setRutaFotosDoc(Fts);
+		daño.setRutaFotosDaño(Fts);
 		
 		setVisible(false);
+	}
+	private String getNombreProp() {
+		return textProp.getText();
+	}
+	private String getSeguroSiNo() {
+		return SeguroSiNo.getSelectedObjects().toString();
+	}
+	private String getNombreSeguro() {
+		return textSeguro.getText();
+	}
+	private String getDenunciaSiNo(){
+		return DenunciaSiNo.getSelectedItem().toString();
+	}
+	private String getDocSino() {
+		return AdjDocSiNo.getSelectedItem().toString();
+	}
+	private String getJustDoc() {
+		return textJstDoc.getText();
+	}
+	private String getJustFotos() {
+		return textJstFoto.getText();
 	}
 }

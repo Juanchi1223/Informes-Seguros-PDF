@@ -498,6 +498,8 @@ public class ModificarVehiculo extends JDialog implements InsertarValores {
 	}
 	
 	public int getTextAño() {
+		if (textAño.getText().isEmpty())
+			return 0;
 		return Integer.parseInt(textAño.getText());
 	}
 	
@@ -506,10 +508,14 @@ public class ModificarVehiculo extends JDialog implements InsertarValores {
 	}
 	
 	public int getTextNumChasis() {
+		if (textNumChasis.getText().isEmpty())
+			return 0;
 		return Integer.parseInt(textNumChasis.getText());
 	}
 	
 	public int getTextNumMotor() {
+		if (textNumMotor.getText().isEmpty())
+			return 0;
 		return Integer.parseInt(textNumMotor.getText());
 	}
 	

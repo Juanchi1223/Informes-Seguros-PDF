@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Date;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -16,6 +17,7 @@ import empresa.Peaton;
 import empresa.Tripulantes;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JComboBox;
 import javax.swing.JTextField;
 import javax.swing.JCheckBox;
@@ -56,7 +58,7 @@ public class AgregarPasajero extends JDialog {
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
 		
-//		JLabel lblVehiculoPerte = new JLabel("Vehiculo al que pertenece:");
+//		JLabel lblVehiculoPerte = new JLabel("Vehiculo al que pertenece:");	-> esta asi pq esta en la lista del auto
 //		lblVehiculoPerte.setBounds(10, 26, 153, 14);
 //		contentPanel.add(lblVehiculoPerte);
 //		
@@ -341,45 +343,54 @@ public class AgregarPasajero extends JDialog {
 				okButton.setActionCommand("OK");
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
+						String apellido = getApellido();
+						String nombre = getApellido();
+						if (!apellido.isBlank() && !nombre.isBlank()) {	
+						
 						PasajeroFotos subventana = new PasajeroFotos();
 						subventana.setModal(true);
 						subventana.setVisible(true);
 						setVisible(false);
 						
-						//persona.setVehicPertenece(comboBoxVehiculo.getSelectedItem().toString());
-						persona.setPersona(comboBoxTipoPer.getSelectedItem().toString());
-						persona.setApellido(textFieldApellido.getText());
-						persona.setEdad(Integer.parseInt(textEdad.getText()));
-						persona.setNroDocumento(Integer.parseInt(textFieldDoc.getText()));
-						persona.setNombre(textNombres.getText());
-						persona.setCelular(Integer.parseInt(textCelular.getText()));
-						persona.setOcupacion(textOcupacion.getText());
-						persona.setTelefono(Integer.parseInt(textTelefono.getText()));
-						persona.setCalle(textCalle.getText());
-						persona.setNumero(Integer.parseInt(textNumero.getText()));
-						persona.setPiso(Integer.parseInt(textPiso.getText()));
-						persona.setDept(textDepto.getText());
-						persona.setLocalidad(textLocalidad.getText());
-						persona.setPartido(textPartido.getText());
-						persona.setProvincia(textProvincia.getText());
-						persona.setLicencia(textLicConducir.getText());
-						persona.setAutoridadEmisora(textAutoridadEm.getText());
-						persona.setVigenciaIni(calendarioVigenciaIni.getDate());
-						persona.setVigenciaFin(calendarioVigenciaFin.getDate());
-						persona.setLesionado(comboBoxLesionado.getSelectedItem().toString());
-						persona.setArt((chckbxART.isSelected())? "Si" : "No");
-						persona.setNombreArt(textNombreLes.getText());
-						persona.setLugarAtencion(textLugarAtt.getText());
-						persona.setAlcoholemia(comboBoxAlcholemia.getSelectedItem().toString());
-						persona.setPropioAsegurado(comboBoxPropAs.getSelectedItem().toString());
-						persona.setRelacion(comboBoxRelacion.getSelectedItem().toString());
-						persona.setCual(textDesAs.getText());
-						persona.setAbogado(comboBoxAbogado.getSelectedItem().toString());
-						persona.setNombreDr(textNombreDr.getText());
-						persona.setApellidoDr(textAppDr.getText());
+						//persona.setVehicPertenece(comboBoxVehiculo.getSelectedItem().toString()); -> esta asi pq se supone que ya esta ingresado en la lista del auto		
+						persona.setPersona(getTipoPer());
+						persona.setApellido(getApellido());
+						persona.setEdad(getEdad());
+						persona.setNroDocumento(getDocumento());
+						persona.setNombre(getNombre());
+						persona.setCelular(getCelular());
+						persona.setOcupacion(getOcupacion());
+						persona.setTelefono(getTelefono());
+						persona.setCalle(getCalle());
+						persona.setNumero(getNumero());
+						persona.setPiso(getPiso());
+						persona.setDept(getDept());
+						persona.setLocalidad(getLocalidad());
+						persona.setPartido(getPartido());
+						persona.setProvincia(getProvincia());
+						persona.setLicencia(getLicencia());
+						persona.setAutoridadEmisora(getAutoridadEm());
+						persona.setVigenciaIni(getVigenciaIni());
+						persona.setVigenciaFin(getVigenciaFin());
+						persona.setLesionado(getLesionado());
+						persona.setArt(getArt());
+						persona.setNombreArt(getNombreArt());
+						persona.setLugarAtencion(getLugAtt());
+						persona.setAlcoholemia(getAlch());
+						persona.setPropioAsegurado(getPropAs());
+						persona.setRelacion(getRelacion());
+						persona.setCual(getDesAs());
+						persona.setAbogado(getAbogado());
+						persona.setNombreDr(getNombreDc());
+						persona.setApellidoDr(getAppldoDr());
 						persona.setDNI(subventana.getDni());
 						persona.setLicenciaFoto(subventana.getLicencia());
-						persona.setAcreditacionMedica(subventana.getAcredMed());
+						persona.setAcreditacionMedica(subventana.getAcredMed());		
+						}
+						else {
+							JOptionPane.showMessageDialog(null, "Error: se nesecita el nombre y apellido para guardar a la persona", "ERROR", JOptionPane.WARNING_MESSAGE);
+							setVisible(false);
+						}
 					}
 				});
 				buttonPane.add(okButton);
@@ -398,6 +409,109 @@ public class AgregarPasajero extends JDialog {
 		}
 	}
 
+	private String getTipoPer() {
+		return comboBoxTipoPer.getSelectedItem().toString();
+	}
+	private String getApellido() {
+		return textFieldApellido.getText();
+	}
+	private int getEdad() {
+		if (textEdad.getText().isEmpty())
+			return 0;
+		return Integer.parseInt(textEdad.getText());
+	}
+	private int getDocumento() {
+		if (textFieldDoc.getText().isEmpty())
+			return 0;
+		return Integer.parseInt(textFieldDoc.getText());
+	}
+	private String getNombre() {
+		return textNombres.getText();
+	}
+	private int getCelular() {
+		if (textCelular.getText().isEmpty())
+			return 0;
+		return Integer.parseInt(textCelular.getText());
+	}
+	private String getOcupacion() {
+		return textOcupacion.getText();
+	}
+	private int getTelefono() {
+		if (textTelefono.getText().isEmpty())
+			return 0;
+		return Integer.parseInt(textTelefono.getText());
+	}
+	private String getCalle() {
+		return textCalle.getText();
+	} 
+	private int getNumero() {
+		if (textNumero.getText().isEmpty())
+			return 0;
+		return Integer.parseInt(textNumero.getText());
+	}
+	private int getPiso() {
+		if (textPiso.getText().isEmpty())
+			return 0;
+		return Integer.parseInt(textPiso.getText());
+	}
+	private String getDept() {
+		return textDepto.getText();
+	}
+	private String getPartido() {
+		return textPartido.getText();
+	}
+	private String getProvincia() {
+		return textProvincia.getText();
+	}
+	private String getLicencia() {
+		return this.textLicConducir.getText();
+	}
+	private String getAutoridadEm() {
+		return this.textAutoridadEm.getText();
+	}
+	private Date getVigenciaIni() {
+		return calendarioVigenciaIni.getDate();
+	}
+	private Date getVigenciaFin() {
+		return this.calendarioVigenciaFin.getDate();
+	}
+	private String getLocalidad() {
+		return textLocalidad.getText();
+	}
+	private String getLesionado() {
+		return comboBoxLesionado.getSelectedItem().toString();
+	}
+	private String getArt() {
+		return (chckbxART.isSelected())? "Si" : "No";
+	}
+	private String getNombreArt() {
+		return textNombreLes.getText();
+	}
+	private String getLugAtt() {
+		return textLugarAtt.getText();
+	}
+	private String getAlch() {
+		return comboBoxAlcholemia.getSelectedItem().toString();
+	}
+	private String getPropAs() {
+		return comboBoxAlcholemia.getSelectedItem().toString();
+	}
+	private String getRelacion() {
+		return comboBoxRelacion.getSelectedItem().toString();
+	}
+	private String getDesAs() {
+		return textDesAs.getText();
+	}
+	private String getAbogado() {
+		return comboBoxAbogado.getSelectedItem().toString();
+	}
+	private String getNombreDc() {
+		return textNombreDr.getText();
+	}
+	private String getAppldoDr() {
+		return textAppDr.getText();
+	}
+	
 	public Tripulantes getPersona() {
 		return persona;
 	}

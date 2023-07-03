@@ -384,7 +384,8 @@ public class AgregarPeaton extends JDialog implements InsertarValores{
 				JButton okButton = new JButton("OK");
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						setPersona();
+						persona = new Peaton();
+						setPersona(persona);
 						setVisible(false);
 					}
 				});
@@ -773,7 +774,7 @@ public class AgregarPeaton extends JDialog implements InsertarValores{
 				JButton okButton = new JButton("OK");
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						cambiarPersona(peaton);
+						setPersona(peaton);
 						setVisible(false);
 					}
 				});
@@ -794,36 +795,35 @@ public class AgregarPeaton extends JDialog implements InsertarValores{
 		}
 	}
 
-	protected void cambiarPersona(Peaton peaton) {
-		
-		peaton.setApellido(getTextApellido());
-		peaton.setNombre(getTextNombre()); 
-		peaton.setEdad(getTextEdad());
-		peaton.setNroDocumento(getTextDocumento());
-		peaton.setCelular(getTextCelular());
-		peaton.setOcupacion(getTextOcupacion());
-		peaton.setTelefono(getTextTelefono());
-		peaton.setCalle(getTextCalle());
-		peaton.setNumero(getTextNumeroDir());
-		peaton.setPiso(getTextPisoDir());
-		peaton.setDept(getTextDeptDir());
-		peaton.setLocalidad(getTextLocalidad());
-		peaton.setPartido(getTextPartido());
-		peaton.setProvincia(getTextProvincia());
-		peaton.setLesionado(getComboBoxLesionado());
-		peaton.setArt(getChckbxART());
-		peaton.setNombreArt(getTextNombreART());
-		peaton.setLugarAtencion(getTextLugarAtt());
-		peaton.setAbogado(getComboBoxAbogadoSN());
-		peaton.setNombreDr(getTextNombreDr());
-		peaton.setApellidoDr(getTextApellidoDr());
-		peaton.setDNI(DNI);
-		peaton.setAcreditacionMedica(ACMED);
-		peaton.setJustificaAcred(getTextJustificarACMED());
-	}
+//	protected void cambiarPersona(Peaton peaton) {
+//		
+//		peaton.setApellido(getTextApellido());
+//		peaton.setNombre(getTextNombre()); 
+//		peaton.setEdad(getTextEdad());
+//		peaton.setNroDocumento(getTextDocumento());
+//		peaton.setCelular(getTextCelular());
+//		peaton.setOcupacion(getTextOcupacion());
+//		peaton.setTelefono(getTextTelefono());
+//		peaton.setCalle(getTextCalle());
+//		peaton.setNumero(getTextNumeroDir());
+//		peaton.setPiso(getTextPisoDir());
+//		peaton.setDept(getTextDeptDir());
+//		peaton.setLocalidad(getTextLocalidad());
+//		peaton.setPartido(getTextPartido());
+//		peaton.setProvincia(getTextProvincia());
+//		peaton.setLesionado(getComboBoxLesionado());
+//		peaton.setArt(getChckbxART());
+//		peaton.setNombreArt(getTextNombreART());
+//		peaton.setLugarAtencion(getTextLugarAtt());
+//		peaton.setAbogado(getComboBoxAbogadoSN());
+//		peaton.setNombreDr(getTextNombreDr());
+//		peaton.setApellidoDr(getTextApellidoDr());
+//		peaton.setDNI(DNI);
+//		peaton.setAcreditacionMedica(ACMED);
+//		peaton.setJustificaAcred(getTextJustificarACMED());
+//	}
 
-	protected void setPersona() {
-		persona = new Peaton();
+	protected void setPersona(Peaton persona) {
 		
 		persona.setApellido(getTextApellido());
 		persona.setNombre(getTextNombre()); 
@@ -860,10 +860,14 @@ public class AgregarPeaton extends JDialog implements InsertarValores{
 	}
 
 	public int getTextEdad() {
+		if (textEdad.getText().isEmpty())
+			return 0;
 		return Integer.parseInt(textEdad.getText());
 	}
 
 	public int getTextDocumento() {
+		if (textDocumento.getText().isEmpty())
+			return 0;
 		return Integer.parseInt(textDocumento.getText());
 	}
 
@@ -876,18 +880,26 @@ public class AgregarPeaton extends JDialog implements InsertarValores{
 	}
 
 	public int getTextCelular() {
+		if (textCelular.getText().isEmpty())
+			return 0;
 		return Integer.parseInt(textCelular.getText());
 	}
 
 	public int getTextTelefono() {
+		if (textTelefono.getText().isEmpty())
+			return 0;
 		return Integer.parseInt(textTelefono.getText());
 	}
 
 	public int getTextNumeroDir() {
+		if (textNumeroDir.getText().isEmpty())
+			return 0;
 		return Integer.parseInt(textNumeroDir.getText());
 	}
 
 	public int getTextPisoDir() {
+		if (textPisoDir.getText().isEmpty())
+			return 0;
 		return Integer.parseInt(textPisoDir.getText()); 
 	}
 
