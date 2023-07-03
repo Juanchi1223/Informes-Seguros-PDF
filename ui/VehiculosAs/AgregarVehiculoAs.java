@@ -13,6 +13,8 @@ import javax.swing.JComboBox;
 import javax.swing.border.LineBorder;
 
 import empresa.*;
+import ui.Pasajeros.AgregarPasajero;
+import ui.Pasajeros.ModificarPasajero;
 
 import java.awt.Color;
 import java.awt.GridLayout;

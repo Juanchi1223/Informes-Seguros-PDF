@@ -20,8 +20,8 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 
 import empresa.*;
-import ui.VehiculosAs.AgregarPasajero;
-import ui.VehiculosAs.ModificarPasajero;
+import ui.Pasajeros.AgregarPasajero;
+import ui.Pasajeros.ModificarPasajero;
 
 public class ModificarVehiculoTer extends JDialog implements InsertarValores{
 

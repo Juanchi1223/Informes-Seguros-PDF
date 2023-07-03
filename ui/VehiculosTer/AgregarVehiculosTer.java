@@ -23,8 +23,8 @@ import empresa.Fotos;
 import empresa.Tripulantes;
 import empresa.VehiculoAsegurado;
 import empresa.VehiculoTercero;
-import ui.VehiculosAs.AgregarPasajero;
-import ui.VehiculosAs.ModificarPasajero;
+import ui.Pasajeros.AgregarPasajero;
+import ui.Pasajeros.ModificarPasajero;
 
 public class AgregarVehiculosTer extends JDialog {
 

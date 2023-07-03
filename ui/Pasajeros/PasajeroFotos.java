@@ -1,4 +1,4 @@
-package ui.VehiculosAs;
+package ui.Pasajeros;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;

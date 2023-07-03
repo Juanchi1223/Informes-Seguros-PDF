@@ -23,6 +23,8 @@ import empresa.Fotos;
 import empresa.InsertarValores;
 import empresa.Tripulantes;
 import empresa.VehiculoAsegurado;
+import ui.Pasajeros.AgregarPasajero;
+import ui.Pasajeros.ModificarPasajero;
 
 public class ModificarVehiculo extends JDialog implements InsertarValores {
 

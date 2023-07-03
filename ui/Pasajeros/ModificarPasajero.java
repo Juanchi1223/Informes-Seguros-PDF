@@ -1,4 +1,4 @@
-package ui.VehiculosAs;
+package ui.Pasajeros;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
@@ -6,25 +6,21 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Date;
 
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
 import javax.swing.JDialog;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 import com.toedter.calendar.JCalendar;
 
-import empresa.Peaton;
 import empresa.Tripulantes;
 
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JComboBox;
-import javax.swing.JTextField;
-import javax.swing.JCheckBox;
-import javax.swing.ComboBoxModel;
-import javax.swing.DefaultComboBoxModel;
-
-public class AgregarPasajero extends JDialog {
+public class ModificarPasajero extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
 	private JTextField textFieldApellido, textEdad, textFieldDoc, textNombres, textCelular, textOcupacion, textTelefono, textCalle, textNumero;
@@ -49,7 +45,7 @@ public class AgregarPasajero extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
-	public AgregarPasajero() {
+	public ModificarPasajero(Tripulantes pasajero) {
 		setResizable(false);
 		setTitle("Tripulante de v. Asegurado");
 		setBounds(100, 100, 627, 633);
@@ -58,7 +54,7 @@ public class AgregarPasajero extends JDialog {
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
 		
-//		JLabel lblVehiculoPerte = new JLabel("Vehiculo al que pertenece:");	-> esta asi pq esta en la lista del auto
+//		JLabel lblVehiculoPerte = new JLabel("Vehiculo al que pertenece:");
 //		lblVehiculoPerte.setBounds(10, 26, 153, 14);
 //		contentPanel.add(lblVehiculoPerte);
 //		
@@ -73,6 +69,8 @@ public class AgregarPasajero extends JDialog {
 		String[] valorestipoPer = {"","Pasajero","Conductor"};
 		comboBoxTipoPer = new JComboBox();
 		comboBoxTipoPer.setModel(new DefaultComboBoxModel(valorestipoPer));
+		if (pasajero.getPersona() != null)
+			comboBoxTipoPer.setSelectedIndex(getIndex(pasajero.getPersona(), valorestipoPer));
 		comboBoxTipoPer.setBounds(144, 47, 111, 22);
 		contentPanel.add(comboBoxTipoPer);
 		
@@ -81,6 +79,8 @@ public class AgregarPasajero extends JDialog {
 		contentPanel.add(lblApellido);
 		
 		textFieldApellido = new JTextField();
+		if (pasajero.getApellido() != null)
+			textFieldApellido.setText(pasajero.getApellido());
 		textFieldApellido.setBounds(67, 73, 209, 20);
 		contentPanel.add(textFieldApellido);
 		textFieldApellido.setColumns(10);
@@ -90,6 +90,8 @@ public class AgregarPasajero extends JDialog {
 		contentPanel.add(lblEdad);
 		
 		textEdad = new JTextField();
+		if (pasajero.getEdad() != 0) 
+			textEdad.setText(Integer.toString(pasajero.getEdad()));
 		textEdad.setBounds(330, 73, 46, 20);
 		contentPanel.add(textEdad);
 		textEdad.setColumns(10);
@@ -99,6 +101,8 @@ public class AgregarPasajero extends JDialog {
 		contentPanel.add(lblDocumento);
 		
 		textFieldDoc = new JTextField();
+		if (pasajero.getNroDocumento() != 0)
+			textFieldDoc.setText(Integer.toString(pasajero.getNroDocumento()));
 		textFieldDoc.setBounds(462, 73, 141, 20);
 		contentPanel.add(textFieldDoc);
 		textFieldDoc.setColumns(10);
@@ -108,6 +112,8 @@ public class AgregarPasajero extends JDialog {
 		contentPanel.add(lblNombre);
 		
 		textNombres = new JTextField();
+		if (pasajero.getNombre() != null)
+			textNombres.setText(pasajero.getNombre());
 		textNombres.setBounds(67, 101, 207, 20);
 		contentPanel.add(textNombres);
 		textNombres.setColumns(10);
@@ -117,6 +123,8 @@ public class AgregarPasajero extends JDialog {
 		contentPanel.add(lblCelular);
 		
 		textCelular = new JTextField();
+		if (pasajero.getCelular() != 0)
+			textCelular.setText(Integer.toString(pasajero.getCelular()));
 		textCelular.setBounds(340, 101, 141, 20);
 		contentPanel.add(textCelular);
 		textCelular.setColumns(10);
@@ -126,6 +134,8 @@ public class AgregarPasajero extends JDialog {
 		contentPanel.add(lblOcupacion);
 		
 		textOcupacion = new JTextField();
+		if (pasajero.getOcupacion() != null)
+			textOcupacion.setText(pasajero.getOcupacion());
 		textOcupacion.setBounds(77, 129, 199, 20);
 		contentPanel.add(textOcupacion);
 		textOcupacion.setColumns(10);
@@ -135,6 +145,8 @@ public class AgregarPasajero extends JDialog {
 		contentPanel.add(lblTel);
 		
 		textTelefono = new JTextField();
+		if (pasajero.getTelefono() != 0)
+			textTelefono.setText(Integer.toString(pasajero.getTelefono()));
 		textTelefono.setBounds(407, 129, 196, 20);
 		contentPanel.add(textTelefono);
 		textTelefono.setColumns(10);
@@ -144,6 +156,8 @@ public class AgregarPasajero extends JDialog {
 		contentPanel.add(lblCalle);
 		
 		textCalle = new JTextField();
+		if (pasajero.getCalle() != null)
+			textCalle.setText(pasajero.getCalle());
 		textCalle.setBounds(67, 154, 209, 20);
 		contentPanel.add(textCalle);
 		textCalle.setColumns(10);
@@ -153,6 +167,8 @@ public class AgregarPasajero extends JDialog {
 		contentPanel.add(lblNumero);
 		
 		textNumero = new JTextField();
+		if (pasajero.getNumero() != 0)
+			textNumero.setText(Integer.toString(pasajero.getNumero()));
 		textNumero.setBounds(341, 154, 62, 20);
 		contentPanel.add(textNumero);
 		textNumero.setColumns(10);
@@ -162,6 +178,8 @@ public class AgregarPasajero extends JDialog {
 		contentPanel.add(lblPiso);
 		
 		textPiso = new JTextField();
+		if (pasajero.getPiso() != 0)
+			textPiso.setText(Integer.toString(pasajero.getPiso()));
 		textPiso.setBounds(444, 154, 46, 20);
 		contentPanel.add(textPiso);
 		textPiso.setColumns(10);
@@ -171,6 +189,8 @@ public class AgregarPasajero extends JDialog {
 		contentPanel.add(lblDepto);
 		
 		textDepto = new JTextField();
+		if (pasajero.getDept() != null)
+			textDepto.setText(pasajero.getDept());
 		textDepto.setBounds(547, 154, 54, 20);
 		contentPanel.add(textDepto);
 		textDepto.setColumns(10);
@@ -180,6 +200,8 @@ public class AgregarPasajero extends JDialog {
 		contentPanel.add(lblLocalidad);
 		
 		textLocalidad = new JTextField();
+		if (pasajero.getLocalidad() != null)
+			textLocalidad.setText(pasajero.getLocalidad());
 		textLocalidad.setBounds(71, 179, 129, 20);
 		contentPanel.add(textLocalidad);
 		textLocalidad.setColumns(10);
@@ -189,15 +211,19 @@ public class AgregarPasajero extends JDialog {
 		contentPanel.add(lblPartido);
 		
 		textPartido = new JTextField();
+		if (pasajero.getPartido() != null)
+			textPartido.setText(pasajero.getPartido());
 		textPartido.setBounds(262, 179, 135, 20);
 		contentPanel.add(textPartido);
-		textPartido.setColumns(10);
+		textPartido.setColumns(10); 
 		
 		JLabel lblProvincia = new JLabel("Provincia");
 		lblProvincia.setBounds(400, 182, 59, 14);
 		contentPanel.add(lblProvincia);
 		
 		textProvincia = new JTextField();
+		if (pasajero.getProvincia() != null)
+			textProvincia.setText(pasajero.getProvincia());
 		textProvincia.setBounds(466, 179, 135, 20);
 		contentPanel.add(textProvincia);
 		textProvincia.setColumns(10);
@@ -207,6 +233,8 @@ public class AgregarPasajero extends JDialog {
 		contentPanel.add(lblLicenciaDeConducir);
 		
 		textLicConducir = new JTextField();
+		if (pasajero.getLicencia() != null)
+			textLicConducir.setText(pasajero.getLicencia());
 		textLicConducir.setBounds(133, 204, 121, 20);
 		contentPanel.add(textLicConducir);
 		textLicConducir.setColumns(10);
@@ -216,6 +244,8 @@ public class AgregarPasajero extends JDialog {
 		contentPanel.add(lblEmisora);
 		
 		textAutoridadEm = new JTextField();
+		if (pasajero.getAutoridadEmisora() != null)
+			textAutoridadEm.setText(pasajero.getAutoridadEmisora());
 		textAutoridadEm.setBounds(385, 205, 111, 20);
 		contentPanel.add(textAutoridadEm);
 		textAutoridadEm.setColumns(10);
@@ -225,6 +255,8 @@ public class AgregarPasajero extends JDialog {
 		contentPanel.add(lblVigencia);
 		
 		calendarioVigenciaIni = new JCalendar();
+		if (pasajero.getVigenciaIni() != null)
+			calendarioVigenciaIni.setDate(pasajero.getVigenciaIni());
 		calendarioVigenciaIni.setBounds(44, 251, 200, 153);
 		contentPanel.add(calendarioVigenciaIni);
 		
@@ -233,6 +265,8 @@ public class AgregarPasajero extends JDialog {
 		contentPanel.add(lblVigenciaFin);
 		
 		calendarioVigenciaFin = new JCalendar();
+		if (pasajero.getVigenciaFin() != null)
+			calendarioVigenciaFin.setDate(pasajero.getVigenciaFin());
 		calendarioVigenciaFin.setBounds(290, 251, 200, 153);
 		contentPanel.add(calendarioVigenciaFin);
 		
@@ -241,12 +275,18 @@ public class AgregarPasajero extends JDialog {
 		contentPanel.add(lblLesionado);
 		
 		String[] valoresLes = {"", "No", "Leve", "Media", "Grave", "Muerte"};
-		comboBoxLesionado = new JComboBox();
+		comboBoxLesionado = new JComboBox();		
+		if (!pasajero.getLesionado().isEmpty())
+			comboBoxLesionado.setSelectedIndex(getIndex(pasajero.getLesionado(), valoresLes));
 		comboBoxLesionado.setBounds(77, 411, 91, 22);
 		comboBoxLesionado.setModel(new DefaultComboBoxModel(valoresLes));
 		contentPanel.add(comboBoxLesionado);
 		
 		chckbxART = new JCheckBox("ART");
+		if (pasajero.getArt() != null){		// cambiar a la implementacion de Insertar Valores
+			boolean x = (pasajero.getArt() == "Si")? true : false;
+			chckbxART.setSelected(x);
+		}
 		chckbxART.setBounds(178, 411, 52, 23);
 		contentPanel.add(chckbxART);
 		
@@ -255,6 +295,8 @@ public class AgregarPasajero extends JDialog {
 		contentPanel.add(lblNNombre);
 		
 		textNombreLes = new JTextField();
+		if (pasajero.getNombreArt() != null)
+			textNombreLes.setText(pasajero.getNombreArt());
 		textNombreLes.setBounds(275, 412, 109, 20);
 		contentPanel.add(textNombreLes);
 		textNombreLes.setColumns(10);
@@ -264,6 +306,8 @@ public class AgregarPasajero extends JDialog {
 		contentPanel.add(lblLugarDeAtt);
 		
 		textLugarAtt = new JTextField();
+		if (pasajero.getLugarAtencion() != null)
+			textLugarAtt.setText(pasajero.getLugarAtencion());
 		textLugarAtt.setBounds(500, 412, 103, 20);
 		contentPanel.add(textLugarAtt);
 		textLugarAtt.setColumns(10);
@@ -275,6 +319,8 @@ public class AgregarPasajero extends JDialog {
 		String[] valoresAlch = {"","No","Si Positivo","Si Negativo","Se nego","Si sin resultados"};
 		comboBoxAlcholemia = new JComboBox();
 		comboBoxAlcholemia.setModel(new DefaultComboBoxModel(valoresAlch));
+		if (pasajero.getAlcoholemia() != null)
+			comboBoxAlcholemia.setSelectedIndex(getIndex(pasajero.getAlcoholemia(), valoresAlch));
 		comboBoxAlcholemia.setBounds(84, 441, 139, 22);
 		contentPanel.add(comboBoxAlcholemia);
 		
@@ -285,6 +331,8 @@ public class AgregarPasajero extends JDialog {
 		String[] valSiNo = {"","Si","No"};
 		comboBoxPropAs = new JComboBox();
 		comboBoxPropAs.setModel(new DefaultComboBoxModel(valSiNo));
+		if (pasajero.getPropioAsegurado() != null)
+			comboBoxPropAs.setSelectedIndex(getIndex(pasajero.getPropioAsegurado(), valSiNo));
 		comboBoxPropAs.setBounds(442, 440, 54, 22);
 		contentPanel.add(comboBoxPropAs);
 		
@@ -295,6 +343,8 @@ public class AgregarPasajero extends JDialog {
 		String[] valRel = {"","Abuelo/a","Cuñado/a","Hermano/a", "Hijo/a", "Madre", "Nieto/a", "Nuera", "Padre", "Sobrino/a", "Suegro/a", "Tio/a", "Yerno", "Otro"};
 		comboBoxRelacion = new JComboBox();
 		comboBoxRelacion.setModel(new DefaultComboBoxModel(valRel));
+		if (pasajero.getRelacion() != null)
+			comboBoxRelacion.setSelectedIndex(getIndex(pasajero.getRelacion(), valRel));
 		comboBoxRelacion.setBounds(404, 470, 142, 22);
 		contentPanel.add(comboBoxRelacion);
 		
@@ -303,6 +353,8 @@ public class AgregarPasajero extends JDialog {
 		contentPanel.add(lblDescAs);
 		
 		textDesAs = new JTextField();
+		if (pasajero.getCual() != null)
+			textDesAs.setText(pasajero.getCual());
 		textDesAs.setBounds(77, 473, 134, 20);
 		contentPanel.add(textDesAs);
 		textDesAs.setColumns(10);
@@ -314,6 +366,8 @@ public class AgregarPasajero extends JDialog {
 		String[] valAbogado = {"","No","Patroncinante","Aporedado"};
 		comboBoxAbogado = new JComboBox();
 		comboBoxAbogado.setModel(new DefaultComboBoxModel(valAbogado));
+		if (pasajero.getAbogado() != null)
+			comboBoxAbogado.setSelectedIndex(getIndex(pasajero.getAbogado(), valAbogado));
 		comboBoxAbogado.setBounds(77, 500, 168, 22);
 		contentPanel.add(comboBoxAbogado);
 		
@@ -322,6 +376,8 @@ public class AgregarPasajero extends JDialog {
 		contentPanel.add(lblApellidoDr);
 		
 		textNombreDr = new JTextField();
+		if (pasajero.getNombreDr() != null)
+			textNombreDr.setText(pasajero.getNombreDr());
 		textNombreDr.setBounds(77, 530, 164, 20);
 		contentPanel.add(textNombreDr);
 		textNombreDr.setColumns(10);
@@ -331,6 +387,8 @@ public class AgregarPasajero extends JDialog {
 		contentPanel.add(lblNombreDr);
 		
 		textAppDr = new JTextField();
+		if (pasajero.getApellidoDr() != null)
+			textAppDr.setText(pasajero.getApellidoDr());
 		textAppDr.setBounds(340, 530, 139, 20);
 		contentPanel.add(textAppDr);
 		textAppDr.setColumns(10);
@@ -343,16 +401,12 @@ public class AgregarPasajero extends JDialog {
 				okButton.setActionCommand("OK");
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						String apellido = getApellido();
-						String nombre = getApellido();
-						if (!apellido.isBlank() && !nombre.isBlank()) {	
-						
 						PasajeroFotos subventana = new PasajeroFotos();
 						subventana.setModal(true);
 						subventana.setVisible(true);
 						setVisible(false);
 						
-						//persona.setVehicPertenece(comboBoxVehiculo.getSelectedItem().toString()); -> esta asi pq se supone que ya esta ingresado en la lista del auto		
+						//persona.setVehicPertenece(comboBoxVehiculo.getSelectedItem().toString());
 						persona.setPersona(getTipoPer());
 						persona.setApellido(getApellido());
 						persona.setEdad(getEdad());
@@ -385,12 +439,7 @@ public class AgregarPasajero extends JDialog {
 						persona.setApellidoDr(getAppldoDr());
 						persona.setDNI(subventana.getDni());
 						persona.setLicenciaFoto(subventana.getLicencia());
-						persona.setAcreditacionMedica(subventana.getAcredMed());		
-						}
-						else {
-							JOptionPane.showMessageDialog(null, "Error: se nesecita el nombre y apellido para guardar a la persona", "ERROR", JOptionPane.WARNING_MESSAGE);
-							setVisible(false);
-						}
+						persona.setAcreditacionMedica(subventana.getAcredMed());
 					}
 				});
 				buttonPane.add(okButton);
@@ -409,6 +458,18 @@ public class AgregarPasajero extends JDialog {
 		}
 	}
 
+	private int getIndex(String valor, String[] x) {
+		int cont = 0;
+		
+		for(String i : x) {
+			if (i.equalsIgnoreCase(valor)) 
+				break;
+			cont++;
+		}
+		
+		return cont;
+	}
+	
 	private String getTipoPer() {
 		return comboBoxTipoPer.getSelectedItem().toString();
 	}
@@ -511,8 +572,9 @@ public class AgregarPasajero extends JDialog {
 	private String getAppldoDr() {
 		return textAppDr.getText();
 	}
-	
+
 	public Tripulantes getPersona() {
 		return persona;
 	}
 }
+
