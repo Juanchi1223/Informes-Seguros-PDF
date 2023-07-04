@@ -190,10 +190,6 @@ public class Home extends JFrame {
 		JButton btnPrntResumen = new JButton("Imprimir Res");
 		btnPrntResumen.setBounds(336, 485, 89, 32);
 		contentPane.add(btnPrntResumen);
-		
-		JButton btnGuardar = new JButton("Guarda como");
-		btnGuardar.setBounds(625, 473, 109, 23);
-		contentPane.add(btnGuardar);
 	}
 	protected void abrirPeaton() {
 		Peatones lista = contrato.getPeatones();
