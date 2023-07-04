@@ -526,12 +526,12 @@ public class ModificarVehiculoTer extends JDialog implements InsertarValores{
 		return textDominio.getText();
 	}
 	
-	public int getTextNumChasis() {
-		return Integer.parseInt(textNumChasis.getText());
+	public String getTextNumChasis() {
+		return textNumChasis.getText();
 	}
 	
-	public int getTextNumMotor() {
-		return Integer.parseInt(textNumMotor.getText());
+	public String getTextNumMotor() {
+		return textNumMotor.getText();
 	}
 	
 	public String getTextJustificarDcs() {

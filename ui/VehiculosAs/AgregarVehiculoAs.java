@@ -471,16 +471,12 @@ public class AgregarVehiculoAs extends JDialog {
 		return textDominio.getText();
 	}
 
-	public int getTextNumChasis() {
-		if(textAño.getText().isEmpty())
-			return 0;
-		return Integer.parseInt(textNumChasis.getText());
+	public String getTextNumChasis() {
+		return textNumChasis.getText();
 	}
 
-	public int getTextNumMotor() {
-		if(textAño.getText().isEmpty())
-			return 0;
-		return Integer.parseInt(textNumMotor.getText());
+	public String getTextNumMotor() {
+		return textNumMotor.getText();
 	}
 
 	public String getTextJustificarDcs() {

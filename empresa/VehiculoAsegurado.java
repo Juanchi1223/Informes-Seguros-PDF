@@ -12,8 +12,8 @@ public class VehiculoAsegurado implements Serializable {
 		protected String modelo;
 		protected int año;
 		protected String dominio;
-		protected int nroChasis;
-		protected int nroMotor;
+		protected String nroChasis;
+		protected String nroMotor;
 		protected String denuncia;
 		protected String documentacion;
 		protected Fotos docFotos;
@@ -47,10 +47,10 @@ public class VehiculoAsegurado implements Serializable {
 		public String getDominio() {
 			return dominio;
 		}
-		public int getNroChasis() {
+		public String getNroChasis() {
 			return nroChasis;
 		}
-		public int getNroMotor() {
+		public String getNroMotor() {
 			return nroMotor;
 		}
 		public String getDenuncia() {
@@ -99,10 +99,10 @@ public class VehiculoAsegurado implements Serializable {
 		public void setDominio(String dominio) {
 			this.dominio = dominio;
 		}
-		public void setNroChasis(int nroChasis) {
+		public void setNroChasis(String nroChasis) {
 			this.nroChasis = nroChasis;
 		}
-		public void setNroMotor(int nroMotor) {
+		public void setNroMotor(String nroMotor) {
 			this.nroMotor = nroMotor;
 		}
 		public void setDenuncia(String denuncia) {

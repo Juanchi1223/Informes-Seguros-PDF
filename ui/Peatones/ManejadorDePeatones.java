@@ -20,23 +20,7 @@ import ui.Daños.ModificarDaño;
 public class ManejadorDePeatones extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
-
-	/**
-	 * Launch the application.
-	 */
-//	public static void main(String[] args) {
-//		try {
-//			ManejadorDePeatones dialog = new ManejadorDePeatones();
-//			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-//			dialog.setVisible(true);
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//	}
-
-	/**
-	 * Create the dialog.
-	 */
+	
 	public ManejadorDePeatones(Peatones listaPeatones) {
 
 		setBounds(100, 100, 440, 300);
@@ -65,7 +49,7 @@ public class ManejadorDePeatones extends JDialog {
 				ventana.setVisible(true);
 				
 				
-				if( !nombreVacio(ventana.getNombrePersona())) {
+				if(!ventana.getNombrePersona().isBlank()) {
 					listaPeatones.agregarPeaton(ventana.getPersona());
 					
 					list.setListData(listaPeatones.getListaPeatones().toArray());
@@ -130,11 +114,5 @@ public class ManejadorDePeatones extends JDialog {
 				buttonPane.add(cancelButton);
 			}
 		}
-	}
-
-	protected boolean nombreVacio(String nombre) {
-		if ( nombre != null && !nombre.equals(""))
-			return false;
-		return true;
 	}
 }

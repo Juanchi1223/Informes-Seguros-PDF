@@ -60,10 +60,10 @@ public class ManejoDeVehiculoAs extends JDialog {
 				ventana.setVisible(true);
 				
 				
-				if ( !propietarioVacio(ventana.getPropietarioVehiculo())) {
+				if ( !propietarioVacio(ventana.getPropietarioVehiculo())) 
 					vehiculos.agregarVehiculo(ventana.getVehiculoNuevo());
-					list.setListData(vehiculos.listaVehiculosAsegurados().toArray());
-				}				
+				
+				list.setListData(vehiculos.listaVehiculosAsegurados().toArray());				
 			}
 		});
 		btnAgregar.setBounds(49, 41, 132, 23);
@@ -76,7 +76,10 @@ public class ManejoDeVehiculoAs extends JDialog {
 				ModificarVehiculo ventana = new ModificarVehiculo(vehiculos.listaVehiculosAsegurados().get(a));
 					
 				ventana.setModal(true);
-				ventana.setVisible(true);				
+				ventana.setVisible(true);
+				
+				// ACA SE TIENE QUE ACTUALIZAR ME IMAGINO
+				
 				
 				list.setListData(vehiculos.listaVehiculosAsegurados().toArray());
 

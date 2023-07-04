@@ -29,10 +29,22 @@ public class VehiculosLesionados implements Serializable {
 			int indiceNuevo = Integer.parseInt(aux.getCodigo()) - 1; 
 			aux.setCodigo(Integer.toString(indiceNuevo));
 		}
+		if (posicion == listaVehiculosAsegurados.size()) {
+			this.codigo--;
+		}
 	}
 	
-	public void borrarVehiculoTer(int posicion) {
+	public void borrarVehiculoTer(int posicion) {	
 		this.listaVehiculosTerceros.remove(posicion);
+		for(int i = posicion; i < listaVehiculosTerceros.size(); i++ ) {
+			VehiculoTercero aux = listaVehiculosTerceros.get(i);
+			int indiceNuevo = Integer.parseInt(aux.getCodigo()) - 1; 
+			aux.setCodigo(Integer.toString(indiceNuevo));
+		}
+		if (posicion == listaVehiculosTerceros.size()) {
+			this.codigo--;
+		}
+		
 	}
 	
 	public ArrayList<VehiculoAsegurado> listaVehiculosAsegurados() {
