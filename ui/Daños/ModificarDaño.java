@@ -128,43 +128,78 @@ public class ModificarDaño extends JDialog {
 		FtsDoc = daño.getFotosDoc();
 		Fts = daño.getFotosDaño();
 		
+		JPanel panelDoc1 = new JPanel();
+		panelDoc1.setBorder(new LineBorder(new Color(0, 0, 0)));
+		panelDoc1.setBounds(27, 129, 122, 122);
+		contentPanel.add(panelDoc1);
+		panelDoc1.setLayout(new BorderLayout(0, 0));
+		
 		JLabel lblDoc1 = new JLabel("");
+		panelDoc1.add(lblDoc1);
 		lblDoc1.setForeground(Color.WHITE);
 		lblDoc1.setBounds(27, 151, 122, 122);
 		FtsDoc.setFotoAdj(0, lblDoc1);
-		contentPanel.add(lblDoc1);
+
+		JPanel panelDoc2 = new JPanel();
+		panelDoc2.setBorder(new LineBorder(new Color(0, 0, 0)));
+		panelDoc2.setBounds(225, 129, 122, 122);
+		contentPanel.add(panelDoc2);
+		panelDoc2.setLayout(new BorderLayout(0, 0));
 		
 		JLabel lblDoc2 = new JLabel("");
+		panelDoc2.add(lblDoc2, BorderLayout.CENTER);
 		lblDoc2.setForeground(Color.WHITE);
 		lblDoc2.setBounds(225, 151, 122, 122);
 		FtsDoc.setFotoAdj(1, lblDoc2);
-		contentPanel.add(lblDoc2);
+		
+		JPanel panelFoto1 = new JPanel();
+		panelFoto1.setBorder(new LineBorder(new Color(0, 0, 0)));
+		panelFoto1.setBounds(27, 310, 122, 122);
+		contentPanel.add(panelFoto1);
+		panelFoto1.setLayout(new BorderLayout(0, 0));
 		
 		JLabel lblFoto1 = new JLabel("");
+		panelFoto1.add(lblFoto1);
 		lblFoto1.setForeground(Color.WHITE);
 		lblFoto1.setBounds(27, 310, 122, 122);
 		Fts.setFotoAdj(0, lblFoto1);
-		contentPanel.add(lblFoto1);
+		
+		JPanel panelFoto2 = new JPanel();
+		panelFoto2.setBorder(new LineBorder(new Color(0, 0, 0)));
+		panelFoto2.setBounds(238, 310, 122, 122);
+		contentPanel.add(panelFoto2);
+		panelFoto2.setLayout(new BorderLayout(0, 0));
 		
 		JLabel lblFoto2 = new JLabel("");
+		panelFoto2.add(lblFoto2, BorderLayout.CENTER);
 		lblFoto2.setForeground(Color.WHITE);
 		lblFoto2.setBounds(238, 310, 122, 122);
 		Fts.setFotoAdj(1, lblFoto2);
-		contentPanel.add(lblFoto2);
+		
+		JPanel panelFoto3 = new JPanel();
+		panelFoto3.setBorder(new LineBorder(new Color(0, 0, 0)));
+		panelFoto3.setBounds(27, 439, 122, 122);
+		contentPanel.add(panelFoto3);
+		panelFoto3.setLayout(new BorderLayout(0, 0));
 		
 		JLabel lblFoto3 = new JLabel("");
+		panelFoto3.add(lblFoto3);
 		lblFoto3.setBackground(SystemColor.menu);
 		lblFoto3.setForeground(Color.WHITE);
 		lblFoto3.setBounds(27, 439, 122, 122);
 		Fts.setFotoAdj(2, lblFoto3);
-		contentPanel.add(lblFoto3);
+		
+		JPanel panelFoto4 = new JPanel();
+		panelFoto4.setBorder(new LineBorder(new Color(0, 0, 0)));
+		panelFoto4.setBounds(238, 443, 122, 122);
+		contentPanel.add(panelFoto4);
+		panelFoto4.setLayout(new BorderLayout(0, 0));
 		
 		JLabel lblFoto4 = new JLabel("");
+		panelFoto4.add(lblFoto4);
 		lblFoto4.setForeground(Color.WHITE);
 		lblFoto4.setBounds(238, 443, 122, 122);
 		Fts.setFotoAdj(3, lblFoto4);
-		contentPanel.add(lblFoto4);
-		
 		
 		JButton btnAdjDoc1 = new JButton("btnAdjDoc1");
 		btnAdjDoc1.addActionListener(new ActionListener() {

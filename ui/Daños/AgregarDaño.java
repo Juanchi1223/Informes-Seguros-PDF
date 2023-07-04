@@ -69,6 +69,7 @@ public class AgregarDaño extends JDialog {
 	 */
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public AgregarDaño() {
+		setResizable(false);
 		setBounds(100, 100, 533, 680);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -76,81 +77,110 @@ public class AgregarDaño extends JDialog {
 		contentPanel.setLayout(null);
 		
 		JLabel lblPropietario = new JLabel("Propietario o Titular");
-		lblPropietario.setBounds(27, 36, 122, 14);
+		lblPropietario.setBounds(27, 14, 122, 14);
 		contentPanel.add(lblPropietario);
 		
 		textProp = new JTextField();
-		textProp.setBounds(148, 33, 291, 20);
+		textProp.setBounds(148, 11, 291, 20);
 		contentPanel.add(textProp);
 		textProp.setColumns(10);
 		
 		JLabel lblSeguro = new JLabel("¿Tiene algun tipo de seguro?");
-		lblSeguro.setBounds(27, 61, 168, 14);
+		lblSeguro.setBounds(27, 39, 168, 14);
 		contentPanel.add(lblSeguro);
 		
 		SeguroSiNo = new JComboBox();
 		SeguroSiNo.setModel(new DefaultComboBoxModel(valoresSN));
-		SeguroSiNo.setBounds(196, 57, 44, 22);
+		SeguroSiNo.setBounds(196, 35, 44, 22);
 		contentPanel.add(SeguroSiNo);
 		
 		JLabel lblCual = new JLabel("¿Cual?");
-		lblCual.setBounds(250, 61, 46, 14);
+		lblCual.setBounds(250, 39, 46, 14);
 		contentPanel.add(lblCual);
 		
 		textSeguro = new JTextField();
-		textSeguro.setBounds(297, 58, 142, 20);
+		textSeguro.setBounds(297, 36, 142, 20);
 		contentPanel.add(textSeguro);
 		textSeguro.setColumns(10);
 		
 		JLabel lblDenuncia = new JLabel("¿Realizo la denuncia?");
-		lblDenuncia.setBounds(27, 90, 160, 14);
+		lblDenuncia.setBounds(27, 68, 160, 14);
 		contentPanel.add(lblDenuncia);
 		
 		DenunciaSiNo = new JComboBox();
 		DenunciaSiNo.setModel(new DefaultComboBoxModel(valoresSN));
-		DenunciaSiNo.setBounds(171, 86, 44, 22);
+		DenunciaSiNo.setBounds(171, 64, 44, 22);
 		contentPanel.add(DenunciaSiNo);
 		
 		JLabel lblAdjDoc = new JLabel("¿Adjunta la documentacion?");
-		lblAdjDoc.setBounds(225, 90, 168, 14);
+		lblAdjDoc.setBounds(225, 68, 168, 14);
 		contentPanel.add(lblAdjDoc);
 		
 		AdjDocSiNo = new JComboBox();
 		AdjDocSiNo.setModel(new DefaultComboBoxModel(valoresSN));
-		AdjDocSiNo.setBounds(395, 86, 44, 22);
+		AdjDocSiNo.setBounds(395, 64, 44, 22);
 		contentPanel.add(AdjDocSiNo);
 		
+		JPanel panelDoc1 = new JPanel();
+		panelDoc1.setBorder(new LineBorder(new Color(0, 0, 0)));
+		panelDoc1.setBounds(27, 129, 122, 122);
+		contentPanel.add(panelDoc1);
+		panelDoc1.setLayout(new BorderLayout(0, 0));
+		
 		JLabel lblDoc1 = new JLabel("");
+		panelDoc1.add(lblDoc1);
 		lblDoc1.setForeground(Color.WHITE);
-		lblDoc1.setBounds(27, 151, 122, 122);
-		contentPanel.add(lblDoc1);
+		
+		JPanel panelDoc2 = new JPanel();
+		panelDoc2.setBorder(new LineBorder(new Color(0, 0, 0)));
+		panelDoc2.setBounds(225, 129, 122, 122);
+		contentPanel.add(panelDoc2);
+		panelDoc2.setLayout(new BorderLayout(0, 0));
 		
 		JLabel lblDoc2 = new JLabel("");
+		panelDoc2.add(lblDoc2, BorderLayout.CENTER);
 		lblDoc2.setForeground(Color.WHITE);
-		lblDoc2.setBounds(225, 151, 122, 122);
-		contentPanel.add(lblDoc2);
+		
+		JPanel panelFoto1 = new JPanel();
+		panelFoto1.setBorder(new LineBorder(new Color(0, 0, 0)));
+		panelFoto1.setBounds(27, 310, 122, 122);
+		contentPanel.add(panelFoto1);
+		panelFoto1.setLayout(new BorderLayout(0, 0));
 		
 		JLabel lblFoto1 = new JLabel("");
+		panelFoto1.add(lblFoto1);
 		lblFoto1.setForeground(Color.WHITE);
-		lblFoto1.setBounds(27, 310, 122, 122);
-		contentPanel.add(lblFoto1);
+		
+		JPanel panelFoto2 = new JPanel();
+		panelFoto2.setBorder(new LineBorder(new Color(0, 0, 0)));
+		panelFoto2.setBounds(238, 310, 122, 122);
+		contentPanel.add(panelFoto2);
+		panelFoto2.setLayout(new BorderLayout(0, 0));
 		
 		JLabel lblFoto2 = new JLabel("");
+		panelFoto2.add(lblFoto2, BorderLayout.CENTER);
 		lblFoto2.setForeground(Color.WHITE);
-		lblFoto2.setBounds(238, 310, 122, 122);
-		contentPanel.add(lblFoto2);
+		
+		JPanel panelFoto3 = new JPanel();
+		panelFoto3.setBorder(new LineBorder(new Color(0, 0, 0)));
+		panelFoto3.setBounds(27, 439, 122, 122);
+		contentPanel.add(panelFoto3);
+		panelFoto3.setLayout(new BorderLayout(0, 0));
 		
 		JLabel lblFoto3 = new JLabel("");
+		panelFoto3.add(lblFoto3);
 		lblFoto3.setBackground(SystemColor.menu);
 		lblFoto3.setForeground(Color.WHITE);
-		lblFoto3.setBounds(27, 439, 122, 122);
-		contentPanel.add(lblFoto3);
+		
+		JPanel panelFoto4 = new JPanel();
+		panelFoto4.setBorder(new LineBorder(new Color(0, 0, 0)));
+		panelFoto4.setBounds(238, 443, 122, 122);
+		contentPanel.add(panelFoto4);
+		panelFoto4.setLayout(new BorderLayout(0, 0));
 		
 		JLabel lblFoto4 = new JLabel("");
+		panelFoto4.add(lblFoto4);
 		lblFoto4.setForeground(Color.WHITE);
-		lblFoto4.setBounds(238, 443, 122, 122);
-		contentPanel.add(lblFoto4);
-		
 		
 		JButton btnAdjDoc1 = new JButton("btnAdjDoc1");
 		btnAdjDoc1.addActionListener(new ActionListener() {
@@ -159,7 +189,7 @@ public class AgregarDaño extends JDialog {
 				FtsDoc.agregarFoto(0, ruta);
 			}
 		});
-		btnAdjDoc1.setBounds(159, 151, 36, 23);
+		btnAdjDoc1.setBounds(159, 129, 36, 23);
 		contentPanel.add(btnAdjDoc1);
 		
 		JButton btnAdjDoc2 = new JButton("btnAdjDoc2");
@@ -169,7 +199,7 @@ public class AgregarDaño extends JDialog {
 				FtsDoc.agregarFoto(0, ruta);
 			}
 		});
-		btnAdjDoc2.setBounds(370, 146, 36, 23);
+		btnAdjDoc2.setBounds(370, 124, 36, 23);
 		contentPanel.add(btnAdjDoc2);
 		
 		JButton btnAdjFt1 = new JButton("btnAdjFt1");
@@ -213,11 +243,11 @@ public class AgregarDaño extends JDialog {
 		contentPanel.add(btnAdjFt4);
 		
 		JLabel lblJstDoc = new JLabel("Justificar Documentacion");
-		lblJstDoc.setBounds(27, 285, 160, 14);
+		lblJstDoc.setBounds(27, 263, 160, 14);
 		contentPanel.add(lblJstDoc);
 		
 		textJstDoc = new JTextField();
-		textJstDoc.setBounds(196, 282, 291, 20);
+		textJstDoc.setBounds(196, 260, 291, 20);
 		contentPanel.add(textJstDoc);
 		textJstDoc.setColumns(10);
 		
@@ -229,6 +259,16 @@ public class AgregarDaño extends JDialog {
 		textJstFoto.setColumns(10);
 		textJstFoto.setBounds(196, 576, 291, 20);
 		contentPanel.add(textJstFoto);
+		
+		
+		
+		JLabel lblDoc = new JLabel("Documentacion:");
+		lblDoc.setBounds(27, 104, 102, 14);
+		contentPanel.add(lblDoc);
+		
+		JLabel lblFotos = new JLabel("Fotos:");
+		lblFotos.setBounds(29, 287, 46, 14);
+		contentPanel.add(lblFotos);
 		
 		{
 			JPanel buttonPane = new JPanel();
