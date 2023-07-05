@@ -1,4 +1,4 @@
-package ui;
+package ui.InformacionSiniestro;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;

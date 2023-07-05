@@ -26,6 +26,7 @@ import java.awt.event.ActionEvent;
 
 import empresa.*;
 import ui.Daños.ManejoDeDaños;
+import ui.InformacionSiniestro.InforSini;
 import ui.Peatones.ManejadorDePeatones;
 import ui.VehiculosAs.ManejoDeVehiculoAs;
 import ui.VehiculosTer.ManejoDeVehiculoTer;
