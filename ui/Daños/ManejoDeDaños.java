@@ -11,6 +11,7 @@ import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JList;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -67,39 +68,48 @@ public class ManejoDeDaños extends JDialog {
 				}
 			}
 		});
-		btnAgregar.setBounds(49, 41, 106, 23);
+		btnAgregar.setBounds(49, 41, 120, 23);
 		contentPanel.add(btnAgregar);
 		
 		JButton btnModificar = new JButton("Modificar Daño");
 		btnModificar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int a = list.getSelectedIndex();
-				
-				Daño aux = daños.getListaDeDaños().get(a);
-				
-				ModificarDaño ventana = new ModificarDaño(aux);
-				
-				ventana.setModal(true);
-				ventana.setVisible(true);				
-				
+				try {
+					Daño aux = daños.getListaDeDaños().get(a);
+					
+					ModificarDaño ventana = new ModificarDaño(aux);
+					
+					ventana.setModal(true);
+					ventana.setVisible(true);
+				}
+				catch(IndexOutOfBoundsException error) {
+					;	// no pasa nada si no se seleciona nada
+				}
+
 				list.setListData(daños.getListaDeDaños().toArray());
 
 			}
 		});
-		btnModificar.setBounds(49, 100, 106, 23);
+		btnModificar.setBounds(49, 100, 120, 23);
 		contentPanel.add(btnModificar);
 		
 		JButton btnEliminar = new JButton("Eliminar Daño");
 		btnEliminar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int x = list.getSelectedIndex();				
-				
-				daños.borrarDaño(x);
+				try {
+					daños.borrarDaño(x);
+					
+				}
+				catch(IndexOutOfBoundsException error) {
+					;	// no pasa nada si no se seleciona nada
+				}
 				
 				list.setListData(daños.getListaDeDaños().toArray());
 			}
 		});
-		btnEliminar.setBounds(49, 156, 106, 23);
+		btnEliminar.setBounds(49, 156, 120, 23);
 		contentPanel.add(btnEliminar);
 		{
 			JPanel buttonPane = new JPanel();
