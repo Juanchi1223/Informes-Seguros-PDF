@@ -75,11 +75,17 @@ public class ManejoDeVehiculoTer extends JDialog {
 		btnModificar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int a = list.getSelectedIndex();
-				ModificarVehiculoTer ventana = new ModificarVehiculoTer(vehiculos.getListaVehiculosTerceros().get(a));
+				
+				try {
+					ModificarVehiculoTer ventana = new ModificarVehiculoTer(vehiculos.getListaVehiculosTerceros().get(a));
 					
-				ventana.setModal(true);
-				ventana.setVisible(true);				
-
+					ventana.setModal(true);
+					ventana.setVisible(true);
+				}
+				catch(IndexOutOfBoundsException error) {
+					;	// no pasa nada si no se seleciona nada
+				}
+				
 				list.setListData(vehiculos.getListaVehiculosTerceros().toArray());
 
 			}
@@ -90,9 +96,15 @@ public class ManejoDeVehiculoTer extends JDialog {
 		JButton btnEliminar = new JButton("Eliminar Vehiculo");
 		btnEliminar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				int x = list.getSelectedIndex();						
-				vehiculos.borrarVehiculoTer(x);
-
+				int x = list.getSelectedIndex();
+				
+				try {
+					vehiculos.borrarVehiculoTer(x);
+				}
+				catch(IndexOutOfBoundsException error) {
+					;	// no pasa nada si no se seleciona nada
+				}
+				
 				list.setListData(vehiculos.getListaVehiculosTerceros().toArray());
 			}
 		});

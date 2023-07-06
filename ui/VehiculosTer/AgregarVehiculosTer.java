@@ -463,7 +463,7 @@ public class AgregarVehiculosTer extends JDialog {
 		vehiculoNuevo.setSeguro(getSeguro());
 		vehiculoNuevo.setDescSeguro(getNomSeguro());
 	}
-	public String getTextCodVeh() {
+	public String getTextCodVeh() {			// TODO arreglar los int s para q retornen 0 si no estan completos
 		return textCodVeh.getText();
 	}
 
