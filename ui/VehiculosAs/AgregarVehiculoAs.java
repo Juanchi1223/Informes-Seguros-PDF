@@ -77,7 +77,7 @@ public class AgregarVehiculoAs extends JDialog {
 		textCodVeh.setColumns(10);
 		
 		comboBoxDaños = new JComboBox();
-		String[] valorSiNo = {"","Si","No"};
+		String[] valorSiNo = {"","Si","No"}; 
 		comboBoxDaños.setModel(new DefaultComboBoxModel(valorSiNo));
 		comboBoxDaños.setBounds(160, 15, 64, 22);
 		contentPanel.add(comboBoxDaños);
