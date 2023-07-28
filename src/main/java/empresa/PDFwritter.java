@@ -2,21 +2,30 @@ package empresa;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 
 import com.itextpdf.kernel.pdf.PdfDocument;
+import com.itextpdf.kernel.pdf.PdfPage;
 import com.itextpdf.kernel.pdf.PdfReader;
 import com.itextpdf.kernel.pdf.PdfWriter;
+import com.itextpdf.kernel.pdf.canvas.PdfCanvas;
+import com.itextpdf.layout.Document;
+import com.itextpdf.layout.element.Image;
 import com.itextpdf.forms.PdfAcroForm;
 import com.itextpdf.forms.fields.PdfFormField;
+import com.itextpdf.io.image.ImageData;
+import com.itextpdf.io.image.ImageDataFactory;
 
 public class PDFwritter {
 	DateFormat df;
 	PdfDocument documento;
-
+	Document doc;
+	
 	public PDFwritter(int sini) {
 		df = new SimpleDateFormat("dd/MM/yyy");	
 		String ruta = "src//main//java//src//contrato_template//Contrato4.0_Rellenable.pdf";
@@ -77,7 +86,31 @@ public class PDFwritter {
 		}
 	}
 
-	public void foto(String x) { // contrato.getFotosLugar().getRutas().get(0) TODO SEGUIR FOTOS
+	public void foto(ArrayList<String> fotos) { // contrato.getFotosLugar().getRutas().get(0) TODO SEGUIR FOTOS
+		String foto1 = fotos.get(0);
+		doc = new Document(documento);
+		try {
+			ImageData imgData1 = ImageDataFactory.create(foto1);
+			
+            PdfPage Page = documento.getPage(1);
+
+			float x = 38.267716535433f;
+			float y = 324.19842519685f;
+			
+			float w = 121.63464566929f;
+			float h = 126.05669291339f;
+
+            Image image = new Image(imgData1).scaleToFit(w, h);
+            
+            PdfCanvas canvas = new PdfCanvas(Page);
+            
+            canvas.addImage(imgData1, x, y, false);
+            
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+		}
+		
+		
 		
 		
 	}
@@ -162,6 +195,8 @@ public class PDFwritter {
 			
 			
 			// FALTA AGREGAR LAS FOTOS 
+			
+			foto(contrato.getFotosLugar().getRutas());
 			
 			// ARRANCA SEGUNDA PAGINA
 			
