@@ -33,6 +33,7 @@ public class PDFwritter {
 		
 		try {
 			documento = new PdfDocument(new PdfReader(ruta), new PdfWriter(output));
+			doc = new Document(documento);
 		}
 		catch (Exception e) {
 			System.out.println("NO SE PUDO ABRIR EL DOCUMENTO ");  // TODO ventaninita para el error (puede ser)
@@ -86,34 +87,22 @@ public class PDFwritter {
 		}
 	}
 
-	public void foto(ArrayList<String> fotos) { // contrato.getFotosLugar().getRutas().get(0) TODO SEGUIR FOTOS
-		String foto1 = fotos.get(0);
-		doc = new Document(documento);
-		try {
-			ImageData imgData1 = ImageDataFactory.create(foto1);
+	public void fotoPag1(String foto, float x,float y,float w,float h) { // String foto1 = fotos.get(0);
+		try 
+		{
+			ImageData imgData1 = ImageDataFactory.create(foto);
 			
             PdfPage Page = documento.getPage(1);
-
-			float x = 38.267716535433f;
-			float y = 324.19842519685f;
-			
-			float w = 121.63464566929f;
-			float h = 126.05669291339f;
-
             Image image = new Image(imgData1).scaleToFit(w, h);
             
-            PdfCanvas canvas = new PdfCanvas(Page);
-            
-            canvas.addImage(imgData1, x, y, false);
+            image.setFixedPosition(Page.getPageSize().getLeft() + x, Page.getPageSize().getTop() - y);
+            doc.add(image);
             
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
 		}
-		
-		
-		
-		
 	}
+	
 	public void insertar(InformacionSiniestro contrato) {
         PdfAcroForm acroForm = PdfAcroForm.getAcroForm(documento, true);
 
@@ -195,8 +184,15 @@ public class PDFwritter {
 			
 			
 			// FALTA AGREGAR LAS FOTOS 
+			ArrayList<String> rutas = contrato.getFotosLugar().getRutas();
 			
-			foto(contrato.getFotosLugar().getRutas());
+			// en las coordenadas el primer numero es el que da la calucalodra y el otro es el desvios que se agrega 
+			
+			fotoPag1(rutas.get(0), 38.267716535433f + 2, 324.19842519685f + 122, 121.63464566929f - 5, 126.05669291339f);
+			fotoPag1(rutas.get(1), 175.88976377953f + 2, 324.19842519685f + 122, 121.63464566929f - 5, 126.05669291339f);
+			fotoPag1(rutas.get(2), 38.267716535433f + 2, 482.11653543307f + 122, 121.63464566929f - 5, 126.05669291339f);
+			fotoPag1(rutas.get(3), 175.88976377953f + 2, 482.11653543307f + 122, 121.63464566929f - 5, 126.05669291339f);
+			fotoPag1(rutas.get(4), 338.45669291339f + 2, 327.85511811024f + 122 + 60, 189.52440944882f, 184.93228346457f - 5);
 			
 			// ARRANCA SEGUNDA PAGINA
 			
@@ -251,6 +247,11 @@ public class PDFwritter {
 		}
 	}
 	
+	public void insertar(VehiculosLesionados contrato) {
+		
+		
+	}
+
 	public void guardar(int sini) {
 		JOptionPane.showMessageDialog(null, "¡El PDF se creo!", "Confirmacion", JOptionPane.INFORMATION_MESSAGE);
 		documento.close();
