@@ -248,7 +248,66 @@ public class PDFwritter {
 	}
 	
 	public void insertar(VehiculosLesionados contrato) {
+		ArrayList<VehiculoAsegurado> asegurados = contrato.listaVehiculosAsegurados();
 		
+		for (VehiculoAsegurado i : asegurados) {
+			// metodo que complete todo (lista de paginas) y devuelve el doc para agregar
+			
+		}
+		
+	}
+	
+	public void paginasVehiculo(VehiculoAsegurado vehiculo) {
+		try 
+		{
+			PdfDocument documentoTemp = new PdfDocument(new PdfReader("src//main//java//src//contrato_template//Vehiculos_Rellenable.pdf"));
+			
+	        PdfAcroForm acroForm = PdfAcroForm.getAcroForm(documentoTemp, true);
+	        
+	        PdfFormField  fieldvehiculo = acroForm.getField("tipoVehiculo");
+	        fieldvehiculo.setValue(vehiculo.getTipo());
+			
+	        PdfFormField  fieldpropietario = acroForm.getField("propietario");
+	        fieldpropietario.setValue(vehiculo.getPropietario());
+	        
+	        PdfFormField  fieldmarca = acroForm.getField("marca");
+	        fieldmarca.setValue(vehiculo.getMarca());
+	        
+	        PdfFormField  fieldmodelo = acroForm.getField("modelo");
+	        fieldmodelo.setValue(vehiculo.getModelo());
+	        
+	        PdfFormField  fieldano = acroForm.getField("ano");
+	        fieldano.setValue(Integer.toString(vehiculo.getAño()));
+	        
+	        PdfFormField  fieldDominio = acroForm.getField("dominio");
+	        fieldDominio.setValue(vehiculo.getDominio());
+	        
+	        PdfFormField  fieldnroChasis = acroForm.getField("nroChasis");
+	        fieldnroChasis.setValue(vehiculo.getNroChasis());
+	        
+	        PdfFormField  fieldnroMotor = acroForm.getField("nroMotor");
+	        fieldnroMotor.setValue(vehiculo.getNroMotor());
+	        
+	        PdfFormField  fieldDenuncia = acroForm.getField("denuncia");
+	        fieldDenuncia.setValue(vehiculo.getDenuncia());
+	        
+	        PdfFormField  fieldDanos = acroForm.getField("danos");
+	        fieldDanos.setValue(vehiculo.getDaños());
+	        
+	        PdfFormField  fieldDoc = acroForm.getField("documentacion");
+	        fieldDoc.setValue(vehiculo.getDocumentacion());
+	        
+	        PdfFormField  fieldJustFts = acroForm.getField("justificacionFotos");
+	        fieldJustFts.setValue(vehiculo.getJustificarFotos());
+	        
+	        PdfFormField  fielJustDoc = acroForm.getField("justificacionDoc");
+	        fielJustDoc.setValue(vehiculo.getJustificarDocs());
+		
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 		
 	}
 

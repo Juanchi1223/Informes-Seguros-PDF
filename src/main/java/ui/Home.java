@@ -40,7 +40,7 @@ public class Home extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					ObjectInputStream entrada = new ObjectInputStream(new FileInputStream("src//main//java//contrato.ser"));
+					ObjectInputStream entrada = new ObjectInputStream(new FileInputStream("contrato.ser"));
 					contrato = (Contrato) entrada.readObject();
 					entrada.close();
 					
