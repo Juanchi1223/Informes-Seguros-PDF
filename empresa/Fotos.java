@@ -51,4 +51,9 @@ public class Fotos implements Serializable {
 		}	
 	}
 
+	public ArrayList<String> getRutas() {
+		return rutas;
+	}
+	
+
 }
