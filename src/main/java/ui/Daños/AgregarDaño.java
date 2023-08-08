@@ -196,7 +196,7 @@ public class AgregarDaño extends JDialog {
 		btnAdjDoc2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String ruta = FtsDoc.adjuntarArchivo(btnAdjDoc2, lblDoc2);
-				FtsDoc.agregarFoto(0, ruta);
+				FtsDoc.agregarFoto(1, ruta);
 			}
 		});
 		btnAdjDoc2.setBounds(370, 124, 36, 23);
@@ -304,7 +304,7 @@ public class AgregarDaño extends JDialog {
 		daño.setNombreSeguro(getNombreSeguro());
 		daño.setDenuncia(getDenunciaSiNo());
 		daño.setDocumentacion(getDocSino());
-		daño.setJustficarDoc(getJustDoc());
+		daño.setJustficarDoc(getJustDoc()); 
 		daño.setJustificaFoto(getJustFotos());
 		daño.setRutaFotosDoc(FtsDoc);
 		daño.setRutaFotosDaño(Fts);
@@ -315,7 +315,7 @@ public class AgregarDaño extends JDialog {
 		return textProp.getText();
 	}
 	private String getSeguroSiNo() {
-		return SeguroSiNo.getSelectedObjects().toString();
+		return SeguroSiNo.getSelectedItem().toString();
 	}
 	private String getNombreSeguro() {
 		return textSeguro.getText();

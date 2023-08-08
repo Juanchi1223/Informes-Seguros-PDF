@@ -9,6 +9,7 @@ import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 
+import com.itextpdf.kernel.geom.PageSize;
 import com.itextpdf.kernel.pdf.PdfDocument;
 import com.itextpdf.kernel.pdf.PdfPage;
 import com.itextpdf.kernel.pdf.PdfReader;
@@ -21,10 +22,14 @@ import com.itextpdf.forms.fields.PdfFormField;
 import com.itextpdf.io.image.ImageData;
 import com.itextpdf.io.image.ImageDataFactory;
 
+import org.apache.pdfbox.io.MemoryUsageSetting;
+import org.apache.pdfbox.multipdf.PDFMergerUtility;
+
 public class PDFwritter {
 	DateFormat df;
 	PdfDocument documento;
 	Document doc;
+	int sini; 
 	
 	public PDFwritter(int sini) {
 		df = new SimpleDateFormat("dd/MM/yyy");	
@@ -34,9 +39,10 @@ public class PDFwritter {
 		try {
 			documento = new PdfDocument(new PdfReader(ruta), new PdfWriter(output));
 			doc = new Document(documento);
+			this.sini = sini;
 		}
 		catch (Exception e) {
-			System.out.println("NO SE PUDO ABRIR EL DOCUMENTO ");  // TODO ventaninita para el error (puede ser)
+			System.out.println("NO SE PUDO ABRIR EL DOCUMENTO ");  // TODO ventaninita para el error (puede ser) y una barra de progreso
 			System.out.println(e);
 		}
 	}
@@ -104,6 +110,7 @@ public class PDFwritter {
 	}
 	
 	public void insertar(InformacionSiniestro contrato) {
+		
         PdfAcroForm acroForm = PdfAcroForm.getAcroForm(documento, true);
 
 		try {
@@ -247,20 +254,10 @@ public class PDFwritter {
 		}
 	}
 	
-	public void insertar(VehiculosLesionados contrato) {
-		ArrayList<VehiculoAsegurado> asegurados = contrato.listaVehiculosAsegurados();
-		
-		for (VehiculoAsegurado i : asegurados) {
-			// metodo que complete todo (lista de paginas) y devuelve el doc para agregar
-			
-		}
-		
-	}
-	
 	public void paginasVehiculo(VehiculoAsegurado vehiculo) {
 		try 
 		{
-			PdfDocument documentoTemp = new PdfDocument(new PdfReader("src//main//java//src//contrato_template//Vehiculos_Rellenable.pdf"));
+			PdfDocument documentoTemp = new PdfDocument(new PdfReader("src//main//java//src//contrato_template//Vehiculos_Rellenable.pdf"), new PdfWriter("src//main//java//src//contrato_template//Vehiculos_Temp.pdf"));
 			
 	        PdfAcroForm acroForm = PdfAcroForm.getAcroForm(documentoTemp, true);
 	        
@@ -303,7 +300,9 @@ public class PDFwritter {
 	        PdfFormField  fielJustDoc = acroForm.getField("justificacionDoc");
 	        fielJustDoc.setValue(vehiculo.getJustificarDocs());
 		
-		} catch (IOException e) {
+	        documentoTemp.close();
+		} 
+		catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -311,8 +310,71 @@ public class PDFwritter {
 		
 	}
 
-	public void guardar(int sini) {
+	public void guardar() {
 		JOptionPane.showMessageDialog(null, "¡El PDF se creo!", "Confirmacion", JOptionPane.INFORMATION_MESSAGE);
 		documento.close();
 	}
+	
+	public void unirPDFs(ArrayList<String> rutasPDF, String rutaSalida) {	// !!!! ESTE ES MEJOR
+	    try {
+	        PDFMergerUtility pdfMerger = new PDFMergerUtility();
+
+	        // Agregar los archivos PDF que deseas unir
+	        for (String rutaPDF : rutasPDF) {
+	            pdfMerger.addSource(new File(rutaPDF));
+	        }
+
+	        // Establecer el archivo PDF de salida
+	        pdfMerger.setDestinationFileName(rutaSalida);
+
+	        // Unir los archivos PDF utilizando setupTempFileOnly()
+	        pdfMerger.mergeDocuments(MemoryUsageSetting.setupTempFileOnly());
+
+	        System.out.println("Los PDFs se han unido en uno solo con éxito.");
+	    } catch (IOException e) {
+	        e.printStackTrace();
+	    }
+	}
+	
+	public void unirPDFs(String rutaPDF1, String rutaPDF2, String rutaSalida) {
+	    try {
+	        // Crear un nuevo documento PDF de salida con un PdfWriter asociado
+	        PdfDocument outputPdfDocument = new PdfDocument(new PdfWriter(rutaSalida));
+
+	        // Abrir los documentos de entrada (PDFs que deseas unir)
+	        PdfDocument inputPdfDocument1 = new PdfDocument(new PdfReader(rutaPDF1));
+	        PdfDocument inputPdfDocument2 = new PdfDocument(new PdfReader(rutaPDF2));
+
+	        // Obtener el número total de páginas de cada documento de entrada
+	        int totalPaginas1 = inputPdfDocument1.getNumberOfPages();
+	        int totalPaginas2 = inputPdfDocument2.getNumberOfPages();
+
+	        // Copiar el contenido de las páginas del primer documento al documento de salida
+	        for (int i = 1; i <= totalPaginas1; i++) {
+	            PdfPage pagina = inputPdfDocument1.getPage(i).copyTo(outputPdfDocument);
+	            outputPdfDocument.addPage(pagina);
+	        }
+
+	        // Copiar el contenido de las páginas del segundo documento al documento de salida
+	        for (int i = 1; i <= totalPaginas2; i++) {
+	            PdfPage pagina = inputPdfDocument2.getPage(i).copyTo(outputPdfDocument);
+	            outputPdfDocument.addPage(pagina);
+	        }
+
+	        // Cerrar los documentos
+	        outputPdfDocument.close();
+	        inputPdfDocument1.close();
+	        inputPdfDocument2.close();
+
+	        System.out.println("Los PDFs se han unido en uno solo con éxito.");
+	    } catch (IOException e) {
+	        e.printStackTrace();
+	    }
+	}
+	
+	private void llenarField(PdfAcroForm acroForm, String field, String value) {
+		PdfFormField  fieldvehiculo = acroForm.getField(field);
+        fieldvehiculo.setValue(value);
+	}
+	
 }

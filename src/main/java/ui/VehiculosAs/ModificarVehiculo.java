@@ -404,7 +404,7 @@ public class ModificarVehiculo extends JDialog implements InsertarValores {
 		JButton btnModPas = new JButton("Modificar");
 		btnModPas.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				int a = listPasajeros.getSelectedIndex();
+				int a = listPasajeros.getSelectedIndex();	// TODO arreglar error sponeao de Idex nose pq
 				Tripulantes tripMod = tripulantes.get(a) ;
 				
 				ModificarPasajero ventana = new ModificarPasajero(tripMod);

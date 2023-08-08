@@ -17,6 +17,8 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.awt.event.ActionEvent;
 
 import empresa.*;
@@ -280,12 +282,85 @@ public class Home extends JFrame {
 		objeto.setInterno(ventana.getInter());
 		objeto.setTelefono(ventana.getNum());
 	}
-	protected void crearPDF() {
-		PDFwritter aux = new PDFwritter(contrato.getInfoaBas().getSiniestro());
+	protected void crearPDF() {		
+		ArrayList<String> rutas = new ArrayList<String>();
 		
-		aux.insertar(contrato.getInfoaBas());
-		aux.insertar(contrato.getInfoSin());
+		PDFwriter escritor = new PDFwriter();
 		
-		aux.guardar(contrato.getInfoaBas().getSiniestro());
+		if(contrato.getInfoaBas().getSiniestro() == 0) {
+			System.out.println("Falta contenido para hacer el contrato");
+		}
+		else 
+		{
+			String a = escritor.insertar(contrato.getInfoaBas(), contrato.getInfoSin());
+			rutas.add(a);
+
+			ArrayList<VehiculoAsegurado> listaVehiculos = contrato.getVehiculos().listaVehiculosAsegurados();
+			
+			if(!listaVehiculos.isEmpty()) {
+//				for (VehiculoAsegurado i : listaVehiculos) {
+//					a = escritor.insertar(i);
+//					rutas.add(a);
+//				}
+//				
+				for (int i = 0; i < listaVehiculos.size(); i++) {
+					VehiculoAsegurado aux = listaVehiculos.get(i);
+					a = escritor.insertar(aux, i);
+					rutas.add(a);
+				}
+			}
+			
+			ArrayList<VehiculoTercero> listaVehiculosT = contrato.getVehiculos().getListaVehiculosTerceros();
+
+			if (!listaVehiculosT.isEmpty()) {
+//				for (VehiculoTercero i : listaVehiculosT) {
+//					a = escritor.insertar(i);
+//					rutas.add(a);
+//				}
+				
+				for (int i = 0; i < listaVehiculosT.size(); i++) {
+					VehiculoTercero aux = listaVehiculosT.get(i);
+					a = escritor.insertar(aux, i);
+					rutas.add(a);
+				}
+			}
+			
+			ArrayList<Daño> listaDaños = contrato.getOtrosDaños().getListaDeDaños();
+			if (!listaDaños.isEmpty()) {
+//				for (Daño daño : listaDaños) {
+//					a = escritor.insertar(daño);
+//					rutas.add(a);
+//				}
+				
+				for (int i = 0; i < listaDaños.size(); i++) {
+					Daño aux = listaDaños.get(i);
+					a = escritor.insertar(aux, i);
+					rutas.add(a);
+				}
+			}
+				
+			ArrayList<Peaton> listaPeatones = contrato.getPeatones().getListaPeatones();
+			if (!listaPeatones.isEmpty()) {
+//				 for (Peaton peaton : listaPeatones) {
+//					a = escritor.insertar(peaton);
+//					rutas.add(a);
+//				}
+				
+				for (int i = 0; i < listaPeatones.size(); i++) {
+					Peaton aux = listaPeatones.get(i);
+					a = escritor.insertar(aux, i);
+					rutas.add(a);
+				}
+			}
+			
+			String ruta = "src//main//java//src//contratos//Contrato "+ contrato.getInfoaBas().getSiniestro() +".pdf";
+			
+			escritor.unirPDFs(rutas, ruta);
+			escritor.bloquearCampos(ruta);
+			
+			System.out.println("TERMINO EL PROCESO DE LA CREACION");
+		
+		}
+		
 	}
 }
