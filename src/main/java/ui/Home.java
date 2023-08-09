@@ -31,34 +31,33 @@ import java.awt.Font;
 import javax.swing.UIManager;
 import java.awt.Color;
 
-
 public class Home extends JFrame {
 
 	private JPanel contentPane;
 	private static Home frame;
 	private static Contrato contrato;
 
-	public static void main(String[] args) {	
+	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
 					ObjectInputStream entrada = new ObjectInputStream(new FileInputStream("contrato.ser"));
 					contrato = (Contrato) entrada.readObject();
 					entrada.close();
-					
+
 					frame = new Home();
 					frame.setVisible(true);
-					
+
 					frame.addWindowListener(new java.awt.event.WindowAdapter() {
-			            @Override
-			            public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+						@Override
+						public void windowClosing(java.awt.event.WindowEvent windowEvent) {
 							ObjectOutputStream salida = null;
 							try {
 								salida = new ObjectOutputStream(new FileOutputStream("contrato.ser"));
 							} catch (IOException e2) {
 								e2.printStackTrace();
 							}
-							try { 
+							try {
 								salida.writeObject(contrato);
 							} catch (IOException e1) {
 								e1.printStackTrace();
@@ -68,12 +67,10 @@ public class Home extends JFrame {
 							} catch (IOException e) {
 								e.printStackTrace();
 							}
-			                System.exit(0);
-			            }
-			        });
-					
-					
-					
+							System.exit(0);
+						}
+					});
+
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -93,7 +90,7 @@ public class Home extends JFrame {
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
+
 		JButton btnInfBasc = new JButton("Información Basica");
 		btnInfBasc.setFont(new Font("Verdana", Font.PLAIN, 11));
 		btnInfBasc.addActionListener(new ActionListener() {
@@ -103,7 +100,7 @@ public class Home extends JFrame {
 		});
 		btnInfBasc.setBounds(32, 49, 249, 53);
 		contentPane.add(btnInfBasc);
-		
+
 		JButton btnSinistro = new JButton("Información del Siniestro");
 		btnSinistro.setFont(new Font("Verdana", Font.PLAIN, 11));
 		btnSinistro.addActionListener(new ActionListener() {
@@ -111,11 +108,10 @@ public class Home extends JFrame {
 				abrirInforSini();
 			}
 
-			
 		});
 		btnSinistro.setBounds(32, 113, 249, 53);
 		contentPane.add(btnSinistro);
-		
+
 		JButton btnAsegLesio = new JButton("Vehículos Asegurados Lesionados");
 		btnAsegLesio.setFont(new Font("Verdana", Font.PLAIN, 11));
 		btnAsegLesio.addActionListener(new ActionListener() {
@@ -125,7 +121,7 @@ public class Home extends JFrame {
 		});
 		btnAsegLesio.setBounds(32, 177, 249, 53);
 		contentPane.add(btnAsegLesio);
-		
+
 		JButton btnTercLesn = new JButton("Vehículos Terceros Lesionados");
 		btnTercLesn.setFont(new Font("Verdana", Font.PLAIN, 11));
 		btnTercLesn.addActionListener(new ActionListener() {
@@ -135,7 +131,7 @@ public class Home extends JFrame {
 		});
 		btnTercLesn.setBounds(32, 241, 249, 53);
 		contentPane.add(btnTercLesn);
-		
+
 		JButton btnPeaton = new JButton("Peaton");
 		btnPeaton.setFont(new Font("Verdana", Font.PLAIN, 11));
 		btnPeaton.addActionListener(new ActionListener() {
@@ -145,7 +141,7 @@ public class Home extends JFrame {
 		});
 		btnPeaton.setBounds(32, 305, 249, 53);
 		contentPane.add(btnPeaton);
-		
+
 		JButton btnOtros = new JButton("Otros Daños");
 		btnOtros.setFont(new Font("Verdana", Font.PLAIN, 11));
 		btnOtros.addActionListener(new ActionListener() {
@@ -155,7 +151,7 @@ public class Home extends JFrame {
 		});
 		btnOtros.setBounds(32, 369, 249, 53);
 		contentPane.add(btnOtros);
-		
+
 		JButton btnVerInf = new JButton("Ver");
 		btnVerInf.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -168,31 +164,32 @@ public class Home extends JFrame {
 		});
 		btnVerInf.setBounds(32, 451, 66, 66);
 		contentPane.add(btnVerInf);
-		
+
 		JButton btnImprimir = new JButton("Print");
 		btnImprimir.setBounds(108, 451, 66, 66);
 		contentPane.add(btnImprimir);
-		
+
 		JButton btnNewButton_2 = new JButton("New button");
 		btnNewButton_2.setBounds(184, 451, 66, 66);
 		contentPane.add(btnNewButton_2);
-		
+
 		JButton btnDel = new JButton("Borrar");
 		btnDel.setBounds(260, 451, 66, 66);
 		contentPane.add(btnDel);
-		
+
 		JButton btnResumen = new JButton("Resumen");
 		btnResumen.setBounds(336, 451, 89, 23);
 		contentPane.add(btnResumen);
-		
+
 		JButton btnPrntResumen = new JButton("Imprimir Res");
 		btnPrntResumen.setBounds(336, 485, 89, 32);
 		contentPane.add(btnPrntResumen);
 	}
+
 	protected void abrirPeaton() {
 		Peatones lista = contrato.getPeatones();
 		ManejadorDePeatones ventana = new ManejadorDePeatones(lista);
-		
+
 		ventana.setModal(true);
 		ventana.setVisible(true);
 	}
@@ -200,7 +197,7 @@ public class Home extends JFrame {
 	protected void abrirTerceros() {
 		VehiculosLesionados vehiculos = contrato.getVehiculos();
 		ManejoDeVehiculoTer ventana = new ManejoDeVehiculoTer(vehiculos);
-		
+
 		ventana.setModal(true);
 		ventana.setVisible(true);
 	}
@@ -208,22 +205,22 @@ public class Home extends JFrame {
 	protected void abrirAsegurados() {
 		VehiculosLesionados vehiculos = contrato.getVehiculos();
 		ManejoDeVehiculoAs ventana = new ManejoDeVehiculoAs(vehiculos);
-		
+
 		ventana.setModal(true);
 		ventana.setVisible(true);
-		
+
 	}
 
 	protected void abrirInforSini() {
 		InformacionSiniestro infSin = contrato.getInfoSin();
 		InforSini ventana = new InforSini(infSin);
-		
+
 		ventana.setModal(true);
 		ventana.setVisible(true);
-		
+
 		// CAMBIAR EL CODIGO PARA QUE SE GUARDE EN EL CONTROLADOR
 		InformacionSiniestro objeto = contrato.getInfoSin();
-	
+
 		objeto.setFechaHoraMin(ventana.getFecha());
 		objeto.setHora(ventana.getHr());
 		objeto.setMin(ventana.getMin());
@@ -250,27 +247,29 @@ public class Home extends JFrame {
 		objeto.setIndemnizacion(ventana.getIndm());
 		objeto.setHonorariosGastos(ventana.getHonorarios());
 	}
+
 	protected void abrirVentanaOtros() {
 		OtrosDaños objeto = contrato.getOtrosDaños();
 		ManejoDeDaños ventana = new ManejoDeDaños(objeto);
-		
+
 		ventana.setModal(true);
 		ventana.setVisible(true);
-		
+
 		// CAMBIAR EL CODIGO PARA QUE SE GUARDE EN EL CONTROLADOR
-		
+
 	}
+
 	protected void abrirVentanaInfor() {
 		inforBasica ventana = new inforBasica(contrato);
-		
+
 		ventana.setModal(true);
 		ventana.setVisible(true);
-		
+
 		// GUARDAR TODOS LOS DATOS -> se se salio con OK
 		InformacionBasica objeto = contrato.getInfoaBas();
-		
+
 		objeto.setSiniestro(ventana.getSinientro());
-		objeto.setPoliza(ventana.getPoliza());	
+		objeto.setPoliza(ventana.getPoliza());
 		objeto.setAjustadorMer(ventana.getAjustador());
 		objeto.setEmail(ventana.getEmail());
 		objeto.setResponsable(ventana.getResponsable());
@@ -282,42 +281,31 @@ public class Home extends JFrame {
 		objeto.setInterno(ventana.getInter());
 		objeto.setTelefono(ventana.getNum());
 	}
-	protected void crearPDF() {		
+
+	protected void crearPDF() {
 		ArrayList<String> rutas = new ArrayList<String>();
-		
+
 		PDFwriter escritor = new PDFwriter();
-		
-		if(contrato.getInfoaBas().getSiniestro() == 0) {
+
+		if (contrato.getInfoaBas().getSiniestro() == 0) {
 			System.out.println("Falta contenido para hacer el contrato");
-		}
-		else 
-		{
+		} else {
 			String a = escritor.insertar(contrato.getInfoaBas(), contrato.getInfoSin());
 			rutas.add(a);
 
 			ArrayList<VehiculoAsegurado> listaVehiculos = contrato.getVehiculos().listaVehiculosAsegurados();
-			
-			if(!listaVehiculos.isEmpty()) {
-//				for (VehiculoAsegurado i : listaVehiculos) {
-//					a = escritor.insertar(i);
-//					rutas.add(a);
-//				}
-//				
+
+			if (!listaVehiculos.isEmpty()) {
 				for (int i = 0; i < listaVehiculos.size(); i++) {
 					VehiculoAsegurado aux = listaVehiculos.get(i);
 					a = escritor.insertar(aux, i);
 					rutas.add(a);
 				}
 			}
-			
+
 			ArrayList<VehiculoTercero> listaVehiculosT = contrato.getVehiculos().getListaVehiculosTerceros();
 
 			if (!listaVehiculosT.isEmpty()) {
-//				for (VehiculoTercero i : listaVehiculosT) {
-//					a = escritor.insertar(i);
-//					rutas.add(a);
-//				}
-				
 				for (int i = 0; i < listaVehiculosT.size(); i++) {
 					VehiculoTercero aux = listaVehiculosT.get(i);
 					a = escritor.insertar(aux, i);
@@ -325,27 +313,9 @@ public class Home extends JFrame {
 				}
 			}
 			
-			ArrayList<Daño> listaDaños = contrato.getOtrosDaños().getListaDeDaños();
-			if (!listaDaños.isEmpty()) {
-//				for (Daño daño : listaDaños) {
-//					a = escritor.insertar(daño);
-//					rutas.add(a);
-//				}
-				
-				for (int i = 0; i < listaDaños.size(); i++) {
-					Daño aux = listaDaños.get(i);
-					a = escritor.insertar(aux, i);
-					rutas.add(a);
-				}
-			}
-				
 			ArrayList<Peaton> listaPeatones = contrato.getPeatones().getListaPeatones();
+			
 			if (!listaPeatones.isEmpty()) {
-//				 for (Peaton peaton : listaPeatones) {
-//					a = escritor.insertar(peaton);
-//					rutas.add(a);
-//				}
-				
 				for (int i = 0; i < listaPeatones.size(); i++) {
 					Peaton aux = listaPeatones.get(i);
 					a = escritor.insertar(aux, i);
@@ -353,14 +323,25 @@ public class Home extends JFrame {
 				}
 			}
 			
-			String ruta = "src//main//java//src//contratos//Contrato "+ contrato.getInfoaBas().getSiniestro() +".pdf";
+			ArrayList<Daño> listaDaños = contrato.getOtrosDaños().getListaDeDaños();
+			if (!listaDaños.isEmpty()) {
+				for (int i = 0; i < listaDaños.size(); i++) {
+					Daño aux = listaDaños.get(i);
+					a = escritor.insertar(aux, i);
+					rutas.add(a);
+				}
+			}
+
 			
+
+			String ruta = "src//main//java//src//contratos//Contrato " + contrato.getInfoaBas().getSiniestro() + ".pdf";
+
 			escritor.unirPDFs(rutas, ruta);
 			escritor.bloquearCampos(ruta);
-			
+
 			System.out.println("TERMINO EL PROCESO DE LA CREACION");
-		
+
 		}
-		
+
 	}
 }

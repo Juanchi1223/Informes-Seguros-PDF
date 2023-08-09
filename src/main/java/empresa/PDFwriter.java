@@ -236,11 +236,13 @@ public class PDFwriter {
 	private void agregarFoto(String foto, PdfPage page, Document doc, float x,float y,float w,float h) {
 		try  
 		{
-			ImageData imgData1 = ImageDataFactory.create(foto);
-		 	Image image = new Image(imgData1).scaleToFit(w, h);
-	        
-	        image.setFixedPosition(page.getPageSize().getLeft() + x, page.getPageSize().getTop() - y);
-	        doc.add(image);
+			if (foto != null) {
+				ImageData imgData1 = ImageDataFactory.create(foto);
+			 	Image image = new Image(imgData1).scaleToFit(w, h);
+		        
+		        image.setFixedPosition(page.getPageSize().getLeft() + x, page.getPageSize().getTop() - y);
+		        doc.add(image);
+	        }
 			
 		} catch (MalformedURLException e) {
 			// TODO Auto-generated catch block
@@ -294,7 +296,24 @@ public class PDFwriter {
 			llenarField(acroForm, "justificacionAcred", a.getJustificaAcred());
 			
 			//AGREGAR FOTOS
-			
+			ArrayList<String> fotosLic = a.getLicenciaFoto().getRutas();
+			ArrayList<String> fotosDoc = a.getDNI().getRutas();
+			ArrayList<String> fotosAM = a.getAcreditacionMedica().getRutas();
+			PdfPage page = documento.getPage(1);
+
+			agregarFoto(fotosDoc.get(0), page, doc, 101.9905512f + 2f, 332.3622047f + 195, 198.4251968f, 198.4251968f- 5);
+			agregarFoto(fotosDoc.get(1), page, doc, 316.0913386f + 2f, 332.3622047f + 195, 198.4251968f, 198.4251968f- 5);
+
+			agregarFoto(fotosLic.get(0), page, doc, 103.776378f + 2f, 586.6866142f + 195, 198.4251968f, 198.4251968f- 5);
+			agregarFoto(fotosLic.get(1), page, doc, 316.8566929f + 2f, 586.6866142f + 195, 198.4251968f, 198.4251968f- 5);
+
+			doc.add(new AreaBreak());
+
+		    agregarFoto(fotosAM.get(0), page, doc, 25.96535433f + 7.5f, 190.488189f + 250, 265.4645669f, 252.3685039f- 5);
+		    agregarFoto(fotosAM.get(1), page, doc, 302.7685039f + 7.5f, 190.488189f + 250, 265.4645669f, 252.3685039f- 5);
+		    agregarFoto(fotosAM.get(2), page, doc, 25.96535433f + 7.5f, 459.184252f + 250, 265.4645669f, 252.3685039f- 5);
+		    agregarFoto(fotosAM.get(3), page, doc, 302.7685039f + 7.5f, 459.184252f + 250, 265.4645669f, 252.3685039f- 5);
+
 			doc.close();
 			documento.close();
 		
@@ -412,6 +431,24 @@ public class PDFwriter {
 			llenarField(acroForm, "documentacion", a.getDocumentacion());
 			llenarField(acroForm, "justificarDoc", a.getJustficarDoc());
 			llenarField(acroForm, "justificarFotos", a.getJustificaFoto());
+			
+			ArrayList<String> FotosDoc = a.getFotosDoc().getRutas();
+			
+			ArrayList<String> FotosDaño = a.getFotosDaño().getRutas();
+			
+			PdfPage Page = documento.getPage(1);
+			// 53.82992126	347.4141732	243.807874	240.5480315 309.5149606
+
+			agregarFoto(FotosDoc.get(0), Page, doc, 53.82992126f + 4.5f, 347.4141732f + 238, 243.807874f, 240.5480315f- 5);
+			agregarFoto(FotosDoc.get(1), Page, doc, 309.5149606f + 4.5f, 347.4141732f + 238, 243.807874f, 240.5480315f- 5);
+
+			doc.add(new AreaBreak());
+			
+			agregarFoto(FotosDaño.get(0), Page, doc, 25.96535433f + 7.5f, 190.488189f + 250, 265.4645669f, 252.3685039f- 5);
+			agregarFoto(FotosDaño.get(1), Page, doc, 302.7685039f + 7.5f, 190.488189f + 250, 265.4645669f, 252.3685039f- 5);
+			agregarFoto(FotosDaño.get(2), Page, doc, 25.96535433f + 7.5f, 459.184252f + 250, 265.4645669f, 252.3685039f- 5);
+			agregarFoto(FotosDaño.get(3), Page, doc, 302.7685039f + 7.5f, 459.184252f + 250, 265.4645669f, 252.3685039f- 5);	
+			
 
 			doc.close();
 			documento.close();
@@ -460,8 +497,21 @@ public class PDFwriter {
 			llenarField(acroForm, "apellidoDr", a.getApellidoDr());
 			llenarField(acroForm, "nombreDr", a.getNombreDr());
 			llenarField(acroForm, "justificarAcred", a.getJustificaAcred());
+			
+			ArrayList<String> fotosDoc = a.getDNI().getRutas();
+			ArrayList<String> fotosAM = a.getAcreditacionMedica().getRutas();
+			
+			PdfPage Page = documento.getPage(1);
 
-			// TODO AGREGAR FOTOS peaton
+			agregarFoto(fotosDoc.get(0), Page, doc, 27.04251968f + 7.5f, 428.3716535f + 250, 265.4645669f, 252.3685039f- 5);
+		    agregarFoto(fotosDoc.get(1), Page, doc, 306.680315f + 7.5f, 428.3716535f + 250, 265.4645669f, 252.3685039f- 5);
+			    
+			doc.add(new AreaBreak());
+		    
+			agregarFoto(fotosAM.get(0), Page, doc, 25.96535433f + 7.5f, 190.488189f + 250, 265.4645669f, 252.3685039f- 5);
+			agregarFoto(fotosAM.get(1), Page, doc, 302.7685039f + 7.5f, 190.488189f + 250, 265.4645669f, 252.3685039f- 5);
+			agregarFoto(fotosAM.get(2), Page, doc, 25.96535433f + 7.5f, 459.184252f + 250, 265.4645669f, 252.3685039f- 5);
+			agregarFoto(fotosAM.get(3), Page, doc, 302.7685039f + 7.5f, 459.184252f + 250, 265.4645669f, 252.3685039f- 5);	
 			
 			doc.close();
 			documento.close();
